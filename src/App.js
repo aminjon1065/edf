@@ -1,14 +1,44 @@
+import React from "react";
 import './App.css';
-import ApplicationLogo from "./components/UI/ApplicationLogo";
+import Login from "./pages/Login";
+import {useDispatch, useSelector} from "react-redux";
+import {useEffect} from "react";
+import {checkAuth} from "./state/slices/signIn";
+import {BrowserRouter} from "react-router-dom";
+import ProtectedRoutes from "./routes/ProtectedRoutes";
+import Loader from "./components/UI/Loader";
+
 
 function App() {
+    const isAuth = useSelector(state => state.auth.isAuth);
+    const selector = useSelector(state => state.auth);
+    const dispatch = useDispatch()
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        if (token) {
+            dispatch(checkAuth(token))
+        }
+    }, [dispatch]);
     return (
-        <div className={"container mx-auto"}>
-            <h1 className="text-3xl font-bold underline">
-                Hello world!
-            </h1>
-            <ApplicationLogo className={"w-16"}/>
-        </div>
+        <React.Fragment>
+            {
+                selector.isLoading
+                    ?
+                    <div className={"h-screen flex justify-center items-center"}>
+                        <Loader/>
+                    </div>
+                    :
+                    <BrowserRouter>
+                        {
+                            isAuth
+                                ?
+                                <ProtectedRoutes/>
+                                :
+                                <Login/>
+                        }
+                    </BrowserRouter>
+            }
+        </React.Fragment>
     );
 }
 
