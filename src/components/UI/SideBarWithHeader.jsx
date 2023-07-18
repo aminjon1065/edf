@@ -11,11 +11,12 @@ import {
     PaperAirplaneIcon,
     UsersIcon,
     CogIcon,
-    ArrowLeftOnRectangleIcon
+    ArrowLeftOnRectangleIcon, EnvelopeIcon
 } from "@heroicons/react/24/outline";
 import {Dialog, Menu, Transition} from '@headlessui/react'
 import ApplicationLogo from "./ApplicationLogo";
 import {Link, useLocation} from "react-router-dom";
+import Modal from "../NewMailModal";
 
 const navigation = [
     {name: 'Входящие', href: '/', icon: InboxIcon, current: true},
@@ -36,6 +37,7 @@ function classNames(...classes) {
 
 const SideBarWithHeader = () => {
     const location = useLocation();
+    const [open, setOpen] = useState(false);
     const [currentRoute, setCurrentRoute] = useState("/");
     const [sidebarOpen, setSidebarOpen] = useState(false)
     useEffect(() => {
@@ -50,7 +52,9 @@ const SideBarWithHeader = () => {
             setCurrentRoute(currentNavItem.href);
         }
     }, [location.pathname]);
-
+    const showModal = () => {
+        setOpen(true);
+    };
     return (
         <>
             <Transition.Root show={sidebarOpen} as={Fragment}>
@@ -101,9 +105,18 @@ const SideBarWithHeader = () => {
                             </div>
                             <div className="mt-5 flex-1 h-0 overflow-y-auto">
                                 <nav className="px-2 space-y-1">
-                                    <button>
-                                        compose
-                                    </button>
+                                    <div className="flex justify-start mb-5">
+                                        <div>
+                                            <button
+                                                className="px-4 py-2 bg-slate-800 text-white rounded-md hover:bg-slate-600 flex"
+                                                onClick={showModal}
+                                            >
+                                                <EnvelopeIcon className="block h-6 w-6 mr-2" aria-hidden="true"/>
+                                                Новое письмо
+                                            </button>
+                                            <Modal open={open} setOpen={setOpen}/>
+                                        </div>
+                                    </div>
                                     {navigation.map((item) => (
                                         <Link
                                             key={item.name}
@@ -143,9 +156,18 @@ const SideBarWithHeader = () => {
                     </div>
                     <div className="flex-1 flex flex-col overflow-y-auto">
                         <nav className="flex-1 px-2 py-4 space-y-1">
-                                <button className={"bg- text-white group flex items-center px-2 py-2 text-sm font-medium rounded-md w-full"}>
-                                    compose
-                                </button>
+                            <div className="flex justify-start mb-5">
+                                <div className={"w-full"}>
+                                    <button
+                                        className="px-4 py-2 bg-slate-700 text-white rounded-md hover:bg-slate-600 flex w-full"
+                                        onClick={showModal}
+                                    >
+                                        <EnvelopeIcon className="block h-6 w-6 mr-2" aria-hidden="true"/>
+                                        Новое письмо
+                                    </button>
+                                    <Modal open={open} setOpen={setOpen}/>
+                                </div>
+                            </div>
                             {navigation.map((item) => (
                                 <Link
                                     key={item.name}

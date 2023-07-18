@@ -73,6 +73,7 @@ const SideBar = () => {
                             </div>
                             <div className="mt-5 flex-1 h-0 overflow-y-auto">
                                 <nav className="px-2 space-y-1">
+
                                     {navigation.map((item) => (
                                         <a
                                             key={item.name}

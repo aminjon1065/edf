@@ -4,10 +4,10 @@ import {API_APP} from "../helpers/CONSTANTS";
 // Создаем экземпляр Axios
 const api = axios.create({
     baseURL: `${API_APP}`,
-    headers: {
-        'X-Requested-With': 'XMLHttpRequest',
-    },
-    withCredentials: true,
+    // headers: {
+    //     'X-Requested-With': 'XMLHttpRequest',
+    // },
+    // withCredentials: true,
 });
 
 // Перехватчик (Интерцептор)

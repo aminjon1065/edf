@@ -1,3 +1,10 @@
+@import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+html::-webkit-scrollbar {
+    display: none;
+}
+html {
+    scroll-behavior: smooth;
+}
