@@ -38,7 +38,6 @@ export default function Index({open, setOpen}) {
     const removeFile = (fileIndex) => {
         setFiles((prevFiles) => prevFiles.filter((_, index) => index !== fileIndex));
     };
-    // Функция получения списка пользователей
 
     const handleChangeTitle = (e) => {
         setTitle(e.target.value)
@@ -63,6 +62,7 @@ export default function Index({open, setOpen}) {
         setUserSelected(value);
     };
 
+
     // Использование React Dropzone хука
     const {getRootProps, getInputProps, isDragActive} = useDropzone({
         onDrop,
@@ -77,9 +77,9 @@ export default function Index({open, setOpen}) {
     const sendMailFN = async () => {
         const formData = new FormData();
         formData.append('title', title);
-        formData.append('type', type);
         formData.append('content', htmlContent);
         formData.append('control', control ? 1 : 0);
+        formData.append('type', type);
         formData.append('date_done', dateDone);
         if (userSelected.length > 0) {
             for (let i = 0; i < userSelected.length; i++) {
@@ -273,7 +273,8 @@ export default function Index({open, setOpen}) {
                                                                                                 null
                                                                                         }
                                                                                     </div>
-                                                                                    <div className={"w-1/4 flex flex-row justify-end"}>
+                                                                                    <div
+                                                                                        className={"w-1/4 flex flex-row justify-end"}>
                                                                                         <div className={""}>
                                                                                             <label htmlFor="type"
                                                                                                    className="block text-sm font-medium text-gray-700">

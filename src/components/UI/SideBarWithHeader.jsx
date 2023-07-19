@@ -11,7 +11,9 @@ import {
     PaperAirplaneIcon,
     UsersIcon,
     CogIcon,
-    ArrowLeftOnRectangleIcon, EnvelopeIcon
+    ArrowLeftOnRectangleIcon,
+    EnvelopeIcon,
+    ClockIcon
 } from "@heroicons/react/24/outline";
 import {Dialog, Menu, Transition} from '@headlessui/react'
 import ApplicationLogo from "./ApplicationLogo";
@@ -25,6 +27,7 @@ const navigation = [
     {name: 'Calendar', href: '/calendar', icon: CalendarIcon, current: false},
     {name: 'Reports', href: '/reports', icon: ChartBarIcon, current: false},
 ]
+
 const userNavigation = [
     {name: 'Профиль', href: '/profile', icon: UsersIcon},
     {name: 'Настройки', href: '/settings', icon: CogIcon},
@@ -188,6 +191,13 @@ const SideBarWithHeader = () => {
                                 </Link>
                             ))}
                         </nav>
+                        <Link
+                            className="flex items-center h-16 flex-shrink-0 px-4 bg-gray-900"
+                        to={"/history-auth"}
+                        >
+                            <ClockIcon className={"h-6 w-auto text-white"}/>
+                            <h6 className={"text-white ml-5"}>История входа</h6>
+                        </Link>
                     </div>
                 </div>
             </div>

@@ -3,8 +3,6 @@ import {Outlet} from "react-router-dom";
 import {openNotification} from "../../state/slices/notification";
 import {useDispatch, useSelector} from "react-redux";
 import NotificationNewMail from "./NotificationNewMail";
-import Header from "./Header";
-import SideBar from "./SideBar";
 import SideBarWithHeader from "./SideBarWithHeader";
 
 const Index = () => {
