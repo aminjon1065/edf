@@ -106,6 +106,7 @@ export default function Index({open, setOpen}) {
             setTitle('')
             setControl(false)
             setFiles([])
+            setDateDone("")
             // if (response.status === 201) {
             //     window.location.reload()
             // }
@@ -117,6 +118,7 @@ export default function Index({open, setOpen}) {
             setTitle('')
             setControl(false)
             setFiles([])
+            setDateDone("")
             console.log(error)
         })
     }
@@ -342,10 +344,10 @@ export default function Index({open, setOpen}) {
                                                                                         />
                                                                                         <div
                                                                                             className="ml-3 text-sm w-1/4">
-                                                                                            <label htmlFor="control"
+                                                                                            <label htmlFor="toRais"
                                                                                                    className="font-medium text-gray-700">
                                                                                                 Председателью
-                                                                                            </label>пи
+                                                                                            </label>
                                                                                         </div>
                                                                                     </div>
 

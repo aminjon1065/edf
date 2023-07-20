@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {Outlet} from "react-router-dom";
 import {openNotification} from "../../state/slices/notification";
 import {useDispatch, useSelector} from "react-redux";
@@ -7,21 +7,20 @@ import SideBarWithHeader from "./SideBarWithHeader";
 
 const Index = () => {
     const dispatch = useDispatch();
-    const [loading, setLoading] = useState();
-    const meSelector = useSelector(state => state.auth);
+    const meSelectorId = useSelector(state => state.auth.user.id);
     const selectorNotification = useSelector(state => state.notificationModal);
     useEffect(() => {
-        window.Echo.channel(`notification.${meSelector.user?.id}`)
+        window.Echo.channel(`notification.${meSelectorId}`)
             .listen('NotificationSharedMail', (e) => {
                 dispatch(openNotification(e.message));
                 // setNotification(e.message)
                 // setIsOpen(true)
             });
-    }, [dispatch, meSelector.user.id]);
+    }, [dispatch, meSelectorId]);
     return (
         <>
             <div className="min-h-full">
-                <SideBarWithHeader />
+                <SideBarWithHeader/>
                 <div className="md:pl-64 flex flex-col flex-1">
                     <main className="flex-1">
                         <div className="py-6">
