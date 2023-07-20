@@ -83,7 +83,7 @@ export default function Index({open, setOpen}) {
         formData.append('control', control ? 1 : 0);
         formData.append('type', type);
         formData.append('date_done', dateDone);
-        formData.append('toRais', toRais);
+        formData.append('toRais', toRais ? 1 : 0);
 
         if (userSelected.length > 0) {
             for (let i = 0; i < userSelected.length; i++) {
@@ -120,8 +120,6 @@ export default function Index({open, setOpen}) {
             console.log(error)
         })
     }
-
-    console.log(meSelector)
     return (
         <Transition.Root show={open} as={Fragment}>
             <Dialog as="div" className="relative z-10" initialFocus={cancelButtonRef} onClose={setOpen}>

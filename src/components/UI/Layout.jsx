@@ -12,12 +12,12 @@ const Index = () => {
     const selectorNotification = useSelector(state => state.notificationModal);
     useEffect(() => {
         window.Echo.channel(`notification.${meSelector.user?.id}`)
-            .listen('NotificationMail', (e) => {
+            .listen('NotificationSharedMail', (e) => {
                 dispatch(openNotification(e.message));
                 // setNotification(e.message)
                 // setIsOpen(true)
             });
-    }, [dispatch, meSelector.id]);
+    }, [dispatch, meSelector.user.id]);
     return (
         <>
             <div className="min-h-full">

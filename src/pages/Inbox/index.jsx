@@ -34,7 +34,6 @@ const Index = () => {
     useEffect(() => {
         refetch();
     }, [selectorNotification, refetch]);
-
     const handleValueChange = (newValue) => {
         setDates(newValue);
     };
