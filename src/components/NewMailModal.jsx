@@ -6,6 +6,7 @@ import {useDropzone} from 'react-dropzone'
 import api from "./../services/api";
 import Editor from "./Editor";
 import {fetchUsers} from "../services/fetchUsers.service";
+import {useSelector} from "react-redux";
 
 export default function Index({open, setOpen}) {
     // Локальные состояния
@@ -18,6 +19,9 @@ export default function Index({open, setOpen}) {
     const [usersList, setUsersList] = useState([]);
     const [files, setFiles] = useState([]);
     const [dateDone, setDateDone] = useState('');
+    const [toRais, setToRais] = useState(false)
+    const meSelector = useSelector(state => state.auth);
+
     // Запрос на получение пользователей при монтировании компонента
     useEffect(() => {
         fetchUsers().then((res) => {
@@ -49,13 +53,11 @@ export default function Index({open, setOpen}) {
     const handleChangeDateDone = (e) => {
         setDateDone(e.target.value)
     }
-    const typeasArray = [
-        'Иностранные',
-        'Внутренные',
-        ''
-    ];
     const handleChangeImportance = (e) => {
         setControl(!control)
+    }
+    const handleChangeToRais = (e) => {
+        setToRais(!toRais)
     }
     // Обработчик изменения значения выбранных пользователей
     const handleChange = (value) => {
@@ -81,6 +83,8 @@ export default function Index({open, setOpen}) {
         formData.append('control', control ? 1 : 0);
         formData.append('type', type);
         formData.append('date_done', dateDone);
+        formData.append('toRais', toRais);
+
         if (userSelected.length > 0) {
             for (let i = 0; i < userSelected.length; i++) {
                 formData.append('to[]', userSelected[i].value);
@@ -116,6 +120,8 @@ export default function Index({open, setOpen}) {
             console.log(error)
         })
     }
+
+    console.log(meSelector)
     return (
         <Transition.Root show={open} as={Fragment}>
             <Dialog as="div" className="relative z-10" initialFocus={cancelButtonRef} onClose={setOpen}>
@@ -321,29 +327,35 @@ export default function Index({open, setOpen}) {
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
-                                                                            {/*<label htmlFor="photo"*/}
-                                                                            {/*       className="block text-sm font-medium text-gray-700">*/}
-                                                                            {/*    Photo*/}
-                                                                            {/*</label>*/}
-                                                                            {/*<div className="mt-1 flex items-center">*/}
-                                                                            {/*    <span*/}
-                                                                            {/*        className="h-12 w-12 rounded-full overflow-hidden bg-gray-100">*/}
-                                                                            {/*        <svg className="h-full w-full text-gray-300"*/}
-                                                                            {/*             fill="currentColor"*/}
-                                                                            {/*             viewBox="0 0 24 24">*/}
-                                                                            {/*            <path*/}
-                                                                            {/*                d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z"/>*/}
-                                                                            {/*        </svg>*/}
-                                                                            {/*    </span>*/}
-                                                                            {/*    <button*/}
-                                                                            {/*        type="button"*/}
-                                                                            {/*        className="ml-5 bg-white py-2 px-3 border border-gray-300 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"*/}
-                                                                            {/*    >*/}
-                                                                            {/*        Change*/}
-                                                                            {/*    </button>*/}
-                                                                            {/*</div>*/}
                                                                         </div>
+                                                                        {
+                                                                            meSelector.user.id === 1
+                                                                                ?
+                                                                                <>
+                                                                                    <div
+                                                                                        className="flex items-center h-5">
+                                                                                        <input
+                                                                                            value={toRais}
+                                                                                            onChange={handleChangeToRais}
+                                                                                            id="toRais"
+                                                                                            name="toRais"
+                                                                                            type="checkbox"
+                                                                                            className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+                                                                                        />
+                                                                                        <div
+                                                                                            className="ml-3 text-sm w-1/4">
+                                                                                            <label htmlFor="control"
+                                                                                                   className="font-medium text-gray-700">
+                                                                                                Председателью
+                                                                                            </label>пи
+                                                                                        </div>
+                                                                                    </div>
 
+                                                                                </>
+
+                                                                                :
+                                                                                null
+                                                                        }
                                                                         <div className="sm:col-span-6">
                                                                             <label htmlFor="cover-photo"
                                                                                    className="block text-sm font-medium text-gray-700">

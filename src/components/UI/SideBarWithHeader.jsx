@@ -19,7 +19,6 @@ import {Dialog, Menu, Transition} from '@headlessui/react'
 import ApplicationLogo from "./ApplicationLogo";
 import {Link, useLocation} from "react-router-dom";
 import Modal from "../NewMailModal";
-
 const navigation = [
     {name: 'Входящие', href: '/', icon: InboxIcon, current: true},
     {name: 'Исходящие', href: '/sent', icon: PaperAirplaneIcon, current: false},
@@ -42,7 +41,8 @@ const SideBarWithHeader = () => {
     const location = useLocation();
     const [open, setOpen] = useState(false);
     const [currentRoute, setCurrentRoute] = useState("/");
-    const [sidebarOpen, setSidebarOpen] = useState(false)
+    const [sidebarOpen, setSidebarOpen] = useState(false);
+
     useEffect(() => {
         // Get the current path from the location object
         const currentPath = location.pathname;
