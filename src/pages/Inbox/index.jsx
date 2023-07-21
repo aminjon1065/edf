@@ -65,7 +65,7 @@ const Index = () => {
     };
 
     const showMailItem = (uuid) => {
-        navigate(`/inbox/${uuid}`);
+        navigate(`/show/${uuid}`);
     };
 
     if (isLoading) {

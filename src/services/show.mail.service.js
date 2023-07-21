@@ -6,6 +6,7 @@ export const inboxApiById = createApi({
     reducerPath: 'inboxApiById',
     baseQuery: fetchBaseQuery({
         baseUrl: API_APP,
+        method:"post",
         prepareHeaders: (headers) => {
             const token = localStorage.getItem("token")
             headers.set('authorization', `Bearer ${token}`)
