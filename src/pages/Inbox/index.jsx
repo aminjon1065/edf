@@ -59,7 +59,6 @@ const Index = () => {
     };
 
 
-
     const handleSearchText = (event) => {
         setSearchText(event.target.value);
     };
@@ -248,7 +247,8 @@ const Index = () => {
                                                     </span>
                                             </td>
                                             <td className="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
-                                                    <span className="bg-slate-400 p-2 rounded">
+                                                    <span
+                                                        className={` p-2 rounded text-white ${mail.document.date_done ? "bg-red-500" : 'bg-gray-500'}`}>
                                                         {mail.document.date_done ? formatterDay(mail.document.date_done) : 'Не контрольная'}
                                                     </span>
                                             </td>

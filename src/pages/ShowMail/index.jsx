@@ -1,23 +1,74 @@
-import React, {useState} from 'react';
+import React, {Fragment, useEffect, useState} from 'react';
 import {useLocation} from "react-router-dom";
 import {useGetInboxByIdQuery} from "../../services/show.mail.service";
 import ApplicationLogo from "../../components/UI/ApplicationLogo";
 import dateFormatter from "../../helpers/dateFormatter";
 import Loader from "../../components/UI/Loader";
+import {PaperClipIcon} from "@heroicons/react/24/outline";
+import {PUBLIC_APP_URL_DOCUMENTS, PUBLIC_URL_BACKEND} from "../../helpers/CONSTANTS";
+import api from "../../services/api";
+import usePageTitle from "../../hooks/usePageTitle";
+import PDFViewer from "../../components/FileViewer";
+import ReplyMailModal from "../../components/ReplyMailModal";
 
 const Index = () => {
+    usePageTitle("Просмотр");
     const location = useLocation();
-    const [open, setOpen] = useState(false)
-    const [reload, setReload] = useState(true);
     const mailId = location.pathname.replace(/\/show\//, "");
     const {data, isLoading, isError, refetch} = useGetInboxByIdQuery(mailId);
+    const [modalOpen, setModalOpen] = useState(false);
+    const [fileUrl, setFileUrl] = useState('');
+    const [fileExtension, setFileExtension] = useState('');
+    const [reload, setReload] = useState(true);
+    const [openReplyModal, setOpenReplyModal] = useState(false)
 
+    useEffect(() => {
+        refetch()
+    }, [refetch, reload]);
+    const handleFileClick = (url, exns) => {
+        setFileUrl(url);
+        setModalOpen(true);
+        setFileExtension(exns)
+    };
+    const openedMail = (id) => {
+        api.post(`/showed/${id}`).then((res) => {
+            console.log('res')
+        }).catch((err) => {
+            console.log(err)
+        })
+    }
+    if (data) {
+        if (!data.opened) {
+            openedMail(data.uuid)
+        }
+    }
 
+    if (isError) {
+        return <span>Error!</span>
+    }
     if (isLoading) {
         return <Loader/>
     }
+
+    const replyModalShow = () => {
+        setOpenReplyModal(true) // open reply modal
+    }
     return (
         <div>
+            <PDFViewer
+                isOpen={modalOpen}
+                onClose={() => setModalOpen(false)}
+                fileUrl={fileUrl}
+                extension={fileExtension}
+            />
+            <ReplyMailModal
+                open={openReplyModal}
+                setOpen={setOpenReplyModal}
+                uuid={data.document.uuid}
+                reload={reload}
+                setReload={setReload}
+                typeDocument={data.document.type}
+            />
             <div className="flex flex-row justify-between items-center">
                 <div className="">
                     <div className="flex flex-row">
@@ -66,53 +117,104 @@ const Index = () => {
                         <>
                             <div className="flex flex-row justify-between">
                                 <div>
-                                    count attachment
+                                    {data.document.file.length}
+                                    <span className={"ml-2"}>
+                                        {data.document.file.length > 1 ? 'Файлы' : 'Файл'}
+                                    </span>
                                 </div>
                                 <div>
-                                    download all
+                                    <a
+                                        href={`${PUBLIC_URL_BACKEND}/download-all/${data.document.uuid}`}
+                                        className={"text-blue-500 hover:text-blue-600"}
+                                        target={"_blank"}
+                                        rel={"noopener noreferrer"}
+                                    >
+                                        download all
+                                    </a>
                                 </div>
                             </div>
                             <div className="flex flex-row mt-10">
-                                <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A aliquam aspernatur
-                                    consectetur
-                                    eligendi enim facere fugiat illum, ipsam iusto magnam mollitia nihil odio omnis
-                                    rerum sapiente
-                                    similique sit vitae voluptatibus.
-                                </div>
-                                <div>Culpa ex odio optio quis saepe? A, eum fugiat id illo labore officiis quae
-                                    quibusdam ratione.
-                                    Accusamus assumenda cumque delectus odit voluptates. Amet consectetur cum impedit,
-                                    ipsum quia
-                                    ullam voluptates.
-                                </div>
-                                <div>Ad adipisci, autem obcaecati perferendis praesentium quibusdam quo tempora. Amet
-                                    autem commodi
-                                    consequatur consequuntur deleniti dolorum eius eligendi enim labore minus quae quo
-                                    reiciendis,
-                                    repellat sapiente sed velit vero voluptatem?
-                                </div>
-                                <div>A adipisci atque beatae culpa cum, cumque enim est exercitationem id labore magnam
-                                    minus
-                                    mollitia nam necessitatibus nesciunt nulla obcaecati officiis perspiciatis provident
-                                    qui quis
-                                    quod quos sunt tempore unde.
-                                </div>
-                                <div>Amet dolore ea eius nostrum perferendis suscipit vero. Asperiores cumque delectus
-                                    dolorum esse
-                                    eveniet ipsum necessitatibus non nostrum qui quos tempora tenetur, totam veritatis?
-                                    Ducimus
-                                    facilis hic in provident veniam!
-                                </div>
+                                <ul
+                                    className="divide-y divide-gray-100 rounded-md border border-gray-200">
+                                    {data.document.file.length > 0 ? data.document.file.map((item) => (
+                                        <li key={item.id}
+                                            className="flex items-center justify-between py-4 pl-4 pr-5 text-sm leading-6">
+                                            <div className="flex flex-1 items-center">
+                                                <PaperClipIcon
+                                                    className="h-5 w-5 flex-shrink-0 text-gray-400"
+                                                    aria-hidden="true"
+                                                />
+                                                <div className="ml-4 flex min-w-0 flex-1 gap-2">
+                                                        <span
+                                                            className="truncate font-medium"
+                                                        >
+                                                                    {item.name}
+                                                        </span>
+                                                    <span
+                                                        className="flex-shrink-0 text-gray-400"
+                                                    >
+                                                                    {item.size} кб
+                                                        </span>
+                                                </div>
+                                            </div>
+                                            <div className="ml-4 flex-shrink-0">
+                                                <a
+                                                    rel={"noopener noreferrer"}
+                                                    target={"_blank"}
+                                                    href={`${PUBLIC_APP_URL_DOCUMENTS}${data.from_user.region}/${data.document.uuid}/${item.name}`}
+                                                    download
+                                                    className="font-medium text-indigo-600 hover:text-indigo-500"
+                                                >
+                                                    Скачать
+                                                </a>
+                                                <button
+                                                    onClick={() => handleFileClick(`${PUBLIC_APP_URL_DOCUMENTS}${data.from_user.region}/${data.document.uuid}/${item.name}`, item.extension)}
+                                                    className={"ml-2 font-medium text-green-600 hover:text-green-500"}
+                                                >
+                                                    Просмотреть
+                                                </button>
+                                            </div>
+                                        </li>)) : <span>Файлов нет!</span>}
+                                </ul>
                             </div>
                         </>
                         :
                         null
 
                 }
-
+            </div>
+            <div>
+                <div className={"mt-10"}>
+                    <button
+                        className={"px-4 py-2 bg-blue-700 rounded-lg text-white"}
+                        onClick={replyModalShow}
+                    >
+                        Ответить
+                    </button>
+                </div>
             </div>
             <div className={"mt-10 border-t"}>
-                reply
+                {
+                    data.document.reply_to_document.length > 0 ?
+                        <>
+                          <span className={"text-xl"}>
+                              Ответ к письму
+                          </span>
+                            <Fragment>
+                                {
+                                    data.document.reply_to_document.map((item) => (
+                                        <div key={item.id} className={"mt-10"}>
+                                            <div className="flex flex-row justify-between items-center">
+                                                <span>{item.title}</span>
+                                            </div>
+                                        </div>
+                                    ))
+                                }
+                            </Fragment>
+                        </>
+                        :
+                        null
+                }
             </div>
         </div>
     );
