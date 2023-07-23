@@ -20,7 +20,6 @@ export default function ReplyMailModal({open, setOpen, uuid, reload, setReload})
     const [toRais, setToRais] = useState(false)
     const meSelector = useSelector(state => state.auth);
 
-    // Запрос на получение пользователей при монтировании компонента
 
     // Получение контента редактора
     const getContent = (htmlContentProp) => {
@@ -84,6 +83,7 @@ export default function ReplyMailModal({open, setOpen, uuid, reload, setReload})
             setControl(false)
             setFiles([])
             setDateDone("")
+            setReload(!reload)
             // if (response.status === 201) {
             //     window.location.reload()
             // }
@@ -94,7 +94,7 @@ export default function ReplyMailModal({open, setOpen, uuid, reload, setReload})
             setControl(false)
             setFiles([])
             setDateDone("")
-            console.log(error)
+            setReload(!reload)
         })
     }
     return (

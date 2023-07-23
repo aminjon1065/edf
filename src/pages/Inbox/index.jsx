@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {ChevronLeftIcon} from '@heroicons/react/24/outline';
+import {ChevronLeftIcon, ClockIcon, CheckCircleIcon} from '@heroicons/react/24/outline';
 import {ChevronRightIcon} from '@heroicons/react/24/solid';
 import {useNavigate} from 'react-router-dom';
 import usePageTitle from '../../hooks/usePageTitle';
@@ -236,7 +236,8 @@ const Index = () => {
                                                         {mail.document.type}
                                                     </span>
                                             </td>
-                                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{mail.document.status}</td>
+                                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                                {mail.document.status === 'pending' ? <ClockIcon className={"h-8 w-auto text-orange-500"} /> : <CheckCircleIcon className={"h-8 w-auto text-green-600"} />}</td>
                                             <td className={`px-6 py-4 whitespace-nowrap text-sm text-gray-500 `}>
                                                     <span
                                                         className={`${
