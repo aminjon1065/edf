@@ -53,17 +53,16 @@ export default function Index({open, setOpen}) {
     const handleChangeDateDone = (e) => {
         setDateDone(e.target.value)
     }
-    const handleChangeImportance = (e) => {
+    const handleChangeImportance = () => {
         setControl(!control)
     }
-    const handleChangeToRais = (e) => {
+    const handleChangeToRais = () => {
         setToRais(!toRais)
     }
     // Обработчик изменения значения выбранных пользователей
     const handleChange = (value) => {
         setUserSelected(value);
     };
-
 
     // Использование React Dropzone хука
     const {getRootProps, getInputProps, isDragActive} = useDropzone({

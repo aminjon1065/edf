@@ -1,12 +1,9 @@
-import {Fragment, useCallback, useEffect, useRef, useState} from 'react'
+import {Fragment, useCallback, useRef, useState} from 'react'
 import {Dialog, Transition} from '@headlessui/react'
 import {EnvelopeIcon, DocumentIcon, XCircleIcon} from '@heroicons/react/24/outline'
-import Select from "react-tailwindcss-select";
 import {useDropzone} from 'react-dropzone'
 import api from "./../services/api";
 import Editor from "./Editor";
-import {fetchUsers} from "../services/fetchUsers.service";
-import {useSelector} from "react-redux";
 
 export default function ReplyMailModal({open, setOpen, uuid, reload, setReload}) {
     // Локальные состояния
@@ -14,11 +11,9 @@ export default function ReplyMailModal({open, setOpen, uuid, reload, setReload})
     const [title, setTitle] = useState("")
     const [control, setControl] = useState(false)
     const cancelButtonRef = useRef(null);
-    const [usersList, setUsersList] = useState([]);
     const [files, setFiles] = useState([]);
     const [dateDone, setDateDone] = useState('');
     const [toRais, setToRais] = useState(false)
-    const meSelector = useSelector(state => state.auth);
 
 
     // Получение контента редактора

@@ -4,12 +4,15 @@ import {useGetInboxByIdQuery} from '../../services/show.mail.service';
 import ApplicationLogo from '../../components/UI/ApplicationLogo';
 import dateFormatter from '../../helpers/dateFormatter';
 import Loader from '../../components/UI/Loader';
-import {PaperClipIcon} from '@heroicons/react/24/outline';
+import {CheckCircleIcon, ClockIcon, PaperClipIcon} from '@heroicons/react/24/outline';
 import {PUBLIC_APP_URL_DOCUMENTS, PUBLIC_URL_BACKEND} from '../../helpers/CONSTANTS';
 import api from '../../services/api';
 import usePageTitle from '../../hooks/usePageTitle';
 import PDFViewer from '../../components/FileViewer';
 import ReplyMailModal from '../../components/ReplyMailModal';
+import {useSelector} from "react-redux";
+import {fetchUsers} from "../../services/fetchUsers.service";
+import Select from "react-tailwindcss-select";
 
 const Index = () => {
     usePageTitle('Просмотр');
@@ -21,6 +24,14 @@ const Index = () => {
     const [fileExtension, setFileExtension] = useState('');
     const [reload, setReload] = useState(true);
     const [openReplyModal, setOpenReplyModal] = useState(false);
+    const meSelector = useSelector(state => state.auth);
+    const [userSelected, setUserSelected] = useState(null);
+    const [usersList, setUsersList] = useState([]);
+    useEffect(() => {
+        fetchUsers().then((res) => {
+            setUsersList(res.data)
+        });
+    }, []);
 
     useEffect(() => {
         refetch();
@@ -30,6 +41,11 @@ const Index = () => {
         setFileUrl(url);
         setModalOpen(true);
         setFileExtension(exns);
+    };
+
+    // Обработчик изменения значения выбранных пользователей
+    const handleChange = (value) => {
+        setUserSelected(value);
     };
 
     const openedMail = (id) => {
@@ -42,7 +58,51 @@ const Index = () => {
                 console.log(err);
             });
     };
+    const toRaisReplyDocument = () => {
+        api.post(`/to-rais-reply/${mailId}`).then((res) => {
+            console.log(res)
+        }).catch((err) => {
+            console.log(err)
+        })
+    }
+    const updateStatus = () => {
+        api.post(`/update-status/${data.document.uuid}`).then((res) => {
+            console.log(res);
+            refetch()
+        }).catch((err) => {
+            console.log(err);
+        });
+    }
+    const handleChangeToRais = async () => {
+        const formData = new FormData();
+        if (userSelected.length > 0) {
+            for (let i = 0; i < userSelected.length; i++) {
+                formData.append('replyTo[]', userSelected[i].value);
+            }
+        }
+        api.post(`/to-rais/${data.document.to_rais.id}`, formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        }).then((response) => {
+            setUserSelected(null);
+            console.log(response)
+        }).catch((error) => {
+            setUserSelected(null);
 
+            console.log(error)
+        })
+    }
+
+
+    const alertUpdateStatus = () => {
+        const confirmation = window.confirm('Уверены что хотите изменить статус?');
+
+        if (confirmation) {
+            // Если пользователь подтвердил, вызываем функцию updateStatus
+            updateStatus();
+        }
+    }
     if (data && !data.opened) {
         openedMail(data.uuid);
     }
@@ -89,17 +149,19 @@ const Index = () => {
                     </div>
                 </div>
                 <span
-                    className={`${documentTypeClasses[data.document.type] || 'bg-gray-500'} text-slate-950 px-4 py-2 rounded`}>
+                    className={`${documentTypeClasses[data.document.type] || 'bg-gray-500'} text-slate-950 px-4 py-2 rounded flex flex-row justify-around`}>
           {data.document.type}
-        </span>
+                    {data.document.status === 'pending' ? <ClockIcon className={"h-6 w-auto text-white-500 ml-2"}/> :
+                        <CheckCircleIcon className={"h-6 w-auto text-green-400 ml-2"}/>}
+            </span>
                 <div className="items-end">{dateFormatter(data.created_at)}</div>
             </div>
             <div className="mt-10">
                 <h3 className="text-3xl">{data.document.title}</h3>
             </div>
             <span>
-        <div dangerouslySetInnerHTML={{__html: data.document.content}}></div>
-      </span>
+                <div dangerouslySetInnerHTML={{__html: data.document.content}}></div>
+            </span>
             <hr className="divide-y-4 divide-amber-500"/>
             <div>
                 {data.document.file.length >= 1 ? (
@@ -167,10 +229,58 @@ const Index = () => {
                 ) : null}
             </div>
             <div>
-                <div className="mt-10">
-                    <button className="px-4 py-2 bg-blue-700 rounded-lg text-white" onClick={replyModalShow}>
+                <div className="mt-10 flex flex-row justify-between">
+                    <button
+                        className="px-4 py-2 bg-blue-700 hover:bg-blue-800 rounded-lg text-white"
+                        onClick={replyModalShow}
+                    >
                         Ответить
                     </button>
+                    {
+                        meSelector.user.role === 1 &&
+                        (
+                            <>
+
+                                <button className="px-4 py-2 bg-slate-500 rounded-lg text-white"
+                                        disabled={!data.toRaise}
+                                        onClick={toRaisReplyDocument}
+                                >
+                                    Перенаправить Предеседателю
+                                </button>
+
+                                <button className="px-4 py-2 bg-green-500 rounded-lg text-white"
+                                        disabled={data.document.status === "success"}
+                                        onClick={alertUpdateStatus}
+                                >
+                                    Выполнена
+                                </button>
+                            </>
+                        )
+                    }
+                    {
+                        meSelector.user.role === 99
+                        &&
+                        <div className={"w-1/3 flex flex-row items-center"}>
+                            <Select
+                                id={"username"}
+                                primaryColor={"indigo"}
+                                noOptionsMessage={"Такого пользователя не существует"}
+                                searchInputPlaceholder={""}
+                                isSearchable
+                                isMultiple
+                                value={userSelected}
+                                onChange={handleChange}
+                                options={usersList}
+                                className="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-0"
+                            />
+                            <button className="px-4 py-2 bg-blue-700 hover:bg-blue-800 rounded-lg text-white ml-2"
+                                    disabled={data.document.status === "success"}
+                                    onClick={handleChangeToRais}
+                            >
+                                Перенавправить
+                            </button>
+                        </div>
+                    }
                 </div>
             </div>
             <div className="mt-10 border-t">
@@ -217,7 +327,7 @@ const Index = () => {
                                         <ul className="divide-y divide-gray-100 rounded-md border border-gray-200">
                                             {item.document.file.length > 0 ? (
                                                 item.document.file.map((file) => (
-                                                    <li key={item.id}
+                                                    <li key={file.id}
                                                         className="flex items-center justify-between py-4 pl-4 pr-5 text-sm leading-6">
                                                         <div className="flex flex-1 items-center">
                                                             <PaperClipIcon

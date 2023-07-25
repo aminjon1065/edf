@@ -22,9 +22,9 @@ import Modal from "../NewMailModal";
 const navigation = [
     {name: 'Входящие', href: '/', icon: InboxIcon, current: true},
     {name: 'Исходящие', href: '/sent', icon: PaperAirplaneIcon, current: false},
-    {name: 'Documents', href: '/documents', icon: DocumentIcon, current: false},
-    {name: 'Calendar', href: '/calendar', icon: CalendarIcon, current: false},
-    {name: 'Reports', href: '/reports', icon: ChartBarIcon, current: false},
+    {name: 'Документы', href: '/documents', icon: DocumentIcon, current: false},
+    {name: 'Календарь', href: '/calendar', icon: CalendarIcon, current: false},
+    {name: 'Отчёты', href: '/reports', icon: ChartBarIcon, current: false},
 ]
 
 const userNavigation = [
