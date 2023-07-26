@@ -31,7 +31,6 @@ const Index = () => {
                                         isOpen={selectorNotification.isOpen}
                                         Notification={selectorNotification.uuid}
                                     />
-
                                     <Outlet/>
                                 </div>
                                 {/* /End replace */}

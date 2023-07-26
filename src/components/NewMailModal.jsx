@@ -75,6 +75,7 @@ export default function Index({open, setOpen}) {
             'image/jpeg': ['.jpeg', '.png', '.jpg'],
         }
     });
+    console.log(toRais)
     const sendMailFN = async () => {
         const formData = new FormData();
         formData.append('title', title);

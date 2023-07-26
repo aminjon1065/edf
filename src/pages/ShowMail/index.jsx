@@ -65,6 +65,7 @@ const Index = () => {
             console.log(err)
         })
     }
+
     const updateStatus = () => {
         api.post(`/update-status/${data.document.uuid}`).then((res) => {
             console.log(res);
@@ -242,7 +243,7 @@ const Index = () => {
                             <>
 
                                 <button className="px-4 py-2 bg-slate-500 rounded-lg text-white"
-                                        disabled={!data.toRaise}
+                                        disabled={data.toRais}
                                         onClick={toRaisReplyDocument}
                                 >
                                     Перенаправить Предеседателю
