@@ -50,15 +50,6 @@ const Index = () => {
         }
     };
 
-    const lastPage = () => {
-        setPageNum(data.last_page);
-    };
-
-    const firstPage = () => {
-        setPageNum(1);
-    };
-
-
     const handleSearchText = (event) => {
         setSearchText(event.target.value);
     };
