@@ -60,7 +60,7 @@ const Index = () => {
     };
     const toRaisReplyDocument = () => {
         api.post(`/to-rais-reply/${mailId}`).then((res) => {
-            console.log(res)
+            refetch();
         }).catch((err) => {
             console.log(err)
         })
@@ -87,10 +87,10 @@ const Index = () => {
             },
         }).then((response) => {
             setUserSelected(null);
-            console.log(response)
+            console.log(response);
+            refetch();
         }).catch((error) => {
             setUserSelected(null);
-
             console.log(error)
         })
     }
@@ -253,13 +253,19 @@ const Index = () => {
                                         </span>
                                     </div>
                                 </div>
-                                <div className="ml-4 flex-shrink-0">
-                                    <button
-                                        className="ml-2 font-medium text-red-600 hover:text-red-500"
-                                    >
-                                        Уведомить
-                                    </button>
-                                </div>
+                                {
+                                    meSelector.user.id === 1
+                                        ?
+                                        <div className="ml-4 flex-shrink-0">
+                                            <button
+                                                className="ml-2 font-medium text-red-600 hover:text-red-500"
+                                            >
+                                                Уведомить
+                                            </button>
+                                        </div>
+                                        :
+                                        null
+                                }
                             </li>
                         ))
                     ) : null}
