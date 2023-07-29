@@ -5,14 +5,12 @@ import formatterDay from "../../helpers/dateFormatter";
 import {useNavigate} from "react-router-dom";
 import {ChevronRightIcon} from "@heroicons/react/24/solid";
 import Datepicker from "react-tailwindcss-datepicker";
-import OtherInbox from "./OtherInbox";
 import {useSelector} from "react-redux";
 import Loader from "../../components/UI/Loader";
 
 const RaisInbox = () => {
     const navigate = useNavigate();
     const selectorNotification = useSelector(state => state.notificationModal);
-    const [order, setOrder] = useState('desc');
     const [pageNum, setPageNum] = useState(1);
     const [searchText, setSearchText] = useState('');
     const [dates, setDates] = useState({
@@ -190,7 +188,7 @@ const RaisInbox = () => {
                                         mail.document ? (
                                             <tr
                                                 key={mail.id}
-                                                onClick={() => showMailItem(mail.uuid)}
+                                                onClick={() => showMailItem(mail.id)}
                                                 className={`bg-slate-100 border-b border-gray-100 hover:bg-slate-300 cursor-pointer`}
                                             >
                                                 <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{mail.id}</td>

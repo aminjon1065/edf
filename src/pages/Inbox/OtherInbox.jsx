@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useGetMessagesQuery} from "../../services/getMails.service";
 import {useNavigate} from "react-router-dom";
 import {CheckCircleIcon, ChevronLeftIcon, ClockIcon} from "@heroicons/react/24/outline";
@@ -6,6 +6,7 @@ import formatterDay from "../../helpers/dateFormatter";
 import Loader from "../../components/UI/Loader";
 import {ChevronRightIcon} from "@heroicons/react/24/solid";
 import Datepicker from "react-tailwindcss-datepicker";
+import {useSelector} from "react-redux";
 
 const OtherInbox = () => {
     const navigate = useNavigate();
@@ -13,6 +14,7 @@ const OtherInbox = () => {
     const [order, setOrder] = useState('desc');
     const [pageNum, setPageNum] = useState(1);
     const [searchText, setSearchText] = useState('');
+    const selectorNotification = useSelector(state => state.notificationModal);
     const [dates, setDates] = useState({
         startDate: '',
         endDate: '',
@@ -27,6 +29,9 @@ const OtherInbox = () => {
         endDate: !dates.endDate ? '' : dates.endDate,
         type: 'inbox'
     });
+    useEffect(() => {
+        refetch();
+    }, [selectorNotification, refetch]);
     const showMailItem = (uuid) => {
         navigate(`/show/${uuid}`);
     };

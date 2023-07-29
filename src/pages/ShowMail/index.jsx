@@ -353,23 +353,29 @@ const Index = () => {
                                     <span>
                     <div dangerouslySetInnerHTML={{__html: item.document.content}}></div>
                   </span>
-                                    <div className="flex flex-row justify-between">
-                                        <div>
-                                            {item.document.file.length}
-                                            <span
-                                                className="ml-2">{item.document.file.length > 1 ? 'Файлы' : 'Файл'}</span>
-                                        </div>
-                                        <div>
-                                            <a
-                                                href={`${PUBLIC_URL_BACKEND}/download-all/${item.document.uuid}`}
-                                                className="text-blue-500 hover:text-blue-600"
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                            >
-                                                Скачать всё
-                                            </a>
-                                        </div>
-                                    </div>
+                                    {
+                                        item.document.file.length > 0
+                                        ?
+                                            <div className="flex flex-row justify-between">
+                                                <div>
+                                                    {item.document.file.length}
+                                                    <span
+                                                        className="ml-2">{item.document.file.length > 1 ? 'Файлы' : 'Файл'}</span>
+                                                </div>
+                                                <div>
+                                                    <a
+                                                        href={`${PUBLIC_URL_BACKEND}/download-all/${item.document.uuid}`}
+                                                        className="text-blue-500 hover:text-blue-600"
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                    >
+                                                        Скачать всё
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            :
+                                            null
+                                    }
                                     <div className="flex flex-row mt-10">
                                         <ul className="divide-y divide-gray-100 rounded-md border border-gray-200">
                                             {item.document.file.length > 0 ? (
