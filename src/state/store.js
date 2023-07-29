@@ -3,7 +3,7 @@ import authReducer from './slices/signIn';
 import {messagesApi} from "../services/getMails.service";
 import {inboxApiById} from "../services/show.mail.service";
 import notificationSlice from './slices/notification';
-import {getRepliedApi} from "../services/getRepliedMailsToRais";
+import {getRepliedApi} from "../services/getRepliedMailsToRais.service";
 
 const rootReducer = combineReducers({
     auth: authReducer,

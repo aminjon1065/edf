@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {useGetRepliedToRaisQuery} from "../../services/getRepliedMailsToRais";
+import {useGetRepliedToRaisQuery} from "../../services/getRepliedMailsToRais.service";
 import {CheckCircleIcon, ChevronLeftIcon, ClockIcon} from "@heroicons/react/24/outline";
 import formatterDay from "../../helpers/dateFormatter";
 import {useNavigate} from "react-router-dom";
@@ -26,7 +26,7 @@ const RaisInbox = () => {
         refetch
     } = useGetRepliedToRaisQuery();
     const showMailItem = (uuid) => {
-        navigate(`/show/${uuid}`);
+        navigate(`/replied/${uuid}`);
     };
     useEffect(() => {
         refetch();

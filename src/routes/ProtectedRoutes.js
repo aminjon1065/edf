@@ -8,6 +8,7 @@ import Documents from "./../pages/Documents";
 import Inbox from "./../pages/Inbox";
 import Sent from "./../pages/Sent";
 import ShowMail from "./../pages/ShowMail";
+import ShowRepliedToRais from "../pages/ShowMail/ShowRepliedToRais";
 
 const ProtectedRoutes = () => {
     return (
@@ -16,6 +17,7 @@ const ProtectedRoutes = () => {
                 <Route path={'/'} element={<Layout/>}>
                     <Route index element={<Inbox/>}/>
                     <Route path={'/show/:id'} element={<ShowMail/>}/>
+                    <Route path={'/replied/:id'} element={<ShowRepliedToRais/>}/>
                     <Route path={"calendar"} element={<Calendar/>}/>
                     <Route path={"documents"} element={<Documents/>}/>
                     <Route path={"reports"} element={<Reports/>}/>
