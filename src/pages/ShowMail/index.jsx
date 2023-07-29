@@ -59,11 +59,15 @@ const Index = () => {
             });
     };
     const toRaisReplyDocument = () => {
-        api.post(`/to-rais-reply/${mailId}`).then((res) => {
-            refetch();
-        }).catch((err) => {
-            console.log(err)
-        })
+        const confirmation = window.confirm("Точно отправить председателю?")
+        if (confirmation) {
+            api.post(`/to-rais-reply/${mailId}`).then((res) => {
+                refetch();
+                alert("Отправлено");
+            }).catch((err) => {
+                console.log(err)
+            })
+        }
     }
 
     const updateStatus = () => {
