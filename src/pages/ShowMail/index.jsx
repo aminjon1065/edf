@@ -233,52 +233,58 @@ const Index = () => {
                     </>
                 ) : null}
             </div>
-            <div className="flex flex-row mt-10">
-                <ul className="divide-y divide-gray-100 rounded-md border border-gray-200">
-                    {data.replyToUsers.length > 0 ? (
-                        data.replyToUsers.map((item) => (
-                            <li key={item.id}
-                                className="flex items-center justify-between py-4 pl-4 pr-5 text-sm leading-6">
-                                <div className="flex flex-1 items-center">
-                                    <UserIcon
-                                        className="h-5 w-5 flex-shrink-0 text-gray-900"
-                                        aria-hidden="true"
-                                    />
-                                    <div className="ml-4 flex min-w-0 flex-1 gap-2">
+            <div className={'mt-10'}>
+                <span>
+                    Было перенаправлено:
+                </span>
+                <div className="flex flex-row">
+                    <ul className="divide-y divide-gray-100 rounded-md border border-gray-200">
+                        {data.replyToUsers.length > 0 ? (
+                            data.replyToUsers.map((item) => (
+                                <li key={item.id}
+                                    className="flex items-center justify-between py-4 pl-4 pr-5 text-sm leading-6">
+                                    <div className="flex flex-1 items-center">
+                                        <UserIcon
+                                            className="h-5 w-5 flex-shrink-0 text-gray-900"
+                                            aria-hidden="true"
+                                        />
+                                        <div className="ml-4 flex min-w-0 flex-1 gap-2">
                                         <span
                                             className="truncate font-medium"
                                         >
                                             {`${item.full_name} - ${item.position}(${item.department})`}
                                         </span>
-                                        <span
-                                            className="flex-shrink-0 text-gray-400"
-                                        >
+                                            <span
+                                                className="flex-shrink-0 text-gray-400"
+                                            >
                                             {item.region}
                                         </span>
-                                    </div>
-                                </div>
-                                {
-                                    meSelector.user.id === 1
-                                        ?
-                                        <div className="ml-4 flex-shrink-0">
-                                            <button
-                                                className="ml-2 font-medium text-red-600 hover:text-red-500"
-                                            >
-                                                Уведомить
-                                            </button>
                                         </div>
-                                        :
-                                        null
-                                }
-                            </li>
-                        ))
-                    ) : null}
-                </ul>
+                                    </div>
+                                    {
+                                        meSelector.user.id === 1
+                                            ?
+                                            <div className="ml-4 flex-shrink-0">
+                                                <button
+                                                    className="ml-2 font-medium text-red-600 hover:text-red-500"
+                                                >
+                                                    Уведомить
+                                                </button>
+                                            </div>
+                                            :
+                                            null
+                                    }
+                                </li>
+                            ))
+                        ) : null}
+                    </ul>
+                </div>
             </div>
             <div>
                 <div className="mt-10 flex flex-row justify-between">
                     <button
                         className="px-4 py-2 bg-blue-700 hover:bg-blue-800 rounded-lg text-white"
+                        disabled={data.document.status === "success"}
                         onClick={replyModalShow}
                     >
                         Ответить

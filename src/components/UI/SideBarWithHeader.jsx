@@ -19,6 +19,7 @@ import {Dialog, Menu, Transition} from '@headlessui/react'
 import ApplicationLogo from "./ApplicationLogo";
 import {Link, useLocation} from "react-router-dom";
 import Modal from "../NewMailModal";
+import {useSelector} from "react-redux";
 const navigation = [
     {name: 'Входящие', href: '/', icon: InboxIcon, current: true},
     {name: 'Исходящие', href: '/sent', icon: PaperAirplaneIcon, current: false},
@@ -42,6 +43,7 @@ const SideBarWithHeader = () => {
     const [open, setOpen] = useState(false);
     const [currentRoute, setCurrentRoute] = useState("/");
     const [sidebarOpen, setSidebarOpen] = useState(false);
+    const meSelector = useSelector(state => state.auth);
 
     useEffect(() => {
         // Get the current path from the location object
@@ -255,11 +257,12 @@ const SideBarWithHeader = () => {
                                 <div>
                                     <Menu.Button
                                         className="max-w-xs bg-white flex items-center text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                                        <span className="sr-only">Open user menu</span>
-                                        <img
+                                        <span className="mr-2">{
+                                            meSelector.user?.full_name
+                                        }</span>
+                                        <ApplicationLogo
                                             className="h-8 w-8 rounded-full"
-                                            src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                            alt=""
+                                            alt="Logo"
                                         />
                                     </Menu.Button>
                                 </div>

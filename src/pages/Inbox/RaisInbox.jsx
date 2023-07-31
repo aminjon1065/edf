@@ -11,6 +11,8 @@ import Loader from "../../components/UI/Loader";
 const RaisInbox = () => {
     const navigate = useNavigate();
     const selectorNotification = useSelector(state => state.notificationModal);
+    const [column, setColumn] = useState('id');
+    const [order, setOrder] = useState('desc');
     const [pageNum, setPageNum] = useState(1);
     const [searchText, setSearchText] = useState('');
     const [dates, setDates] = useState({
@@ -22,7 +24,14 @@ const RaisInbox = () => {
         isLoading,
         error,
         refetch
-    } = useGetRepliedToRaisQuery();
+    } = useGetRepliedToRaisQuery({
+        page: pageNum,
+        searchQuery: searchText,
+        startDate: dates.startDate,
+        endDate: dates.endDate,
+        order: order,
+        column: column
+    });
     const showMailItem = (uuid) => {
         navigate(`/replied/${uuid}`);
     };

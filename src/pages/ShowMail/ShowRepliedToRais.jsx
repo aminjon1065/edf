@@ -53,6 +53,27 @@ const ShowRepliedToRais = ({id}) => {
     const handleChange = (value) => {
         setUserSelected(value);
     };
+    const handleChangeControlDocument = async () => {
+        const confirm = window.confirm("Задать контрольную дату для документа?")
+        if (confirm)
+        {
+            const formData = new FormData();
+            formData.append('date_done', dateDone);
+            api.post(`/update-control/${data.document.uuid}`, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            }).then((response) => {
+                alert('Контрольная дата спешно задано')
+                setDateDone(null)
+                refetch();
+            }).catch((error) => {
+                setDateDone(null);
+                console.log(error)
+            })
+        }
+
+    }
     const handleChangeToRais = async () => {
         const formData = new FormData();
         if (userSelected.length > 0) {
@@ -60,7 +81,7 @@ const ShowRepliedToRais = ({id}) => {
                 formData.append('replyTo[]', userSelected[i].value);
             }
         }
-        api.post(`/to-rais/${data.document.to_rais.id}`, formData, {
+        api.post(`/to-rais/${data.id}`, formData, {
             headers: {
                 'Content-Type': 'multipart/form-data',
             },
@@ -73,7 +94,6 @@ const ShowRepliedToRais = ({id}) => {
             console.log(error)
         })
     }
-
     return (
         <>
             <div>
@@ -173,24 +193,31 @@ const ShowRepliedToRais = ({id}) => {
                 </div>
                 <div>
                     <div className="mt-10 flex flex-row justify-between">
-                        <div className={"flex flex-row items-center"}>
-                            <div className="">
-                                <div>
-                                    <input
-                                        id="dateDone"
-                                        value={dateDone}
-                                        onChange={handleChangeDateDone}
-                                        type="datetime-local"
-                                        className={"rounded-xl focus:border-indigo-500"}/>
+                        {
+                            data.document.control
+                                ?
+                                null
+                                :
+                                <div className={"flex flex-row items-center"}>
+                                    <div className="">
+                                        <div>
+                                            <input
+                                                id="dateDone"
+                                                value={dateDone}
+                                                onChange={handleChangeDateDone}
+                                                type="datetime-local"
+                                                className={"rounded-xl focus:border-indigo-500"}/>
+                                        </div>
+                                    </div>
+                                    <button
+                                        className="px-4 py-2 bg-blue-700 hover:bg-blue-800 rounded-lg text-white ml-2"
+                                        disabled={data.document.status === "success"}
+                                        onClick={handleChangeControlDocument}
+                                    >
+                                        Задать дату
+                                    </button>
                                 </div>
-                            </div>
-                            <button className="px-4 py-2 bg-blue-700 hover:bg-blue-800 rounded-lg text-white ml-2"
-                                    disabled={data.document.status === "success"}
-                                    onClick={handleChangeToRais}
-                            >
-                                Задать дату
-                            </button>
-                        </div>
+                        }
                         <div className={"w-1/3 flex flex-row items-center"}>
                             <Select
                                 id={"username"}

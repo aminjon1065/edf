@@ -8,6 +8,7 @@ import SideBarWithHeader from "./SideBarWithHeader";
 const Index = () => {
     const dispatch = useDispatch();
     const meSelectorId = useSelector(state => state.auth.user.id);
+    const meSelectorRole = useSelector(state => state.auth.user.role);
     const selectorNotification = useSelector(state => state.notificationModal);
     useEffect(() => {
         window.Echo.channel(`notification.${meSelectorId}`)
@@ -27,10 +28,17 @@ const Index = () => {
                             <div className="max-w-full mx-auto px-4 sm:px-6 md:px-8">
                                 {/* Replace with your content */}
                                 <div className="">
-                                    <NotificationNewMail
-                                        isOpen={selectorNotification.isOpen}
-                                        Notification={selectorNotification.uuid}
-                                    />
+                                    {
+                                        meSelectorRole === 99
+                                            ?
+                                            null
+                                            :
+                                            <NotificationNewMail
+                                                isOpen={selectorNotification.isOpen}
+                                                Notification={selectorNotification.uuid}
+                                            />
+                                    }
+
                                     <Outlet/>
                                 </div>
                                 {/* /End replace */}
