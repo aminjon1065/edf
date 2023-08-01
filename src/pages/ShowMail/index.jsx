@@ -5,7 +5,7 @@ import ApplicationLogo from '../../components/UI/ApplicationLogo';
 import dateFormatter from '../../helpers/dateFormatter';
 import Loader from '../../components/UI/Loader';
 import {CheckCircleIcon, ClockIcon, PaperClipIcon, UserIcon} from '@heroicons/react/24/outline';
-import {PUBLIC_APP_URL_DOCUMENTS, PUBLIC_URL_BACKEND} from '../../helpers/CONSTANTS';
+import {API_APP, PUBLIC_APP_URL_DOCUMENTS, PUBLIC_URL_BACKEND} from '../../helpers/CONSTANTS';
 import api from '../../services/api';
 import usePageTitle from '../../hooks/usePageTitle';
 import PDFViewer from '../../components/FileViewer';
@@ -131,6 +131,13 @@ const Index = () => {
         Гузориш: 'bg-gradient-to-r from-orange-500 from-10% to-amber-500 text-white',
     };
 
+    const RepliedToUsers =()=>{
+        const confirm = window.confirm("Отправить уведомление пользователю?")
+        if (confirm)
+        {
+            api.post(`${API_APP}/reply-to-user/${data.document.uuid}`)
+        }
+    }
     return (
         <div>
             <PDFViewer isOpen={modalOpen} onClose={() => setModalOpen(false)} fileUrl={fileUrl}
@@ -267,6 +274,7 @@ const Index = () => {
                                             <div className="ml-4 flex-shrink-0">
                                                 <button
                                                     className="ml-2 font-medium text-red-600 hover:text-red-500"
+                                                    onClick={RepliedToUsers}
                                                 >
                                                     Уведомить
                                                 </button>
