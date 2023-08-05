@@ -15,7 +15,6 @@ const Index = () => {
             <RaisInbox/>
             :
             <OtherInbox/>
-
     );
 };
 
