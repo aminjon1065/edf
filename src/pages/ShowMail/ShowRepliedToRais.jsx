@@ -1,17 +1,17 @@
-import React, { Fragment, useEffect, useState } from 'react';
-import { useLocation } from "react-router-dom";
+import React, {Fragment, useEffect, useState} from 'react';
+import {useLocation} from "react-router-dom";
 import usePageTitle from "../../hooks/usePageTitle";
-import { useGetRepliedByIdQuery } from '../../services/show.replied.service';
+import {useGetRepliedByIdQuery} from '../../services/show.replied.service';
 import PDFViewer from "../../components/FileViewer";
 import ApplicationLogo from "../../components/UI/ApplicationLogo";
-import { CheckCircleIcon, ClockIcon, PaperClipIcon, UserIcon } from "@heroicons/react/24/outline";
+import {CheckCircleIcon, ClockIcon, PaperClipIcon, UserIcon} from "@heroicons/react/24/outline";
 import dateFormatter from "../../helpers/dateFormatter";
-import { PUBLIC_APP_URL_DOCUMENTS, PUBLIC_URL_BACKEND } from "../../helpers/CONSTANTS";
+import {PUBLIC_APP_URL_DOCUMENTS, PUBLIC_URL_BACKEND} from "../../helpers/CONSTANTS";
 import Select from "react-tailwindcss-select";
 import api from "../../services/api";
-import { fetchUsers } from "../../services/fetchUsers.service";
+import {fetchUsers} from "../../services/fetchUsers.service";
 
-const ShowRepliedToRais = ({ id }) => {
+const ShowRepliedToRais = ({id}) => {
     usePageTitle("Перенаправить");
     const [modalOpen, setModalOpen] = useState(false);
     const [fileUrl, setFileUrl] = useState('');
@@ -22,7 +22,7 @@ const ShowRepliedToRais = ({ id }) => {
     const [usersList, setUsersList] = useState([]);
     const location = useLocation();
     const repliedId = location.pathname.replace(/\/replied\//, '');
-    const { data, isLoading, isError, refetch } = useGetRepliedByIdQuery(repliedId);
+    const {data, isLoading, isError, refetch} = useGetRepliedByIdQuery(repliedId);
     useEffect(() => {
         fetchUsers().then((res) => {
             setUsersList(res.data)
@@ -97,11 +97,11 @@ const ShowRepliedToRais = ({ id }) => {
         <>
             <div>
                 <PDFViewer isOpen={modalOpen} onClose={() => setModalOpen(false)} fileUrl={fileUrl}
-                    extension={fileExtension} />
+                           extension={fileExtension}/>
                 <div className="flex flex-row justify-between items-center">
                     <div className="">
                         <div className="flex flex-row">
-                            <ApplicationLogo className="h-12 w-auto" />
+                            <ApplicationLogo className="h-12 w-auto"/>
                             <div className="flex flex-col">
                                 <span className="text-xl">{data.toRais.document.user.full_name}</span>
                                 <span className="text-sm">{data.toRais.document.user.region}</span>
@@ -112,8 +112,8 @@ const ShowRepliedToRais = ({ id }) => {
                         className={`${documentTypeClasses[data.toRais.document.type] || 'bg-gray-500'} text-slate-950 px-4 py-2 rounded flex flex-row justify-around`}>
                         {data.toRais.document.type}
                         {data.toRais.document.status === 'pending' ?
-                            <ClockIcon className={"h-6 w-auto text-white-500 ml-2"} /> :
-                            <CheckCircleIcon className={"h-6 w-auto text-green-400 ml-2"} />}
+                            <ClockIcon className={"h-6 w-auto text-white-500 ml-2"}/> :
+                            <CheckCircleIcon className={"h-6 w-auto text-green-400 ml-2"}/>}
                     </span>
                     <div>
                         <div className="items-end p-1">{dateFormatter(data.toRais.created_at)}</div>
@@ -134,9 +134,9 @@ const ShowRepliedToRais = ({ id }) => {
                     <h3 className="text-3xl">{data.toRais.document.title}</h3>
                 </div>
                 <span>
-                    <div dangerouslySetInnerHTML={{ __html: data.toRais.document.content }}></div>
+                    <div dangerouslySetInnerHTML={{__html: data.toRais.document.content}}></div>
                 </span>
-                <hr className="divide-y-4 divide-amber-500" />
+                <hr className="divide-y-4 divide-amber-500"/>
                 <div>
                     {data.toRais.document.file.length >= 1 ? (
                         <>
@@ -165,7 +165,7 @@ const ShowRepliedToRais = ({ id }) => {
                                                 className="flex items-center justify-between py-4 pl-4 pr-5 text-sm leading-6">
                                                 <div className="flex flex-1 items-center">
                                                     <PaperClipIcon className="h-5 w-5 flex-shrink-0 text-gray-400"
-                                                        aria-hidden="true" />
+                                                                   aria-hidden="true"/>
                                                     <div className="ml-4 flex min-w-0 flex-1 gap-2">
                                                         <span className="truncate font-medium">{item.name}</span>
                                                         <span
@@ -241,31 +241,27 @@ const ShowRepliedToRais = ({ id }) => {
                 ) : null}
                 <div>
                     <div className="mt-10 flex flex-row justify-between">
-                        {
-                            data.toRais.document.control
-                                ?
-                                null
-                                :
-                                <div className={"flex flex-row items-center"}>
-                                    <div className="">
-                                        <div>
-                                            <input
-                                                id="dateDone"
-                                                value={dateDone}
-                                                onChange={handleChangeDateDone}
-                                                type="datetime-local"
-                                                className={"rounded-xl focus:border-indigo-500"} />
-                                        </div>
-                                    </div>
-                                    <button
-                                        className="px-4 py-2 bg-blue-700 hover:bg-blue-800 rounded-lg text-white ml-2"
-                                        disabled={data.toRais.document.status === "success"}
-                                        onClick={handleChangeControlDocument}
-                                    >
-                                        Задать дату
-                                    </button>
+
+                        <div className={"flex flex-row items-center"}>
+                            <div className="">
+                                <div>
+                                    <input
+                                        disabled={data.toRais.document.control}
+                                        id="dateDone"
+                                        value={dateDone}
+                                        onChange={handleChangeDateDone}
+                                        type="datetime-local"
+                                        className={"rounded-xl focus:border-indigo-500"}/>
                                 </div>
-                        }
+                            </div>
+                            <button
+                                disabled={data.toRais.document.control}
+                                className="px-4 py-2 bg-blue-700 hover:bg-blue-800 rounded-lg text-white ml-2"
+                                onClick={handleChangeControlDocument}
+                            >
+                                Задать дату
+                            </button>
+                        </div>
                         <div className={"w-1/3 flex flex-row items-center"}>
                             <Select
                                 id={"username"}
@@ -280,8 +276,8 @@ const ShowRepliedToRais = ({ id }) => {
                                 className="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-0"
                             />
                             <button className="px-4 py-2 bg-blue-700 hover:bg-blue-800 rounded-lg text-white ml-2"
-                                disabled={data.toRais.document.status === "success"}
-                                onClick={handleChangeToRais}
+                                    disabled={data.toRais.document.status === "success"}
+                                    onClick={handleChangeToRais}
                             >
                                 Перенавправить
                             </button>

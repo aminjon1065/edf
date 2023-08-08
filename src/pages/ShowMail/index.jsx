@@ -27,6 +27,7 @@ const Index = () => {
     const meSelector = useSelector(state => state.auth);
     const [userSelected, setUserSelected] = useState(null);
     const [usersList, setUsersList] = useState([]);
+    const [managementId, setManagementId] = useState(null);
     useEffect(() => {
         fetchUsers().then((res) => {
             setUsersList(res.data)
@@ -61,7 +62,7 @@ const Index = () => {
     const toRaisReplyDocument = () => {
         const confirmation = window.confirm("Точно отправить председателю?")
         if (confirmation) {
-            api.post(`/to-rais-reply/${mailId}`).then((res) => {
+            api.post(`/to-rais-reply/${mailId}`, {'management_id': managementId}).then((res) => {
                 refetch();
                 alert("Отправлено");
             }).catch((err) => {
@@ -99,7 +100,10 @@ const Index = () => {
         })
     }
 
-
+    const changeManagementId = (e) => {
+        setManagementId(e.target.value);
+        console.log(e.target.value);
+    }
     const alertUpdateStatus = () => {
         const confirmation = window.confirm('Уверены что хотите изменить статус?');
 
@@ -131,10 +135,9 @@ const Index = () => {
         Гузориш: 'bg-gradient-to-r from-orange-500 from-10% to-amber-500 text-white',
     };
 
-    const RepliedToUsers =()=>{
+    const RepliedToUsers = () => {
         const confirm = window.confirm("Отправить уведомление пользователю?")
-        if (confirm)
-        {
+        if (confirm) {
             api.post(`${API_APP}/reply-to-user/${data.document.uuid}`)
         }
     }
@@ -290,31 +293,60 @@ const Index = () => {
             </div>
             <div>
                 <div className="mt-10 flex flex-row justify-between">
-                    <button
-                        className="px-4 py-2 bg-blue-700 hover:bg-blue-800 rounded-lg text-white"
-                        disabled={data.document.status === "success"}
-                        onClick={replyModalShow}
-                    >
-                        Ответить
-                    </button>
+                    <div>
+                        <button
+                            className="px-4 py-2 bg-blue-700 hover:bg-blue-800 rounded-lg text-white"
+                            disabled={data.document.status === "success"}
+                            onClick={replyModalShow}
+                        >
+                            Ответить
+                        </button>
+                    </div>
                     {
                         meSelector.user.role === 1 &&
                         (
                             <>
+                                <div className={"flex flex-row justify-around  items-center"}>
+                                    <div
+                                        className={"w-auto flex flex-row justify-end px-4 py-2"}>
+                                        <div
+                                            className="mt-1 rounded-md shadow-sm">
+                                            <select
+                                                onChange={changeManagementId}
+                                                value={managementId}
+                                                name="type"
+                                                id="type"
+                                                className="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-0"
+                                            >
+                                                <option
+                                                    disabled={true}
+                                                    value="">
+                                                    Выберите вариант
+                                                </option>
+                                                <option value="2">Rais Raisov</option>
+                                                <option value="3">Muovin muovinov</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <button className="px-4 py-2 bg-slate-500 rounded-lg text-white"
+                                                disabled={data.toRais}
+                                                onClick={toRaisReplyDocument}
+                                        >
+                                            Перенаправить руководству
+                                        </button>
+                                    </div>
+                                </div>
 
-                                <button className="px-4 py-2 bg-slate-500 rounded-lg text-white"
-                                        disabled={data.toRais}
-                                        onClick={toRaisReplyDocument}
-                                >
-                                    Перенаправить Предеседателю
-                                </button>
 
-                                <button className="px-4 py-2 bg-green-500 rounded-lg text-white"
-                                        disabled={data.document.status === "success"}
-                                        onClick={alertUpdateStatus}
-                                >
-                                    Выполнена
-                                </button>
+                                <div>
+                                    <button className="px-4 py-2 bg-green-500 rounded-lg text-white"
+                                            disabled={data.document.status === "success"}
+                                            onClick={alertUpdateStatus}
+                                    >
+                                        Выполнена
+                                    </button>
+                                </div>
                             </>
                         )
                     }
@@ -369,7 +401,7 @@ const Index = () => {
                   </span>
                                     {
                                         item.document.file.length > 0
-                                        ?
+                                            ?
                                             <div className="flex flex-row justify-between">
                                                 <div>
                                                     {item.document.file.length}
