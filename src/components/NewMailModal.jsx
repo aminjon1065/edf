@@ -330,7 +330,7 @@ export default function Index({open, setOpen}) {
                                                                             </div>
                                                                         </div>
                                                                         {
-                                                                            meSelector.user.id === 1
+                                                                            meSelector.user.role === 1
                                                                                 ?
                                                                                 <>
                                                                                     <div
