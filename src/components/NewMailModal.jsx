@@ -75,6 +75,7 @@ export default function Index({open, setOpen}) {
             'image/jpeg': ['.jpeg', '.png', '.jpg'],
         }
     });
+
     const sendMailFN = async () => {
         const formData = new FormData();
         formData.append('title', title);
@@ -109,8 +110,9 @@ export default function Index({open, setOpen}) {
             // if (response.status === 201) {
             //     window.location.reload()
             // }
-            setType("")
-            console.log(response)
+            setType("");
+            console.log(response);
+
         }).catch((error) => {
             setUserSelected(null);
             setHtmlContent('');
