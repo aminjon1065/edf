@@ -121,7 +121,7 @@ const ShowRepliedToRais = ({id}) => {
                             data.toRais.document.control
                                 ?
                                 <div className={"flex flex-row justify-around"}>
-                                    <div className={"items-end p-1 bg-red-600 rounded"}>
+                                    <div className={"items-end p-1 bg-red-600 rounded text-white"}>
                                         {dateFormatter(data.toRais.document.date_done)}
                                     </div>
                                 </div>

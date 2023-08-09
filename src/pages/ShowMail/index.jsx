@@ -4,7 +4,7 @@ import {useGetInboxByIdQuery} from '../../services/show.mail.service';
 import ApplicationLogo from '../../components/UI/ApplicationLogo';
 import dateFormatter from '../../helpers/dateFormatter';
 import Loader from '../../components/UI/Loader';
-import {CheckCircleIcon, ClockIcon, PaperClipIcon, UserIcon} from '@heroicons/react/24/outline';
+import {CheckCircleIcon, CheckIcon, ClockIcon, PaperClipIcon, UserIcon} from '@heroicons/react/24/outline';
 import {API_APP, PUBLIC_APP_URL_DOCUMENTS, PUBLIC_URL_BACKEND} from '../../helpers/CONSTANTS';
 import api from '../../services/api';
 import usePageTitle from '../../hooks/usePageTitle';
@@ -141,7 +141,6 @@ const Index = () => {
             api.post(`${API_APP}/reply-to-user/${data.document.uuid}`)
         }
     }
-    console.log(managementId==='')
     return (
         <div>
             <PDFViewer isOpen={modalOpen} onClose={() => setModalOpen(false)} fileUrl={fileUrl}
@@ -170,7 +169,20 @@ const Index = () => {
                     {data.document.status === 'pending' ? <ClockIcon className={"h-6 w-auto text-white-500 ml-2"}/> :
                         <CheckCircleIcon className={"h-6 w-auto text-green-400 ml-2"}/>}
             </span>
-                <div className="items-end">{dateFormatter(data.created_at)}</div>
+               <div>
+                   <div className="items-end">{dateFormatter(data.created_at)}</div>
+                   {
+                       data.document.control
+                           ?
+                           <div className={"flex flex-row justify-around"}>
+                               <div className={"items-end p-1 bg-red-600 rounded text-white"}>
+                                   {dateFormatter(data.document.date_done)}
+                               </div>
+                           </div>
+                           :
+                           null
+                   }
+               </div>
             </div>
             <div className="mt-10">
                 <h3 className="text-3xl">{data.document.title}</h3>
@@ -244,15 +256,82 @@ const Index = () => {
                     </>
                 ) : null}
             </div>
-            <div className={'mt-10'}>
-                <span>
-                    Было перенаправлено:
-                </span>
-                <div className="flex flex-row">
-                    <ul className="divide-y divide-gray-100 rounded-md border border-gray-200">
-                        {data.replyToUsers.length > 0 ? (
-                            data.replyToUsers.map((item) => (
-                                <li key={item.id}
+            <div className="flex flex-row justify-between">
+                <div className={'mt-10'}>
+                    {
+                        data.replyToUsers.length > 0 ?
+                            <span>
+                            Было перенаправлено:
+                        </span>
+                            :
+                            null
+                    }
+                    <div className="flex flex-row">
+                        <ul className="divide-y divide-gray-100 rounded-md border border-gray-200">
+                            {data.replyToUsers.length > 0 ? (
+                                data.replyToUsers.map((item) => (
+                                    <li key={item.id}
+                                        className="flex items-center justify-between py-4 pl-4 pr-5 text-sm leading-6">
+                                        <div className="flex flex-1 items-center">
+                                            <UserIcon
+                                                className="h-5 w-5 flex-shrink-0 text-gray-900"
+                                                aria-hidden="true"
+                                            />
+                                            <div className="ml-4 flex min-w-0 flex-1 gap-2">
+                                        <span
+                                            className="truncate font-medium"
+                                        >
+                                            {`${item.full_name} - ${item.position}(${item.department})`}
+                                        </span>
+                                                <span
+                                                    className="flex-shrink-0 text-gray-400"
+                                                >
+                                            {item.region}
+                                        </span>
+                                            </div>
+                                        </div>
+                                        {
+                                            meSelector.user.role === 1
+                                                ?
+                                                <>
+                                                    {/*{*/}
+                                                    {/*    item.hasSentDocument*/}
+                                                    {/*    ?*/}
+                                                    {/*        <CheckCircleIcon className={"w-6 h-auto text-blue-400 ml-4"} />*/}
+                                                    {/*        :*/}
+                                                            <div className="ml-4 flex-shrink-0">
+                                                                <button
+                                                                    className="ml-2 font-medium text-red-600 hover:text-red-500"
+                                                                    onClick={RepliedToUsers}
+                                                                    // disabled={item.hasSentDocument}
+                                                                >
+                                                                    Уведомить
+                                                                </button>
+                                                            </div>
+                                                    {/*}*/}
+                                                </>
+                                                :
+                                                null
+                                        }
+                                    </li>
+                                ))
+                            ) : null}
+                        </ul>
+                    </div>
+                </div>
+                <div className={'mt-10'}>
+                    {
+                        data.replyToUsers.length > 0 ?
+                            <span>
+                            Перенаправил:
+                        </span>
+                            :
+                            null
+                    }
+                    <div className="flex flex-row">
+                        <ul className="divide-y divide-gray-100 rounded-md border border-gray-200">
+                            {data.document?.to_rais?.user ?
+                                <li
                                     className="flex items-center justify-between py-4 pl-4 pr-5 text-sm leading-6">
                                     <div className="flex flex-1 items-center">
                                         <UserIcon
@@ -263,33 +342,19 @@ const Index = () => {
                                         <span
                                             className="truncate font-medium"
                                         >
-                                            {`${item.full_name} - ${item.position}(${item.department})`}
+                                            {`${data.document.to_rais.user.full_name} - ${data.document.to_rais.user.position}(${data.document.to_rais.user.department})`}
                                         </span>
                                             <span
                                                 className="flex-shrink-0 text-gray-400"
                                             >
-                                            {item.region}
+                                            {data.document.to_rais.user.region}
                                         </span>
                                         </div>
                                     </div>
-                                    {
-                                        meSelector.user.id === 1
-                                            ?
-                                            <div className="ml-4 flex-shrink-0">
-                                                <button
-                                                    className="ml-2 font-medium text-red-600 hover:text-red-500"
-                                                    onClick={RepliedToUsers}
-                                                >
-                                                    Уведомить
-                                                </button>
-                                            </div>
-                                            :
-                                            null
-                                    }
                                 </li>
-                            ))
-                        ) : null}
-                    </ul>
+                            : null}
+                        </ul>
+                    </div>
                 </div>
             </div>
             <div>
@@ -313,11 +378,11 @@ const Index = () => {
                                         <div
                                             className="mt-1 rounded-md shadow-sm">
                                             <select
-                                                    value={managementId}
-                                                    onChange={changeManagementId}
-                                                    name="management_id"
-                                                    id="management_id"
-                                                    className="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-0"
+                                                value={managementId}
+                                                onChange={changeManagementId}
+                                                name="management_id"
+                                                id="management_id"
+                                                className="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-0"
                                             >
                                                 <option
                                                     disabled={true}
@@ -336,7 +401,7 @@ const Index = () => {
                                     </div>
                                     <div>
                                         <button className="px-4 py-2 bg-slate-500 rounded-lg text-white"
-                                                disabled={data.toRais || managementId===''}
+                                                disabled={data.toRais || managementId === ''}
                                                 onClick={toRaisReplyDocument}
                                         >
                                             Перенаправить руководству
