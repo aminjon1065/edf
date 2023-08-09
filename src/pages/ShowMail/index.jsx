@@ -27,7 +27,7 @@ const Index = () => {
     const meSelector = useSelector(state => state.auth);
     const [userSelected, setUserSelected] = useState(null);
     const [usersList, setUsersList] = useState([]);
-    const [managementId, setManagementId] = useState(null);
+    const [managementId, setManagementId] = useState('');
     useEffect(() => {
         fetchUsers().then((res) => {
             setUsersList(res.data)
@@ -141,6 +141,7 @@ const Index = () => {
             api.post(`${API_APP}/reply-to-user/${data.document.uuid}`)
         }
     }
+    console.log(managementId==='')
     return (
         <div>
             <PDFViewer isOpen={modalOpen} onClose={() => setModalOpen(false)} fileUrl={fileUrl}
@@ -312,25 +313,30 @@ const Index = () => {
                                         <div
                                             className="mt-1 rounded-md shadow-sm">
                                             <select
-                                                onChange={changeManagementId}
-                                                value={managementId}
-                                                name="type"
-                                                id="type"
-                                                className="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-0"
+                                                    value={managementId}
+                                                    onChange={changeManagementId}
+                                                    name="management_id"
+                                                    id="management_id"
+                                                    className="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-0"
                                             >
                                                 <option
                                                     disabled={true}
                                                     value="">
                                                     Выберите вариант
                                                 </option>
-                                                <option value="2">Rais Raisov</option>
-                                                <option value="3">Muovin muovinov</option>
+                                                <option
+                                                    value="3">
+                                                    Muovin Muovinov
+                                                </option>
+                                                <option
+                                                    value="4">Rais Raisov
+                                                </option>
                                             </select>
                                         </div>
                                     </div>
                                     <div>
                                         <button className="px-4 py-2 bg-slate-500 rounded-lg text-white"
-                                                disabled={data.toRais}
+                                                disabled={data.toRais || managementId===''}
                                                 onClick={toRaisReplyDocument}
                                         >
                                             Перенаправить руководству

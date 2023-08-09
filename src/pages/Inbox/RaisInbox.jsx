@@ -198,9 +198,9 @@ const RaisInbox = () => {
                                             <tr
                                                 key={mail.id}
                                                 onClick={() => showMailItem(mail.id)}
-                                                className={`bg-slate-100 border-b border-gray-100 hover:bg-slate-300 cursor-pointer`}
+                                                className={`${mail.opened ? 'bg-slate-100' : 'bg-white'}  border-b border-gray-100 hover:bg-slate-300 cursor-pointer`}
                                             >
-                                                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{mail.id}</td>
+                                                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{mail.document.id}</td>
                                                 <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 ">
                                                     {mail.document.user.full_name}
                                                     <span
