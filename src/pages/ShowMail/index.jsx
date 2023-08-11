@@ -138,7 +138,12 @@ const Index = () => {
     const RepliedToUsers = () => {
         const confirm = window.confirm("Отправить уведомление пользователю?")
         if (confirm) {
-            api.post(`${API_APP}/reply-to-user/${data.document.uuid}`)
+            api.post(`${API_APP}/reply-to-user/${data.document.uuid}`).then((res) => {
+                console.log(res);
+                refetch();
+            } ).catch((err) => {
+                console.log(err);
+            })
         }
     }
     return (
@@ -294,21 +299,21 @@ const Index = () => {
                                             meSelector.user.role === 1
                                                 ?
                                                 <>
-                                                    {/*{*/}
-                                                    {/*    item.hasSentDocument*/}
-                                                    {/*    ?*/}
-                                                    {/*        <CheckCircleIcon className={"w-6 h-auto text-blue-400 ml-4"} />*/}
-                                                    {/*        :*/}
+                                                    {
+                                                        item.hasSentDocument
+                                                        ?
+                                                            <CheckCircleIcon className={"w-6 h-auto text-blue-400 ml-4"} />
+                                                            :
                                                             <div className="ml-4 flex-shrink-0">
                                                                 <button
                                                                     className="ml-2 font-medium text-red-600 hover:text-red-500"
                                                                     onClick={RepliedToUsers}
-                                                                    // disabled={item.hasSentDocument}
+                                                                    disabled={item.hasSentDocument}
                                                                 >
                                                                     Уведомить
                                                                 </button>
                                                             </div>
-                                                    {/*}*/}
+                                                    }
                                                 </>
                                                 :
                                                 null
@@ -321,9 +326,9 @@ const Index = () => {
                 </div>
                 <div className={'mt-10'}>
                     {
-                        data.replyToUsers.length > 0 ?
+                        data.document?.to_rais?.user  ?
                             <span>
-                            Перенаправил:
+                            Руководства:
                         </span>
                             :
                             null
