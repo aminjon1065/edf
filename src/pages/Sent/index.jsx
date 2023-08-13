@@ -116,11 +116,10 @@ const Index = () => {
                             </nav>
                             <div className={"ml-5"}>
                                 <select name="filterType" onChange={handleChangeType} id="filterType" className={"rounded"}>
-                                    <option value="" disabled selected>Выберите тип</option>
+                                    <option value="">Все</option>
                                     <option value="Гузориш">Гузориш</option>
                                     <option value="Внутренные">Внутренные</option>
                                     <option value="Правительственные">Правительственные</option>
-                                    <option value="">Все</option>
                                 </select>
                             </div>
                         </div>

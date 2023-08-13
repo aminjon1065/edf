@@ -1,9 +1,9 @@
 import React from 'react';
-
+import Calendarr from "../../components/Calendar";
 const Index = () => {
     return (
         <div>
-           Calendar
+            <Calendarr/>
         </div>
     );
 };
