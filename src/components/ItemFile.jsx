@@ -7,12 +7,12 @@ const files = [
     }
 ]
 
-export default function ItemDocument({document,source, title, size, extens}) {
-    console.log(document)
+export default function ItemFile({document,source, title, size, extens}) {
+    console.log(source);
     const file = files[0];
     return (
 
-                <li key={file.source} className="relative">
+                <li key={title} className="relative">
                     <div className="group block w-full aspect-w-10 aspect-h-7 rounded-lg bg-gray-100 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:ring-indigo-500 overflow-hidden">
                         <img src={file.source} alt="" className="object-cover pointer-events-none group-hover:opacity-75" />
                         <button type="button" className="absolute inset-0 focus:outline-none">
@@ -20,7 +20,7 @@ export default function ItemDocument({document,source, title, size, extens}) {
                         </button>
                     </div>
                     <p className="mt-2 block text-sm font-medium text-gray-900 truncate pointer-events-none">{file.title}</p>
-                    <p className="block text-sm font-medium text-gray-500 pointer-events-none">{file.size}</p>
+                    <p className="block text-sm font-medium text-gray-500 pointer-events-none">{size}</p>
                 </li>
     )
 }

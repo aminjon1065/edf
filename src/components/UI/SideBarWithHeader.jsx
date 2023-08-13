@@ -23,7 +23,8 @@ import {useSelector} from "react-redux";
 const navigation = [
     {name: 'Входящие', href: '/', icon: InboxIcon, current: true},
     {name: 'Исходящие', href: '/sent', icon: PaperAirplaneIcon, current: false},
-    {name: 'Документы', href: '/documents', icon: DocumentIcon, current: false},
+    {name: 'Файлы', href: '/files', icon: DocumentIcon, current: false},
+    // {name: 'Документы', href: '/documents', icon: DocumentIcon, current: false},
     {name: 'Календарь', href: '/calendar', icon: CalendarIcon, current: false},
     {name: 'Отчёты', href: '/reports', icon: ChartBarIcon, current: false},
 ]
