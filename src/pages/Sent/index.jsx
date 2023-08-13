@@ -10,11 +10,12 @@ import {useSelector} from "react-redux";
 import formatterDay from "../../helpers/dateFormatter";
 
 const Index = () => {
-    usePageTitle('Входящие');
+    usePageTitle('Исходящие');
     const navigate = useNavigate();
     const [column, setColumn] = useState('id');
     const [order, setOrder] = useState('desc');
     const [pageNum, setPageNum] = useState(1);
+    const [type, setType] = useState('')
     const [searchText, setSearchText] = useState('');
     const [dates, setDates] = useState({
         startDate: '',
@@ -24,10 +25,11 @@ const Index = () => {
         page: pageNum,
         order: order,
         column: column,
+        type: type,
         searchQuery: searchText,
         startDate: !dates.startDate ? '' : dates.startDate,
         endDate: !dates.endDate ? '' : dates.endDate,
-        type: 'sent'
+        request: 'sent'
     });
     const selectorNotification = useSelector(state => state.notificationModal);
 
@@ -83,6 +85,9 @@ const Index = () => {
     if (error) {
         return <span>Error!</span>;
     }
+    const handleChangeType = (event) => {
+        setType(event.target.value);
+    };
     return (
         <div className="flex flex-col">
             <div className="-my-2 scrollbar-none sm:-mx-6 lg:-mx-8 h-screen">
@@ -109,6 +114,15 @@ const Index = () => {
                                     </button>
                                 )}
                             </nav>
+                            <div className={"ml-5"}>
+                                <select name="filterType" onChange={handleChangeType} id="filterType" className={"rounded"}>
+                                    <option value="" disabled selected>Выберите тип</option>
+                                    <option value="Гузориш">Гузориш</option>
+                                    <option value="Внутренные">Внутренные</option>
+                                    <option value="Правительственные">Правительственные</option>
+                                    <option value="">Все</option>
+                                </select>
+                            </div>
                         </div>
                         <div className="flex justify-end">
                             <div className="relative mr-1">

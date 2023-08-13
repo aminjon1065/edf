@@ -4,7 +4,7 @@ import {useGetInboxByIdQuery} from '../../services/show.mail.service';
 import ApplicationLogo from '../../components/UI/ApplicationLogo';
 import dateFormatter from '../../helpers/dateFormatter';
 import Loader from '../../components/UI/Loader';
-import {CheckCircleIcon, CheckIcon, ClockIcon, PaperClipIcon, UserIcon} from '@heroicons/react/24/outline';
+import {CheckCircleIcon, ClockIcon, PaperClipIcon, UserIcon} from '@heroicons/react/24/outline';
 import {API_APP, PUBLIC_APP_URL_DOCUMENTS, PUBLIC_URL_BACKEND} from '../../helpers/CONSTANTS';
 import api from '../../services/api';
 import usePageTitle from '../../hooks/usePageTitle';
@@ -233,7 +233,7 @@ const Index = () => {
                                                 <a
                                                     rel="noopener noreferrer"
                                                     target="_blank"
-                                                    href={`${PUBLIC_APP_URL_DOCUMENTS}${data.from_user.region}/${data.document.uuid}/${item.name}`}
+                                                    href={`${PUBLIC_APP_URL_DOCUMENTS}${data.from_user.region}/${item.folder}/${item.name}`}
                                                     download
                                                     className="font-medium text-indigo-600 hover:text-indigo-500"
                                                 >
@@ -242,7 +242,7 @@ const Index = () => {
                                                 <button
                                                     onClick={() =>
                                                         handleFileClick(
-                                                            `${PUBLIC_APP_URL_DOCUMENTS}${data.from_user.region}/${data.document.uuid}/${item.name}`,
+                                                            `${PUBLIC_APP_URL_DOCUMENTS}${data.from_user.region}/${item.folder}/${item.name}`,
                                                             item.extension
                                                         )
                                                     }
@@ -528,7 +528,7 @@ const Index = () => {
                                                             <button
                                                                 onClick={() =>
                                                                     handleFileClick(
-                                                                        `${PUBLIC_APP_URL_DOCUMENTS}${item.from_user.region}/${item.document.uuid}/${file.name}`,
+                                                                        `${PUBLIC_APP_URL_DOCUMENTS}${item.from_user.region}/${file.folder}/${file.name}`,
                                                                         file.extension
                                                                     )
                                                                 }

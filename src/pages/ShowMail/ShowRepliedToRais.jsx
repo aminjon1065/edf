@@ -185,7 +185,7 @@ const ShowRepliedToRais = ({id}) => {
                                                     <button
                                                         onClick={() =>
                                                             handleFileClick(
-                                                                `${PUBLIC_APP_URL_DOCUMENTS}${data.toRais.document.user.region}/${data.toRais.document.uuid}/${item.name}`,
+                                                                `${PUBLIC_APP_URL_DOCUMENTS}${data.toRais.document.user.region}/${item.folder}/${item.name}`,
                                                                 item.extension
                                                             )
                                                         }

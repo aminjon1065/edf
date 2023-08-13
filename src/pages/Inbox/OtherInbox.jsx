@@ -13,6 +13,7 @@ const OtherInbox = () => {
     const [column, setColumn] = useState('id');
     const [order, setOrder] = useState('desc');
     const [pageNum, setPageNum] = useState(1);
+    const [type, setType] = useState('')
     const [searchText, setSearchText] = useState('');
     const selectorNotification = useSelector(state => state.notificationModal);
     const [dates, setDates] = useState({
@@ -22,12 +23,13 @@ const OtherInbox = () => {
 
     const {data = [], isLoading, error, refetch} = useGetMessagesQuery({
         page: pageNum,
+        type:type,
         order: order,
         column: column,
         searchQuery: searchText,
         startDate: !dates.startDate ? '' : dates.startDate,
         endDate: !dates.endDate ? '' : dates.endDate,
-        type: 'inbox'
+        request: 'inbox'
     });
     useEffect(() => {
         refetch();
@@ -68,6 +70,9 @@ const OtherInbox = () => {
     const handleSearchText = (event) => {
         setSearchText(event.target.value);
     };
+    const handleChangeType = (event) => {
+        setType(event.target.value);
+    }
     return (
         <>
             <div className="flex flex-col">
@@ -95,7 +100,17 @@ const OtherInbox = () => {
                                         </button>
                                     )}
                                 </nav>
+                                <div className={"ml-5"}>
+                                    <select name="filterType" onChange={handleChangeType} id="filterType" className={"rounded"}>
+                                        <option value="" disabled selected>Выберите тип</option>
+                                        <option value="Гузориш">Гузориш</option>
+                                        <option value="Внутренные">Внутренные</option>
+                                        <option value="Правительственные">Правительственные</option>
+                                        <option value="">Все</option>
+                                    </select>
+                                </div>
                             </div>
+
                             <div className="flex justify-end">
                                 <div className="relative mr-1">
                                     <Datepicker
