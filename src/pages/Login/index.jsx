@@ -8,6 +8,7 @@ import usePageTitle from "../../hooks/usePageTitle";
 import {login} from "../../state/slices/signIn";
 import {LockClosedIcon, EyeIcon, EyeSlashIcon, ChevronDownIcon, ChevronUpIcon} from "@heroicons/react/24/solid";
 import {Popover, Transition} from '@headlessui/react';
+import {useTranslation} from "react-i18next";
 
 const Index = () => {
     usePageTitle("Войти");
@@ -27,6 +28,7 @@ const Index = () => {
         e.preventDefault();
         dispatch(login(email, password));
     };
+    const  {t} = useTranslation();
     return (
         <AuthCard
             logo={
@@ -38,18 +40,16 @@ const Index = () => {
                 // </Link>
             }
         >
-
-
             <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
                 <div className="sm:mx-auto sm:w-full sm:max-w-sm">
                     <h2 className="text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-                        Вход в ваш аккаунт
+                        {t("Interface.Auth.Login.Title")}
                     </h2>
                 </div>
                 <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
                     <form className="space-y-6" onSubmit={handleSubmit}>
                         <div>
-                            <Label htmlFor="email">Email</Label>
+                            <Label htmlFor="email">{t("Interface.Auth.Login.Email")}</Label>
 
                             <Input
                                 id="email"
@@ -66,7 +66,7 @@ const Index = () => {
                         <div>
                             <div className="flex items-center justify-between">
                                 <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">
-                                    Пароль
+                                    {t("Interface.Auth.Login.Password")}
                                 </label>
                                 <div className="text-sm">
                                     <Popover className="relative">
@@ -79,7 +79,7 @@ const Index = () => {
                                                         `}
                                                 >
                                                     <div className="flex">
-                                                        <span>Забыли пароль?</span>
+                                                        <span>{t("Interface.Auth.Login.ForgotPassword")}</span>
                                                         {open ? (
                                                             <ChevronUpIcon
                                                                 className={`${open ? '' : 'text-opacity-70'}
@@ -111,10 +111,7 @@ const Index = () => {
                                                             className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
                                                             <div className="relative  bg-white p-3">
                                                                     <span>
-                                                                        Если вы забыли свой пароль, пожалуйста, обращайтесь в
-                                                                        <span className="text-green-500 font-bold">
-                                                                            "Общий отдел"
-                                                                        </span>
+                                                                        {t("Interface.Auth.Login.ForgotText")}
                                                                     </span>
                                                             </div>
                                                         </div>
@@ -159,7 +156,8 @@ const Index = () => {
                                         <LockClosedIcon className="h-5 w-5 text-indigo-500 group-hover:text-indigo-400"
                                                         aria-hidden="true"/>
                                     </span>
-                                Вход
+                                {t("Interface.Auth.Login.Submit")}
+
                             </button>
                         </div>
                     </form>

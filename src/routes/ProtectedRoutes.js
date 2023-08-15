@@ -10,6 +10,8 @@ import Sent from "./../pages/Sent";
 import ShowMail from "./../pages/ShowMail";
 import ShowRepliedToRais from "../pages/ShowMail/ShowRepliedToRais";
 import Files from "../pages/Files";
+import Settings from "../pages/Settings";
+import Profile from "../pages/Profile";
 
 const ProtectedRoutes = () => {
     return (
@@ -24,6 +26,8 @@ const ProtectedRoutes = () => {
                     <Route path={"files"} element={<Files/>}/>
                     <Route path={"reports"} element={<Reports/>}/>
                     <Route path={"sent"} element={<Sent/>}/>
+                    <Route path={"settings"} element={<Settings/>}/>
+                    <Route path={"profile"} element={<Profile/>}/>
                     <Route path={"*"} element={<NotFound/>}/>
                 </Route>
             </Routes>

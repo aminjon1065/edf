@@ -7,7 +7,7 @@ import {Provider} from "react-redux";
 import store from "./state/store";
 import Echo from "laravel-echo";
 import {VITE_PUSHER_APP_CLUSTER, VITE_PUSHER_APP_KEY, VITE_PUSHER_HOST} from "./helpers/CONSTANTS";
-
+import i18n from "./localization/i18n";
 
 window.Pusher = require('pusher-js');
 window.Echo = new Echo({

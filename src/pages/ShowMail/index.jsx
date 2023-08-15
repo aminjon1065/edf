@@ -136,12 +136,12 @@ const Index = () => {
     };
 
     const RepliedToUsers = () => {
-        const confirm = window.confirm("Отправить уведомление пользователю?")
+        const confirm = window.confirm("Отправить уведомление пользователей?")
         if (confirm) {
             api.post(`${API_APP}/reply-to-user/${data.document.uuid}`).then((res) => {
                 console.log(res);
                 refetch();
-            } ).catch((err) => {
+            }).catch((err) => {
                 console.log(err);
             })
         }
@@ -174,20 +174,20 @@ const Index = () => {
                     {data.document.status === 'pending' ? <ClockIcon className={"h-6 w-auto text-white-500 ml-2"}/> :
                         <CheckCircleIcon className={"h-6 w-auto text-green-400 ml-2"}/>}
             </span>
-               <div>
-                   <div className="items-end">{dateFormatter(data.created_at)}</div>
-                   {
-                       data.document.control
-                           ?
-                           <div className={"flex flex-row justify-around"}>
-                               <div className={"items-end p-1 bg-red-600 rounded text-white"}>
-                                   {dateFormatter(data.document.date_done)}
-                               </div>
-                           </div>
-                           :
-                           null
-                   }
-               </div>
+                <div>
+                    <div className="items-end">{dateFormatter(data.created_at)}</div>
+                    {
+                        data.document.control
+                            ?
+                            <div className={"flex flex-row justify-around"}>
+                                <div className={"items-end p-1 bg-red-600 rounded text-white"}>
+                                    {dateFormatter(data.document.date_done)}
+                                </div>
+                            </div>
+                            :
+                            null
+                    }
+                </div>
             </div>
             <div className="mt-10">
                 <h3 className="text-3xl">{data.document.title}</h3>
@@ -265,11 +265,44 @@ const Index = () => {
                 <div className={'mt-10'}>
                     {
                         data.replyToUsers.length > 0 ?
-                            <span>
-                            Было перенаправлено:
-                        </span>
-                            :
-                            null
+                            <div className={"flex flex-row justify-between"}>
+                                    {
+                                        data.document?.to_rais?.opened
+                                            ?
+                                            <span>
+                                              Было перенаправлено:
+                                            </span>
+                                            :
+                                            <span>
+                                            Будет перенаправлено:
+                                            < /span>
+                                    }
+                                    {
+                                        meSelector.user.role === 1
+                                            ?
+                                            <>
+                                                {
+                                                    data.document?.to_rais?.opened
+                                                        ?
+                                                        <CheckCircleIcon className={"w-5 h-5"}/>
+                                                        :
+                                                        <div className="ml-4 flex-shrink-0">
+                                                            <button
+                                                                className="ml-2 font-medium text-red-600 hover:text-red-500"
+                                                                onClick={RepliedToUsers}
+                                                                disabled={data.document?.to_rais?.opened}
+                                                            >
+                                                                Уведомить всех
+                                                            </button>
+                                                        </div>
+                                                }
+                                            </>
+                                            :
+                                            null
+                                    }
+                            </div>
+                        :
+                        null
                     }
                     <div className="flex flex-row">
                         <ul className="divide-y divide-gray-100 rounded-md border border-gray-200">
@@ -295,29 +328,7 @@ const Index = () => {
                                         </span>
                                             </div>
                                         </div>
-                                        {
-                                            meSelector.user.role === 1
-                                                ?
-                                                <>
-                                                    {
-                                                        item.hasSentDocument
-                                                        ?
-                                                            <CheckCircleIcon className={"w-6 h-auto text-blue-400 ml-4"} />
-                                                            :
-                                                            <div className="ml-4 flex-shrink-0">
-                                                                <button
-                                                                    className="ml-2 font-medium text-red-600 hover:text-red-500"
-                                                                    onClick={RepliedToUsers}
-                                                                    disabled={item.hasSentDocument}
-                                                                >
-                                                                    Уведомить
-                                                                </button>
-                                                            </div>
-                                                    }
-                                                </>
-                                                :
-                                                null
-                                        }
+
                                     </li>
                                 ))
                             ) : null}
@@ -326,7 +337,7 @@ const Index = () => {
                 </div>
                 <div className={'mt-10'}>
                     {
-                        data.document?.to_rais?.user  ?
+                        data.document?.to_rais?.user ?
                             <span>
                             Руководства:
                         </span>
@@ -357,7 +368,7 @@ const Index = () => {
                                         </div>
                                     </div>
                                 </li>
-                            : null}
+                                : null}
                         </ul>
                     </div>
                 </div>
@@ -552,7 +563,7 @@ const Index = () => {
             </div>
 
         </div>
-    );
+);
 };
 
 export default Index;

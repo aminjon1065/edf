@@ -7,7 +7,7 @@ import {checkAuth} from "./state/slices/signIn";
 import {BrowserRouter} from "react-router-dom";
 import ProtectedRoutes from "./routes/ProtectedRoutes";
 import Loader from "./components/UI/Loader";
-
+import i18n from "./localization/i18n";
 
 function App() {
     const isAuth = useSelector(state => state.auth.isAuth);
@@ -15,6 +15,10 @@ function App() {
     const dispatch = useDispatch()
     useEffect(() => {
         const token = localStorage.getItem('token');
+        const lang = localStorage.getItem('lang');
+        if (lang) {
+            i18n.changeLanguage(lang);
+        }
         if (token) {
             dispatch(checkAuth(token))
         }

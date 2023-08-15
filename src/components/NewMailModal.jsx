@@ -7,6 +7,7 @@ import api from "./../services/api";
 import Editor from "./Editor";
 import {fetchUsers} from "../services/fetchUsers.service";
 import {useSelector} from "react-redux";
+import {useTranslation} from "react-i18next";
 
 export default function Index({open, setOpen}) {
     // Локальные состояния
@@ -21,6 +22,7 @@ export default function Index({open, setOpen}) {
     const [dateDone, setDateDone] = useState('');
     const [toRais, setToRais] = useState(false)
     const meSelector = useSelector(state => state.auth);
+    const {t} = useTranslation();
 
     // Запрос на получение пользователей при монтировании компонента
     useEffect(() => {
@@ -28,6 +30,7 @@ export default function Index({open, setOpen}) {
             setUsersList(res.data)
         });
     }, []);
+
     // Получение контента редактора
     const getContent = (htmlContentProp) => {
         setHtmlContent(htmlContentProp);
@@ -42,17 +45,22 @@ export default function Index({open, setOpen}) {
     const removeFile = (fileIndex) => {
         setFiles((prevFiles) => prevFiles.filter((_, index) => index !== fileIndex));
     };
-
+//Изменить зоголовок
     const handleChangeTitle = (e) => {
         setTitle(e.target.value)
     }
+    //Изменить тип
     const handleChangeType = (e) => {
         setType(e.target.value);
         console.log(e.target.value)
     }
+
+    //Изменить дату выполнения
     const handleChangeDateDone = (e) => {
         setDateDone(e.target.value)
     }
+
+    //Изменить контрольный
     const handleChangeImportance = () => {
         setControl(!control)
     }
@@ -166,7 +174,7 @@ export default function Index({open, setOpen}) {
                                                         as="h3"
                                                         className="text-base font-semibold leading-6 text-gray-900 ml-2"
                                                     >
-                                                        Новое письмо
+                                                        {t("Interface.SideBar.NewMail")}
                                                     </Dialog.Title>
                                                 </div>
                                                 <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
@@ -179,7 +187,8 @@ export default function Index({open, setOpen}) {
                                                                         <div className="sm:col-span-6">
                                                                             <label htmlFor="username"
                                                                                    className="block text-sm font-medium text-gray-700">
-                                                                                Кому
+                                                                                {t("Interface.NewMailModal.To")}
+
                                                                                 <sup
                                                                                     className={"text-red-500 font-bold"}>*</sup>
                                                                             </label>
@@ -202,7 +211,8 @@ export default function Index({open, setOpen}) {
                                                                         <div className="sm:col-span-6">
                                                                             <label htmlFor="title"
                                                                                    className="block text-sm font-medium text-gray-700">
-                                                                                Заголовок
+                                                                                {t("Interface.NewMailModal.Title")}
+
                                                                                 <sup
                                                                                     className={"text-red-500 font-bold"}>*</sup>
                                                                             </label>
@@ -220,24 +230,15 @@ export default function Index({open, setOpen}) {
                                                                         <div className="sm:col-span-6">
                                                                             <label htmlFor="description"
                                                                                    className="block text-sm font-medium text-gray-700">
-                                                                                Текст
+                                                                                {t("Interface.NewMailModal.Message")}
+
                                                                             </label>
                                                                             <div
                                                                                 className="">
                                                                                 <Editor getContent={getContent}/>
                                                                             </div>
-                                                                            {/*<div className="mt-1">*/}
-                                                                            {/*    <textarea*/}
-                                                                            {/*        id="description"*/}
-                                                                            {/*        name="about"*/}
-                                                                            {/*        rows={3}*/}
-                                                                            {/*        className="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-0"*/}
-                                                                            {/*        defaultValue={''}*/}
-                                                                            {/*    />*/}
-                                                                            {/*</div>*/}
                                                                             <p className="mt-2 text-sm text-gray-500">
-                                                                                дополнение, тело документа,
-                                                                                примечание и т.д.
+                                                                                {t("Interface.NewMailModal.Other")}
                                                                             </p>
                                                                         </div>
                                                                         <div className="sm:col-span-6">
@@ -259,10 +260,10 @@ export default function Index({open, setOpen}) {
                                                                                     <div className="ml-3 text-sm w-1/4">
                                                                                         <label htmlFor="control"
                                                                                                className="font-medium text-gray-700">
-                                                                                            Контрольный
+                                                                                            {t("Interface.NewMailModal.Control")}
                                                                                         </label>
                                                                                         <p className="text-gray-500">
-                                                                                            если документ контрольный,
+                                                                                            {t("Interface.NewMailModal.ControlDescription")}
                                                                                         </p>
                                                                                     </div>
                                                                                     <div className="text-sm w-2/4">
@@ -285,7 +286,7 @@ export default function Index({open, setOpen}) {
                                                                                         <div className={""}>
                                                                                             <label htmlFor="type"
                                                                                                    className="block text-sm font-medium text-gray-700">
-                                                                                                Тип документа
+                                                                                                {t("Interface.NewMailModal.TypeDocument")}
                                                                                                 <sup
                                                                                                     className={"text-red-500 font-bold"}>*</sup>
                                                                                             </label>
@@ -316,13 +317,6 @@ export default function Index({open, setOpen}) {
                                                                                                         value="Гузориш">Гузориш
                                                                                                     </option>
                                                                                                 </select>
-                                                                                                {/*<input*/}
-                                                                                                {/*    value={type}*/}
-                                                                                                {/*    onChange={handleChangeType}*/}
-                                                                                                {/*    type="text"*/}
-                                                                                                {/*    id={"type"}*/}
-                                                                                                {/*    className="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-0"*/}
-                                                                                                {/*/>*/}
                                                                                             </div>
                                                                                         </div>
                                                                                     </div>
@@ -347,11 +341,10 @@ export default function Index({open, setOpen}) {
                                                                                             className="ml-3 text-sm w-1/4">
                                                                                             <label htmlFor="toRais"
                                                                                                    className="font-medium text-gray-700">
-                                                                                                Председателью
+                                                                                                {t("Interface.NewMailModal.ToRais")}
                                                                                             </label>
                                                                                         </div>
                                                                                     </div>
-
                                                                                 </>
 
                                                                                 :
@@ -360,7 +353,7 @@ export default function Index({open, setOpen}) {
                                                                         <div className="sm:col-span-6">
                                                                             <label htmlFor="cover-photo"
                                                                                    className="block text-sm font-medium text-gray-700">
-                                                                                Загрузка документов
+                                                                                {t("Interface.NewMailModal.UploadDocuments")}
                                                                             </label>
                                                                             <div
                                                                                 {...getRootProps()}
@@ -389,11 +382,9 @@ export default function Index({open, setOpen}) {
                                                                                 <span
                                                                                     className="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
                                                                                 >
-                                                                                    Загрузить документ
+                                                                                                                                                                                {t("Interface.NewMailModal.UploadDragAndDrop")}
+
                                                                                 </span>
-                                                                                        <p className="pl-1">или
-                                                                                            можете перетащит
-                                                                                            документ</p>
                                                                                     </div>
                                                                                     <p className="text-xs text-gray-500">DOCX,
                                                                                         PDF, XLS
@@ -449,7 +440,8 @@ export default function Index({open, setOpen}) {
                                                 className="disabled:bg-gray-300 inline-flex w-full justify-center rounded-md bg-sky-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-sky-500 sm:ml-3 sm:w-auto"
                                                 onClick={sendMailFN}
                                             >
-                                                Отправить
+                                                {t("Interface.NewMailModal.Send")}
+
                                             </button>
                                             <button
                                                 type="button"
@@ -457,7 +449,8 @@ export default function Index({open, setOpen}) {
                                                 onClick={() => setOpen(false)}
                                                 ref={cancelButtonRef}
                                             >
-                                                Отмена
+                                                {t("Interface.NewMailModal.Cancel")}
+
                                             </button>
                                         </div>
                                     </>

@@ -1,6 +1,7 @@
 import {createSlice} from '@reduxjs/toolkit';
 import axios from 'axios';
-import { API_APP } from '../../helpers/CONSTANTS';
+import {API_APP} from '../../helpers/CONSTANTS';
+import i18n from "../../localization/i18n";
 
 const initialState = {
     isAuth: false,
@@ -49,7 +50,7 @@ const authSlice = createSlice({
     },
 });
 
-export const {loginStart, checkAuthSuccess,checkAuthFailure, loginSuccess, loginFailure, logout} = authSlice.actions;
+export const {loginStart, checkAuthSuccess, checkAuthFailure, loginSuccess, loginFailure, logout} = authSlice.actions;
 
 export const login = (email, password) => async (dispatch) => {
     dispatch(loginStart());
@@ -58,10 +59,10 @@ export const login = (email, password) => async (dispatch) => {
             email: email,
             password: password,
         });
-        console.log('data :',response.data)
+        console.log('data :', response.data)
         dispatch(loginSuccess(response.data));
     } catch (error) {
-        dispatch(loginFailure("Неправильный логин или пароль!"));
+        dispatch(loginFailure(i18n.t("Interface.Auth.Login.InvalidCredentials")));
     }
 };
 
@@ -74,14 +75,13 @@ export const checkAuth = (token) => async (dispatch) => {
                 headers: {'Authorization': `Bearer ${localStorage.getItem('token')}`}
             })
         if (response.status === 401) {
-            console.log("res401")
-            dispatch(checkAuthFailure(response.message));
+            console.log(response.message)
+            dispatch(checkAuthFailure(i18n.t("Interface.Auth.Login.ExpiredToken")));
         }
         dispatch(checkAuthSuccess(response.data))
     } catch (e) {
         // localStorage.removeItem("token")
-        dispatch(checkAuthFailure('Время токена закончено, авторизуйтесь заново!'));
-
+        dispatch(checkAuthFailure(i18n.t("Interface.Auth.Login.ExpiredToken")));
     }
 }
 

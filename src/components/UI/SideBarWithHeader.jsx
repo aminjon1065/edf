@@ -20,20 +20,8 @@ import ApplicationLogo from "./ApplicationLogo";
 import {Link, useLocation} from "react-router-dom";
 import Modal from "../NewMailModal";
 import {useSelector} from "react-redux";
-const navigation = [
-    {name: 'Входящие', href: '/', icon: InboxIcon, current: true},
-    {name: 'Исходящие', href: '/sent', icon: PaperAirplaneIcon, current: false},
-    {name: 'Файлы', href: '/files', icon: DocumentIcon, current: false},
-    // {name: 'Документы', href: '/documents', icon: DocumentIcon, current: false},
-    {name: 'Календарь', href: '/calendar', icon: CalendarIcon, current: false},
-    {name: 'Отчёты', href: '/reports', icon: ChartBarIcon, current: false},
-]
+import {useTranslation} from "react-i18next";
 
-const userNavigation = [
-    {name: 'Профиль', href: '/profile', icon: UsersIcon},
-    {name: 'Настройки', href: '/settings', icon: CogIcon},
-    {name: 'Выход', href: '/log-out', icon: ArrowLeftOnRectangleIcon},
-]
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
@@ -45,7 +33,21 @@ const SideBarWithHeader = () => {
     const [currentRoute, setCurrentRoute] = useState("/");
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const meSelector = useSelector(state => state.auth);
+    const {t} = useTranslation();
+    const navigation = [
+        {name: t("Interface.SideBar.Inbox"), href: '/', icon: InboxIcon, current: true},
+        {name: t("Interface.SideBar.Sent"), href: '/sent', icon: PaperAirplaneIcon, current: false},
+        {name: t("Interface.SideBar.Files"), href: '/files', icon: DocumentIcon, current: false},
+        // {name: 'Документы', href: '/documents', icon: DocumentIcon, current: false},
+        {name: t("Interface.SideBar.Calendar"), href: '/calendar', icon: CalendarIcon, current: false},
+        {name: t("Interface.SideBar.Reports"), href: '/reports', icon: ChartBarIcon, current: false},
+    ]
 
+    const userNavigation = [
+        {name: 'Профиль', href: '/profile', icon: UsersIcon},
+        {name: 'Настройки', href: '/settings', icon: CogIcon},
+        {name: 'Выход', href: '/log-out', icon: ArrowLeftOnRectangleIcon},
+    ]
     useEffect(() => {
         // Get the current path from the location object
         const currentPath = location.pathname;
@@ -118,7 +120,7 @@ const SideBarWithHeader = () => {
                                                 onClick={showModal}
                                             >
                                                 <EnvelopeIcon className="block h-6 w-6 mr-2" aria-hidden="true"/>
-                                                Новое письмо
+                                                {t("Interface.SideBar.NewMail")}
                                             </button>
                                             <Modal open={open} setOpen={setOpen}/>
                                         </div>
@@ -169,7 +171,7 @@ const SideBarWithHeader = () => {
                                         onClick={showModal}
                                     >
                                         <EnvelopeIcon className="block h-6 w-6 mr-2" aria-hidden="true"/>
-                                        Новое письмо
+                                        {t("Interface.SideBar.NewMail")}
                                     </button>
                                     <Modal open={open} setOpen={setOpen}/>
                                 </div>
@@ -196,7 +198,7 @@ const SideBarWithHeader = () => {
                         </nav>
                         <Link
                             className="flex items-center h-16 flex-shrink-0 px-4 bg-gray-900"
-                        to={"/history-auth"}
+                            to={"/history-auth"}
                         >
                             <ClockIcon className={"h-6 w-auto text-white"}/>
                             <h6 className={"text-white ml-5"}>История входа</h6>
