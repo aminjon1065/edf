@@ -7,6 +7,7 @@ import {ChevronRightIcon} from "@heroicons/react/24/solid";
 import Datepicker from "react-tailwindcss-datepicker";
 import {useSelector} from "react-redux";
 import Loader from "../../components/UI/Loader";
+import {useTranslation} from "react-i18next";
 
 const RaisInbox = () => {
     const navigate = useNavigate();
@@ -19,6 +20,8 @@ const RaisInbox = () => {
         startDate: '',
         endDate: '',
     });
+    const {t} = useTranslation();
+
     const {
         data,
         isLoading,
@@ -253,7 +256,7 @@ const RaisInbox = () => {
                             </div>
                         ) : (
                             <div className="">
-                                <span className="font-bold">Писем нет!</span>
+                                <span className="font-bold">{t("Interface.FeedBack.EmptyMail")}</span>
                             </div>
                         )}
                     </div>

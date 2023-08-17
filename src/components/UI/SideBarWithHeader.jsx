@@ -21,6 +21,7 @@ import {Link, useLocation} from "react-router-dom";
 import Modal from "../NewMailModal";
 import {useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
+import i18n from "../../localization/i18n";
 
 
 function classNames(...classes) {
@@ -44,9 +45,9 @@ const SideBarWithHeader = () => {
     ]
 
     const userNavigation = [
-        {name: 'Профиль', href: '/profile', icon: UsersIcon},
-        {name: 'Настройки', href: '/settings', icon: CogIcon},
-        {name: 'Выход', href: '/log-out', icon: ArrowLeftOnRectangleIcon},
+        {name: t("Interface.Header.Profile"), href: '/profile', icon: UsersIcon},
+        {name: t("Interface.Header.Settings"), href: '/settings', icon: CogIcon},
+        {name: t("Interface.Header.Logout"), href: '/log-out', icon: ArrowLeftOnRectangleIcon},
     ]
     useEffect(() => {
         // Get the current path from the location object
@@ -63,6 +64,10 @@ const SideBarWithHeader = () => {
     const showModal = () => {
         setOpen(true);
     };
+    const changeLanguage = (lng) => {
+        i18n.changeLanguage(lng);
+        localStorage.setItem("lang", lng);
+    }
     return (
         <>
             <Transition.Root show={sidebarOpen} as={Fragment}>
@@ -196,13 +201,21 @@ const SideBarWithHeader = () => {
                                 </Link>
                             ))}
                         </nav>
-                        <Link
-                            className="flex items-center h-16 flex-shrink-0 px-4 bg-gray-900"
-                            to={"/history-auth"}
-                        >
-                            <ClockIcon className={"h-6 w-auto text-white"}/>
-                            <h6 className={"text-white ml-5"}>История входа</h6>
-                        </Link>
+
+                        <div className={"flex flex-row justify-center space-x-2 mb-5"}>
+                            <button
+                                onClick={() => changeLanguage('tj')}
+                                className="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
+                            >
+                                <span>Тоҷикӣ</span>
+                            </button>
+                            <button
+                                onClick={() => changeLanguage('ru')}
+                                className="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
+                            >
+                                <span>Русский</span>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -218,23 +231,23 @@ const SideBarWithHeader = () => {
                     </button>
                     <div className="flex-1 px-4 flex justify-between">
                         <div className="flex-1 flex">
-                            <form className="w-full flex md:ml-0" action="#" method="GET">
-                                <label htmlFor="search-field" className="sr-only">
-                                    Поиск
-                                </label>
-                                <div className="relative w-full text-gray-400 focus-within:text-gray-600">
-                                    <div className="absolute inset-y-0 left-0 flex items-center pointer-events-none">
-                                        <MagnifyingGlassIcon className="h-5 w-5" aria-hidden="true"/>
-                                    </div>
-                                    <input
-                                        id="search-field"
-                                        className="block w-full h-full pl-8 pr-3 py-2 border-transparent text-gray-900 placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-0 focus:border-transparent sm:text-sm"
-                                        placeholder="Поиск"
-                                        type="search"
-                                        name="search"
-                                    />
-                                </div>
-                            </form>
+                            {/*<form className="w-full flex md:ml-0" action="#" method="GET">*/}
+                            {/*    <label htmlFor="search-field" className="sr-only">*/}
+                            {/*        {t("Interface.Header.Search")}*/}
+                            {/*    </label>*/}
+                            {/*    <div className="relative w-full text-gray-400 focus-within:text-gray-600">*/}
+                            {/*        <div className="absolute inset-y-0 left-0 flex items-center pointer-events-none">*/}
+                            {/*            <MagnifyingGlassIcon className="h-5 w-5" aria-hidden="true"/>*/}
+                            {/*        </div>*/}
+                            {/*        <input*/}
+                            {/*            id="search-field"*/}
+                            {/*            className="block w-full h-full pl-8 pr-3 py-2 border-transparent text-gray-900 placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-0 focus:border-transparent sm:text-sm"*/}
+                            {/*            placeholder={t("Interface.Header.Search")}*/}
+                            {/*            type="search"*/}
+                            {/*            name="search"*/}
+                            {/*        />*/}
+                            {/*    </div>*/}
+                            {/*</form>*/}
                         </div>
                         <div className="ml-4 flex items-center md:ml-6">
                             <Link

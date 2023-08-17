@@ -8,6 +8,8 @@ import Editor from "./Editor";
 import {fetchUsers} from "../services/fetchUsers.service";
 import {useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
+import {typeDocument} from "../helpers/typeDocument";
+import i18next from "i18next";
 
 export default function Index({open, setOpen}) {
     // Локальные состояния
@@ -23,7 +25,8 @@ export default function Index({open, setOpen}) {
     const [toRais, setToRais] = useState(false)
     const meSelector = useSelector(state => state.auth);
     const {t} = useTranslation();
-
+    const [typeDocumentTj, setTypeDocumentTj] = useState("");
+    const [typeDocumentRu, setTypeDocumentRu] = useState("");
     // Запрос на получение пользователей при монтировании компонента
     useEffect(() => {
         fetchUsers().then((res) => {
@@ -52,9 +55,14 @@ export default function Index({open, setOpen}) {
     //Изменить тип
     const handleChangeType = (e) => {
         setType(e.target.value);
-        console.log(e.target.value)
+        const result = typeDocument.find(item => item.code === e.target.value);
+        if (result) {
+            setTypeDocumentTj(result.type_tj);
+            setTypeDocumentRu(result.type_ru);
+        } else {
+            console.log("Document not found.");
+        }
     }
-
     //Изменить дату выполнения
     const handleChangeDateDone = (e) => {
         setDateDone(e.target.value)
@@ -89,7 +97,9 @@ export default function Index({open, setOpen}) {
         formData.append('title', title);
         formData.append('content', htmlContent);
         formData.append('control', control ? 1 : 0);
-        formData.append('type', type);
+        formData.append("code", type);
+        formData.append('type_tj', typeDocumentTj);
+        formData.append('type_ru', typeDocumentRu);
         formData.append('date_done', dateDone);
         formData.append('toRais', toRais ? 1 : 0);
 
@@ -303,19 +313,16 @@ export default function Index({open, setOpen}) {
                                                                                                         value="">
                                                                                                         Выберите вариант
                                                                                                     </option>
-                                                                                                    <option
-                                                                                                        value="Министерства и Ведомства">Министерства
-                                                                                                        и Ведомства
-                                                                                                    </option>
-                                                                                                    <option
-                                                                                                        value="Правительственные">Правительственные
-                                                                                                    </option>
-                                                                                                    <option
-                                                                                                        value="Внутренные">Внутренные
-                                                                                                    </option>
-                                                                                                    <option
-                                                                                                        value="Гузориш">Гузориш
-                                                                                                    </option>
+                                                                                                    {
+                                                                                                        typeDocument.map((item, index) => (
+                                                                                                            <option
+                                                                                                                value={item.code}
+                                                                                                                key={item.code}
+                                                                                                            >
+                                                                                                                {item.code} - {i18next.language === "ru" ? item.type_ru : item.type_tj}
+                                                                                                            </option>
+                                                                                                        ))
+                                                                                                    }
                                                                                                 </select>
                                                                                             </div>
                                                                                         </div>
@@ -435,7 +442,7 @@ export default function Index({open, setOpen}) {
                                         </div>
                                         <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
                                             <button
-                                                disabled={!userSelected || !title || !type}
+                                                disabled={!userSelected || !title || !typeDocumentTj || !typeDocumentRu}
                                                 type="button"
                                                 className="disabled:bg-gray-300 inline-flex w-full justify-center rounded-md bg-sky-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-sky-500 sm:ml-3 sm:w-auto"
                                                 onClick={sendMailFN}

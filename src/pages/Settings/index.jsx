@@ -17,14 +17,14 @@ const Index = () => {
                         onClick={() => changeLanguage('tj')}
                         className="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
                     >
-                        {currentLang === 'tj' && <CheckCircleIcon className={"h-5 w-5 text-green-500"}/> }
+                        {currentLang === 'tj' && <CheckCircleIcon className={"h-5 w-5 text-green-500"}/>}
                         <span>Тоҷикӣ</span>
                     </button>
                     <button
                         onClick={() => changeLanguage('ru')}
                         className="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
                     >
-                        {currentLang === 'ru' && <CheckCircleIcon className={"h-5 w-5 text-green-500"}/> }
+                        {currentLang === 'ru' && <CheckCircleIcon className={"h-5 w-5 text-green-500"}/>}
                         <span>Русский</span>
                     </button>
                 </div>

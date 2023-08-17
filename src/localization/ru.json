@@ -21,6 +21,12 @@
         "Calendar": "Календарь",
         "Reports": "Отчеты"
       },
+      "Header": {
+        "Search": "Поиск",
+        "Profile": "Профиль",
+        "Settings": "Настройки",
+        "Logout": "Выйти"
+      },
       "NewMailModal": {
         "To": "Кому",
         "Title": "Заголовок",
@@ -37,8 +43,22 @@
         "ToManagement": "Рукводству"
       },
       "FeedBack": {
-        "EmptyMail": "Нет писем"
-      }
+        "EmptyMail": "Нет писем!"
+      },
+      "DaysCalendar": {
+        "Monday": "Понедельник",
+        "Tuesday": "Вторник",
+        "Wednesday": "Среда",
+        "Thursday": "Четверг",
+        "Friday": "Пятница",
+        "Saturday": "Суббота",
+        "Sunday": "Воскресенье",
+        "Today": "Сегодня",
+        "Yesterday": "Вчера",
+        "CurrentMonth": "Текущий месяц",
+        "PastMonth": "Прошлый месяц"
+      },
+      "ShowMail": "Показать"
     }
   }
 }

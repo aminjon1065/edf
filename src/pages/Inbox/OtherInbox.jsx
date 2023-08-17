@@ -7,6 +7,9 @@ import Loader from "../../components/UI/Loader";
 import {ChevronRightIcon} from "@heroicons/react/24/solid";
 import Datepicker from "react-tailwindcss-datepicker";
 import {useSelector} from "react-redux";
+import {useTranslation} from "react-i18next";
+import {typeDocument} from "../../helpers/typeDocument";
+import i18next from "i18next";
 
 const OtherInbox = () => {
     const navigate = useNavigate();
@@ -20,10 +23,10 @@ const OtherInbox = () => {
         startDate: '',
         endDate: '',
     });
-
+    const {t} = useTranslation();
     const {data = [], isLoading, error, refetch} = useGetMessagesQuery({
         page: pageNum,
-        type:type,
+        type: type,
         order: order,
         column: column,
         searchQuery: searchText,
@@ -101,11 +104,27 @@ const OtherInbox = () => {
                                     )}
                                 </nav>
                                 <div className={"ml-5"}>
-                                    <select name="filterType" onChange={handleChangeType} id="filterType" className={"rounded"}>
-                                        <option value="">Все</option>
-                                        <option value="Гузориш">Гузориш</option>
-                                        <option value="Внутренные">Внутренные</option>
-                                        <option value="Правительственные">Правительственные</option>
+                                    <select
+                                        value={type}
+                                        name="filterType"
+                                        onChange={handleChangeType}
+                                        id="filterType"
+                                        className={"rounded w-1/3"}
+                                    >
+                                        <option
+                                            value="">
+                                            Вcе
+                                        </option>
+                                        {
+                                            typeDocument.map((item, index) => (
+                                                <option
+                                                    value={item.code}
+                                                    key={item.code}
+                                                >
+                                                    {item.code} - {i18next.language === "ru" ? item.type_ru : item.type_tj}
+                                                </option>
+                                            ))
+                                        }
                                     </select>
                                 </div>
                             </div>
@@ -120,11 +139,11 @@ const OtherInbox = () => {
                                         showShortcuts={true}
                                         configs={{
                                             shortcuts: {
-                                                today: 'Сегодня',
-                                                yesterday: 'Вчера',
-                                                past: (period) => `Последние ${period} дней`,
-                                                currentMonth: 'Этот месяц',
-                                                pastMonth: 'Прошлый месяц',
+                                                today: t('Interface.DaysCalendar.Today'),
+                                                yesterday: t('Interface.DaysCalendar.Yesterday'),
+                                                // past: (period) => `Последние ${period} дней`,
+                                                currentMonth: t('Interface.DaysCalendar.CurrentMonth'),
+                                                pastMonth: t('Interface.DaysCalendar.PastMonth'),
                                             },
                                         }}
                                         primaryColor="blue"
@@ -133,7 +152,8 @@ const OtherInbox = () => {
                                     />
                                 </div>
                                 <div className="relative">
-                                    <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                                    <div
+                                        className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                                         <svg
                                             aria-hidden="true"
                                             className="w-5 h-5 text-gray-500 dark:text-gray-400"
@@ -268,7 +288,7 @@ const OtherInbox = () => {
                                 </div>
                             ) : (
                                 <div className="">
-                                    <span className="font-bold">Писем нет!</span>
+                                    <span className="font-bold">{t("Interface.FeedBack.EmptyMail")}</span>
                                 </div>
                             )
                         }

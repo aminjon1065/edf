@@ -13,9 +13,11 @@ import ReplyMailModal from '../../components/ReplyMailModal';
 import {useSelector} from "react-redux";
 import {fetchUsers} from "../../services/fetchUsers.service";
 import Select from "react-tailwindcss-select";
+import {useTranslation} from "react-i18next";
 
 const Index = () => {
-    usePageTitle('Просмотр');
+    const {t} = useTranslation();
+    usePageTitle(t('Interface.ShowMail'));
     const location = useLocation();
     const mailId = location.pathname.replace(/\/show\//, '');
     const {data, isLoading, isError, refetch} = useGetInboxByIdQuery(mailId);
@@ -156,7 +158,6 @@ const Index = () => {
                 uuid={data.document.uuid}
                 reload={reload}
                 setReload={setReload}
-                typeDocument={data.document.type}
             />
             <div className="flex flex-row justify-between items-center">
                 <div className="">
@@ -175,6 +176,23 @@ const Index = () => {
                         <CheckCircleIcon className={"h-6 w-auto text-green-400 ml-2"}/>}
             </span>
                 <div>
+                    <button
+                        className={"bg-red-700 px-4 py-2 hover:bg-red-500 rounded text-white"}
+                        onClick={() => {
+                            const confirmation = window.confirm('Уверены что хотите удалить?');
+                            if (confirmation) {
+                                // Если пользователь подтвердил, вызываем функцию updateStatus
+                                api.delete(`/delete/${data.document.uuid}`).then((res) => {
+                                    console.log(res);
+                                    window.location.href = '/';
+                                }).catch((err) => {
+                                    console.log(err);
+                                });
+                            }
+                        }}
+                    >
+                        Delete
+                    </button>
                     <div className="items-end">{dateFormatter(data.created_at)}</div>
                     {
                         data.document.control

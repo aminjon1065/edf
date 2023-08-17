@@ -8,9 +8,13 @@ import Loader from './../../components/UI/Loader';
 import Datepicker from 'react-tailwindcss-datepicker';
 import {useSelector} from "react-redux";
 import formatterDay from "../../helpers/dateFormatter";
+import {useTranslation} from "react-i18next";
+import {typeDocument} from "../../helpers/typeDocument";
+import i18next from "i18next";
 
 const Index = () => {
-    usePageTitle('Исходящие');
+    const {t} = useTranslation();
+    usePageTitle(t("Interface.SideBar.Sent"));
     const navigate = useNavigate();
     const [column, setColumn] = useState('id');
     const [order, setOrder] = useState('desc');
@@ -115,11 +119,27 @@ const Index = () => {
                                 )}
                             </nav>
                             <div className={"ml-5"}>
-                                <select name="filterType" onChange={handleChangeType} id="filterType" className={"rounded"}>
-                                    <option value="">Все</option>
-                                    <option value="Гузориш">Гузориш</option>
-                                    <option value="Внутренные">Внутренные</option>
-                                    <option value="Правительственные">Правительственные</option>
+                                <select
+                                    value={type}
+                                    name="filterType"
+                                    onChange={handleChangeType}
+                                    id="filterType"
+                                    className={"rounded w-1/3"}
+                                >
+                                    <option
+                                        value="">
+                                        Вcе
+                                    </option>
+                                    {
+                                        typeDocument.map((item, index) => (
+                                            <option
+                                                value={item.code}
+                                                key={item.code}
+                                            >
+                                                {item.code} - {i18next.language === "ru" ? item.type_ru : item.type_tj}
+                                            </option>
+                                        ))
+                                    }
                                 </select>
                             </div>
                         </div>
@@ -278,7 +298,7 @@ const Index = () => {
                         </div>
                     ) : (
                         <div className="">
-                            <span className="font-bold">Писем нет!</span>
+                            <span className="font-bold">{t("Interface.FeedBack.EmptyMail")}</span>
                         </div>
                     )}
                 </div>

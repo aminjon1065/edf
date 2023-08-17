@@ -21,9 +21,15 @@
         "Calendar": "Тақвим",
         "Reports": "Ҳисоботҳо"
       },
+      "Header": {
+        "Search": "Кофтан",
+        "Profile": "Профил",
+        "Settings": "Танзимотҳо",
+        "Logout": "Баромад"
+      },
       "NewMailModal": {
         "To": "Ба",
-        "Title" : "Сарлавҳа",
+        "Title": "Сарлавҳа",
         "Message": "Матн",
         "Other": "пурра кардани матни ҳуҷҷат ва д.",
         "Control": "Назоратӣ",
@@ -35,8 +41,24 @@
         "Send": "Ирсол кардан",
         "ToRais": "Ба Раис",
         "ToManagement": "Барои роҳбарият"
-
-      }
+      },
+      "FeedBack": {
+        "EmptyMail": "Макутби нав нест!"
+      },
+      "DaysCalendar": {
+        "Monday": "Душанбе",
+        "Tuesday": "Сешанбе",
+        "Wednesday": "Чоршанбе",
+        "Thursday": "Панҷшанбе",
+        "Friday": "Ҷумъа",
+        "Saturday": "Шанбе",
+        "Sunday": "Якшанбе",
+        "Today": "Имрӯз",
+        "Yesterday": "Дирӯз",
+        "CurrentMonth": "Моҳи ҷорӣ",
+        "PastMonth": "Моҳи гузашта"
+      },
+      "ShowMail": "Нишон додан"
     }
   }
 }
