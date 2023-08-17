@@ -10,6 +10,7 @@ import {useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
 import {typeDocument} from "../../helpers/typeDocument";
 import i18next from "i18next";
+import i18n from "../../localization/i18n";
 
 const OtherInbox = () => {
     const navigate = useNavigate();
@@ -113,7 +114,7 @@ const OtherInbox = () => {
                                     >
                                         <option
                                             value="">
-                                            Вcе
+                                            {t("Interface.All")}
                                         </option>
                                         {
                                             typeDocument.map((item, index) => (
@@ -128,8 +129,7 @@ const OtherInbox = () => {
                                     </select>
                                 </div>
                             </div>
-
-                            <div className="flex justify-end">
+                            <div className="flex justify-end w-2/3">
                                 <div className="relative mr-1">
                                     <Datepicker
                                         separator="до"
@@ -243,19 +243,9 @@ const OtherInbox = () => {
                                                     </td>
                                                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                                     <span
-                                                        className={`${
-                                                            mail.document.type === 'Министерства и Ведомства'
-                                                                ? 'bg-gradient-to-r from-cyan-500 to-blue-500 text-white'
-                                                                : mail.document.type === 'Внутренные'
-                                                                    ? 'bg-gradient-to-r from-slate-500 from-10% to-slate-700 text-white'
-                                                                    : mail.document.type === 'Правительственные'
-                                                                        ? 'bg-gradient-to-r from-pink-500 from-10% to-red-500 text-white'
-                                                                        : mail.document.type === 'Гузориш'
-                                                                            ? 'bg-gradient-to-r from-orange-500 from-10% to-amber-500 text-white'
-                                                                            : 'bg-gray-500'
-                                                        } text-slate-950 px-4 py-2 rounded`}
+                                                        className={`bg-gray-500 text-white px-4 py-2 rounded`}
                                                     >
-                                                        {mail.document.type}
+                                                        {i18n.language === "ru" ?  mail.document.type_ru : mail.document.type_tj}
                                                     </span>
                                                     </td>
                                                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">

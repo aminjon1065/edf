@@ -2,7 +2,7 @@ import React from 'react';
 import {Route, Routes} from "react-router-dom";
 import Layout from "./../components/UI/Layout";
 import NotFound from "./../pages/NotFound";
-import Calendar from "./../pages/Calendar";
+// import Calendar from "./../pages/Calendar";
 import Reports from "./../pages/Reports";
 import Documents from "./../pages/Documents";
 import Inbox from "./../pages/Inbox";
@@ -21,7 +21,7 @@ const ProtectedRoutes = () => {
                     <Route index element={<Inbox/>}/>
                     <Route path={'/show/:id'} element={<ShowMail/>}/>
                     <Route path={'/replied/:id'} element={<ShowRepliedToRais/>}/>
-                    <Route path={"calendar"} element={<Calendar/>}/>
+                    {/*<Route path={"calendar"} element={<Calendar/>}/>*/}
                     <Route path={"documents"} element={<Documents/>}/>
                     <Route path={"files"} element={<Files/>}/>
                     <Route path={"reports"} element={<Reports/>}/>

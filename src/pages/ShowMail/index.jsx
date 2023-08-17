@@ -4,7 +4,7 @@ import {useGetInboxByIdQuery} from '../../services/show.mail.service';
 import ApplicationLogo from '../../components/UI/ApplicationLogo';
 import dateFormatter from '../../helpers/dateFormatter';
 import Loader from '../../components/UI/Loader';
-import {CheckCircleIcon, ClockIcon, PaperClipIcon, UserIcon} from '@heroicons/react/24/outline';
+import {CheckCircleIcon, ClockIcon, PaperClipIcon, TrashIcon, UserIcon} from '@heroicons/react/24/outline';
 import {API_APP, PUBLIC_APP_URL_DOCUMENTS, PUBLIC_URL_BACKEND} from '../../helpers/CONSTANTS';
 import api from '../../services/api';
 import usePageTitle from '../../hooks/usePageTitle';
@@ -14,6 +14,7 @@ import {useSelector} from "react-redux";
 import {fetchUsers} from "../../services/fetchUsers.service";
 import Select from "react-tailwindcss-select";
 import {useTranslation} from "react-i18next";
+import i18n from "../../localization/i18n";
 
 const Index = () => {
     const {t} = useTranslation();
@@ -130,12 +131,12 @@ const Index = () => {
         setOpenReplyModal(true); // open reply modal
     };
 
-    const documentTypeClasses = {
-        'Министерства и Ведомства': 'bg-gradient-to-r from-cyan-500 to-blue-500 text-white',
-        Внутренные: 'bg-gradient-to-r from-slate-500 from-10% to-slate-700 text-white',
-        Правительственные: 'bg-gradient-to-r from-pink-500 from-10% to-red-500 text-white',
-        Гузориш: 'bg-gradient-to-r from-orange-500 from-10% to-amber-500 text-white',
-    };
+    // const documentTypeClasses = {
+    //     'Министерства и Ведомства': 'bg-gradient-to-r from-cyan-500 to-blue-500 text-white',
+    //     Внутренные: 'bg-gradient-to-r from-slate-500 from-10% to-slate-700 text-white',
+    //     Правительственные: 'bg-gradient-to-r from-pink-500 from-10% to-red-500 text-white',
+    //     Гузориш: 'bg-gradient-to-r from-orange-500 from-10% to-amber-500 text-white',
+    // };
 
     const RepliedToUsers = () => {
         const confirm = window.confirm("Отправить уведомление пользователей?")
@@ -170,14 +171,14 @@ const Index = () => {
                     </div>
                 </div>
                 <span
-                    className={`${documentTypeClasses[data.document.type] || 'bg-gray-500'} text-slate-950 px-4 py-2 rounded flex flex-row justify-around`}>
-          {data.document.type}
+                    className={`bg-gray-500 text-slate-950 px-4 py-2 rounded flex flex-row justify-around`}>
+          {i18n.language === "ru" ? data.document.type_ru : data.document.type_tj}
                     {data.document.status === 'pending' ? <ClockIcon className={"h-6 w-auto text-white-500 ml-2"}/> :
                         <CheckCircleIcon className={"h-6 w-auto text-green-400 ml-2"}/>}
             </span>
                 <div>
                     <button
-                        className={"bg-red-700 px-4 py-2 hover:bg-red-500 rounded text-white"}
+                        className={"bg-red-700 px-4 py-2 hover:bg-red-500 rounded text-white flex flex-row items-center"}
                         onClick={() => {
                             const confirmation = window.confirm('Уверены что хотите удалить?');
                             if (confirmation) {
@@ -191,6 +192,7 @@ const Index = () => {
                             }
                         }}
                     >
+                        <TrashIcon className={"w-5 h-5 mr-2"} />
                         Delete
                     </button>
                     <div className="items-end">{dateFormatter(data.created_at)}</div>
@@ -284,43 +286,43 @@ const Index = () => {
                     {
                         data.replyToUsers.length > 0 ?
                             <div className={"flex flex-row justify-between"}>
-                                    {
-                                        data.document?.to_rais?.opened
-                                            ?
-                                            <span>
+                                {
+                                    data.document?.to_rais?.opened
+                                        ?
+                                        <span>
                                               Было перенаправлено:
                                             </span>
-                                            :
-                                            <span>
+                                        :
+                                        <span>
                                             Будет перенаправлено:
                                             < /span>
-                                    }
-                                    {
-                                        meSelector.user.role === 1
-                                            ?
-                                            <>
-                                                {
-                                                    data.document?.to_rais?.opened
-                                                        ?
-                                                        <CheckCircleIcon className={"w-5 h-5"}/>
-                                                        :
-                                                        <div className="ml-4 flex-shrink-0">
-                                                            <button
-                                                                className="ml-2 font-medium text-red-600 hover:text-red-500"
-                                                                onClick={RepliedToUsers}
-                                                                disabled={data.document?.to_rais?.opened}
-                                                            >
-                                                                Уведомить всех
-                                                            </button>
-                                                        </div>
-                                                }
-                                            </>
-                                            :
-                                            null
-                                    }
+                                }
+                                {
+                                    meSelector.user.role === 1
+                                        ?
+                                        <>
+                                            {
+                                                data.document?.to_rais?.opened
+                                                    ?
+                                                    <CheckCircleIcon className={"w-5 h-5"}/>
+                                                    :
+                                                    <div className="ml-4 flex-shrink-0">
+                                                        <button
+                                                            className="ml-2 font-medium text-red-600 hover:text-red-500"
+                                                            onClick={RepliedToUsers}
+                                                            disabled={data.document?.to_rais?.opened}
+                                                        >
+                                                            Уведомить всех
+                                                        </button>
+                                                    </div>
+                                            }
+                                        </>
+                                        :
+                                        null
+                                }
                             </div>
-                        :
-                        null
+                            :
+                            null
                     }
                     <div className="flex flex-row">
                         <ul className="divide-y divide-gray-100 rounded-md border border-gray-200">
@@ -581,7 +583,7 @@ const Index = () => {
             </div>
 
         </div>
-);
+    );
 };
 
 export default Index;

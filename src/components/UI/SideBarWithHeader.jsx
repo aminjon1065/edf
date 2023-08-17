@@ -40,10 +40,9 @@ const SideBarWithHeader = () => {
         {name: t("Interface.SideBar.Sent"), href: '/sent', icon: PaperAirplaneIcon, current: false},
         {name: t("Interface.SideBar.Files"), href: '/files', icon: DocumentIcon, current: false},
         // {name: 'Документы', href: '/documents', icon: DocumentIcon, current: false},
-        {name: t("Interface.SideBar.Calendar"), href: '/calendar', icon: CalendarIcon, current: false},
+        // {name: t("Interface.SideBar.Calendar"), href: '/calendar', icon: CalendarIcon, current: false},
         {name: t("Interface.SideBar.Reports"), href: '/reports', icon: ChartBarIcon, current: false},
     ]
-
     const userNavigation = [
         {name: t("Interface.Header.Profile"), href: '/profile', icon: UsersIcon},
         {name: t("Interface.Header.Settings"), href: '/settings', icon: CogIcon},

@@ -128,7 +128,7 @@ const Index = () => {
                                 >
                                     <option
                                         value="">
-                                        Вcе
+                                        {t("Interface.All")}
                                     </option>
                                     {
                                         typeDocument.map((item, index) => (

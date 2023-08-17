@@ -4,6 +4,7 @@ import api from "../../services/api";
 import ItemFile from "../../components/ItemFile";
 import {PUBLIC_APP_URL_DOCUMENTS} from "../../helpers/CONSTANTS";
 import Loader from "../../components/UI/Loader";
+import {useTranslation} from "react-i18next";
 
 const Index = () => {
     usePageTitle('Файлы');
@@ -11,6 +12,7 @@ const Index = () => {
     const [data, setData] = useState({});
     const [loading, setLoading] = useState(true);
     const [currentPage, setCurrentPage] = useState(1);
+    const {t} = useTranslation();
     useEffect(() => {
         fetchFiles();
     }, [currentPage]);
@@ -58,8 +60,9 @@ const Index = () => {
                         >
                             <div className="hidden sm:block">
                                 <p className="text-sm text-gray-700">
-                                    Показано <span className="font-medium">{data.to}</span> из{' '}
-                                    <span className="font-medium">{data.total}</span> результатов
+                                    {t("Interface.Showed")} <span
+                                    className="font-medium">{data.to}</span> {t("Interface.from")}{' '}
+                                    <span className="font-medium">{data.total}</span> {t("Interface.Results")}
                                 </p>
                             </div>
                             <div className="flex-1 flex justify-between sm:justify-end">
@@ -68,14 +71,14 @@ const Index = () => {
                                     onClick={handlePrevPage}
                                     className="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
                                 >
-                                    Предыдущий
+                                    {t("Interface.Prev")}
                                 </button>
                                 <button
                                     onClick={handleNextPage}
                                     disabled={currentPage >= data.last_page}
                                     className="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
                                 >
-                                    Следующий
+                                    {t("Interface.Next")}
                                 </button>
                             </div>
                         </nav>
