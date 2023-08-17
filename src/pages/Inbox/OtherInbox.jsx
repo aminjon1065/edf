@@ -82,7 +82,7 @@ const OtherInbox = () => {
             <div className="flex flex-col">
                 <div className="-my-2 scrollbar-none sm:-mx-6 lg:-mx-8 h-screen">
                     <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-                        {data.to && <span>{data.to} из {data.total}</span>}
+                        {data.to && <span>{data.to} {t("Interface.from")} {data.total}</span>}
                         <div className="flex flex-row items-center justify-between mb-3">
                             <div className="flex justify-start">
                                 <nav className="isolate inline-flex -space-x-px rounded-md shadow-sm bg-indigo-700"
@@ -202,25 +202,25 @@ const OtherInbox = () => {
                                                 scope="col"
                                                 className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                                             >
-                                                От куда
+                                                {t("Interface.Table.From")}
                                             </th>
                                             <th
                                                 scope="col"
                                                 className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                                             >
-                                                ТИП
+                                                {t("Interface.Table.Type")}
                                             </th>
                                             <th
                                                 scope="col"
                                                 className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                                             >
-                                                статус
+                                                {t("Interface.Table.Status")}
                                             </th>
                                             <th
                                                 scope="col"
                                                 className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                                             >
-                                                Контрольный
+                                                {t("Interface.Table.Control")}
                                             </th>
                                             <th scope="col" className="relative px-6 py-3">
                                                 <span className="">Дата выполнения</span>
