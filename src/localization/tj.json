@@ -43,7 +43,10 @@
         "ToManagement": "Барои роҳбарият"
       },
       "FeedBack": {
-        "EmptyMail": "Макутби нав нест!"
+        "EmptyMail": "Макутб нест!",
+        "EmptyFiles": "Файл нест!",
+        "EmptyCalendar": "Маълумоти тақвим нест!",
+        "EmptyReports": "Ҳисобот нест!"
       },
       "DaysCalendar": {
         "Monday": "Душанбе",

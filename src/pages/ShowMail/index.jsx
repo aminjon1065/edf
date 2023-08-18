@@ -171,7 +171,7 @@ const Index = () => {
                     </div>
                 </div>
                 <span
-                    className={`bg-gray-500 text-slate-950 px-4 py-2 rounded flex flex-row justify-around`}>
+                    className={`bg-gray-500 text-white px-4 py-2 rounded flex flex-row justify-around`}>
           {i18n.language === "ru" ? data.document.type_ru : data.document.type_tj}
                     {data.document.status === 'pending' ? <ClockIcon className={"h-6 w-auto text-white-500 ml-2"}/> :
                         <CheckCircleIcon className={"h-6 w-auto text-green-400 ml-2"}/>}

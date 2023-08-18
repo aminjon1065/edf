@@ -43,7 +43,10 @@
         "ToManagement": "Рукводству"
       },
       "FeedBack": {
-        "EmptyMail": "Нет писем!"
+        "EmptyMail": "Нет писем!",
+        "EmptyFiles": "Нет файлов!",
+        "EmptyCalendar": "Нет событий!",
+        "EmptyReports": "Нет отчетов!"
       },
       "DaysCalendar": {
         "Monday": "Понедельник",
