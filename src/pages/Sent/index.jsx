@@ -143,7 +143,7 @@ const Index = () => {
                                 </select>
                             </div>
                         </div>
-                        <div className="flex justify-end">
+                        <div className="flex justify-end w-2/3">
                             <div className="relative mr-1">
                                 <Datepicker
                                     separator="до"
