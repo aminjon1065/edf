@@ -298,7 +298,7 @@ const Index = () => {
                         </div>
                     ) : (
                         <div className="">
-                            <span className="font-bold">{t("Interface.FeedBack.EmptyMail")}</span>
+                            <p className="text-center text-gray-500 py-5">{t("Interface.FeedBack.EmptyMail")}</p>
                         </div>
                     )}
                 </div>
