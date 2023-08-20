@@ -40,7 +40,13 @@ const Index = () => {
     if (error) {
         return <span>Error!</span>;
     }
-    console.log(field);
+    const downloadPdf = () => {
+        api.post(`/pdf-reports/${i18n.language}`).then((res) => {
+            console.log(res)
+        }).catch((err) => {
+            console.log(err)
+        })
+    }
     return (
         <div>
             <div className="flex flex-row justify-between">
@@ -86,23 +92,34 @@ const Index = () => {
                     />
                 </div>
             </div>
+
             <ul role="list" className="divide-y divide-gray-100">
                 {
-                    data.length === 0 ? <p className="text-center text-gray-500 py-5">{t("Interface.FeedBack.EmptyReports")}</p> :
-                    data.map((item, index) => (
-                    <li key={index} className="flex justify-between gap-x-6 py-5">
-                        <div className="flex min-w-0 gap-x-4">
-                            <div className="min-w-0 flex-auto">
-                                <p className="text-sm font-semibold leading-6 text-gray-900">{i18n.language === "ru" ? item.type_ru : item.type_tj}</p>
-                            </div>
-                        </div>
-                        <div className="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
-                            <p className="text-sm leading-6 flex h-6 w-6 items-center justify-center rounded-full bg-indigo-600 font-semibold text-white">{item.count}</p>
-                        </div>
-                    </li>
-                ))
+                    data.length === 0 ?
+                        <p className="text-center text-gray-500 py-5">{t("Interface.FeedBack.EmptyReports")}</p> :
+                        data.map((item, index) => (
+                            <li key={index} className="flex justify-between gap-x-6 py-5">
+                                <div className="flex min-w-0 gap-x-4">
+                                    <div className="min-w-0 flex-auto">
+                                        <p className="text-sm font-semibold leading-6 text-gray-900">{i18n.language === "ru" ? item.type_ru : item.type_tj}</p>
+                                    </div>
+                                </div>
+                                <div className="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
+                                    <p className="text-sm leading-6 flex h-6 w-6 items-center justify-center rounded-full bg-indigo-600 font-semibold text-white">{item.count}</p>
+                                </div>
+                            </li>
+                        ))
                 }
             </ul>
+            <div className={"float-right mt-5"}>
+                <button
+                    onClick={downloadPdf}
+                    disabled={data.length === 0}
+                    className={"bg-slate-950 px-4 py-2 rounded text-white hover:bg-slate-800"}
+                >
+                    Download
+                </button>
+            </div>
         </div>
     );
 };

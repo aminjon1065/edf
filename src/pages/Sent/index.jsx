@@ -143,7 +143,7 @@ const Index = () => {
                                 </select>
                             </div>
                         </div>
-                        <div className="flex justify-end">
+                        <div className="flex justify-end w-2/3">
                             <div className="relative mr-1">
                                 <Datepicker
                                     separator="до"
@@ -298,7 +298,7 @@ const Index = () => {
                         </div>
                     ) : (
                         <div className="">
-                            <span className="font-bold">{t("Interface.FeedBack.EmptyMail")}</span>
+                            <p className="text-center text-gray-500 py-5">{t("Interface.FeedBack.EmptyMail")}</p>
                         </div>
                     )}
                 </div>
