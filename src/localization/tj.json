@@ -59,7 +59,9 @@
         "Today": "Имрӯз",
         "Yesterday": "Дирӯз",
         "CurrentMonth": "Моҳи ҷорӣ",
-        "PastMonth": "Моҳи гузашта"
+        "PastMonth": "Моҳи гузашта",
+        "NextMonth": "Моҳи оянда"
+
       },
       "All": "Ҳама",
       "ShowMail": "Нишон додан",

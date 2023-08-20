@@ -243,9 +243,9 @@ const OtherInbox = () => {
                                                     </td>
                                                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                                     <span
-                                                        className={`bg-gray-500 text-white px-4 py-2 rounded`}
+                                                        className={`bg-gray-500 text-white px-4 py-2 rounded text-clip`}
                                                     >
-                                                        {i18n.language === "ru" ?  mail.document.type_ru : mail.document.type_tj}
+                                                        {i18n.language === "ru" ? mail.document.type_ru.substring(0, 50) : mail.document.type_tj.substring(0, 50)}
                                                     </span>
                                                     </td>
                                                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">

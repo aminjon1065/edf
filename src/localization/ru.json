@@ -59,7 +59,8 @@
         "Today": "Сегодня",
         "Yesterday": "Вчера",
         "CurrentMonth": "Текущий месяц",
-        "PastMonth": "Прошлый месяц"
+        "PastMonth": "Прошлый месяц",
+        "NextMonth": "Следующий месяц"
       },
       "All": "Все",
       "ShowMail": "Показать",
