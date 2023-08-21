@@ -41,11 +41,24 @@ const Index = () => {
         return <span>Error!</span>;
     }
     const downloadPdf = () => {
-        api.post(`/pdf-reports/${i18n.language}`).then((res) => {
-            console.log(res)
-        }).catch((err) => {
-            console.log(err)
-        })
+        api.get(`/pdf-reports/${i18n.language}`, {responseType: 'blob'})
+            .then((response) => {
+                // Создаем URL-объект из blob ответа
+                const url = window.URL.createObjectURL(new Blob([response.data]));
+
+                // Создаем ссылку DOM и программно кликаем по ней
+                const link = document.createElement('a');
+                link.href = url;
+                link.setAttribute('download', 'report.pdf');
+                document.body.appendChild(link);
+                link.click();
+
+                // Удаляем ссылку для освобождения памяти
+                link.parentNode.removeChild(link);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     }
     return (
         <div>
