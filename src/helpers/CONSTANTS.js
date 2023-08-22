@@ -1,4 +1,4 @@
-export const API_APP = "http://localhost:8000/api/api/v1";
+export const API_APP = "http://185.177.2.167:8000/api/api/v1";
 export const PUBLIC_APP_URL_DOCUMENTS = "http://localhost:8000/storage/documents/";
 export const PUBLIC_URL_BACKEND = "http://localhost:8000";
 export const JWTToken = localStorage.getItem('token');
