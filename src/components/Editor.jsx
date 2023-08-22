@@ -41,28 +41,28 @@ const Index = ({getContent}) => {
                     onFocus={() => setFocused(true)}
                     onBlur={() => setFocused(false)}
                     editorState={editorState}
-                    editorClassName={"h-36 rounded-b-3xl pl-3 scrollbar-none"}
+                    editorClassName={"h-36 rounded-b-3xl pl-3 scrollbar-none z-10"}
                     toolbarClassName={"bg-gray-200  border-gray-300 rounded-lg"}
                     toolbar={{
-                        history: { inDropdown: true },
+                        // history: { inDropdown: true },
                         inline: { inDropdown: true },
-                        list: { inDropdown: true },
-                        textAlign: { inDropdown: true },
-                        blockType: { inDropdown: true },
+                        // list: { inDropdown: true },
+                        // textAlign: { inDropdown: true },
+                        // blockType: { inDropdown: true },
                         image: {
                             previewImage: true,
                             uploadCallback: uploadImageCallback,
                             inputAccept: 'image/gif,image/jpeg,image/jpg,image/png,image/svg'
                         },
-                        // options: [
-                        //     "history",
-                        //     "inline",
-                        //     "textAlign",
-                        //     "blockType",
-                        //     "fontSize",
-                        //     "list",
-                        //     "image"
-                        // ],
+                        options: [
+                            "history",
+                            "inline",
+                            "textAlign",
+                            "blockType",
+                            "fontSize",
+                            "list",
+                            "image"
+                        ],
                     }}
                     onEditorStateChange={handleEditorChange}
                 />

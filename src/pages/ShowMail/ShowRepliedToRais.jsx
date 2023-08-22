@@ -10,9 +10,12 @@ import {PUBLIC_APP_URL_DOCUMENTS, PUBLIC_URL_BACKEND} from "../../helpers/CONSTA
 import Select from "react-tailwindcss-select";
 import api from "../../services/api";
 import {fetchUsers} from "../../services/fetchUsers.service";
+import i18n from "../../localization/i18n";
+import {useTranslation} from "react-i18next";
 
 const ShowRepliedToRais = ({id}) => {
-    usePageTitle("Перенаправить");
+    const {t} = useTranslation();
+    usePageTitle(t('Interface.ShowMail'));
     const [modalOpen, setModalOpen] = useState(false);
     const [fileUrl, setFileUrl] = useState('');
     const [fileExtension, setFileExtension] = useState('');
@@ -93,6 +96,7 @@ const ShowRepliedToRais = ({id}) => {
             console.log(error)
         })
     }
+    console.log(i18n.language);
     return (
         <>
             <div>
@@ -109,8 +113,8 @@ const ShowRepliedToRais = ({id}) => {
                         </div>
                     </div>
                     <span
-                        className={`${documentTypeClasses[data.toRais.document.type] || 'bg-gray-500'} text-slate-950 px-4 py-2 rounded flex flex-row justify-around`}>
-                        {data.toRais.document.type}
+                        className='text-slate-950 px-4 py-2 rounded flex flex-row justify-around bg-gray-500'>
+                        {i18n.language === "ru" ? data.toRais.document.type_ru.substring(0, 50) : data.toRais.document.type_tj.substring(0, 50)}
                         {data.toRais.document.status === 'pending' ?
                             <ClockIcon className={"h-6 w-auto text-white-500 ml-2"}/> :
                             <CheckCircleIcon className={"h-6 w-auto text-green-400 ml-2"}/>}
