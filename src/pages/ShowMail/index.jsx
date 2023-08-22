@@ -226,7 +226,7 @@ const Index = () => {
                             </div>
                             <div>
                                 <a
-                                    href={`${PUBLIC_URL_BACKEND}/download-all/${data.document.uuid}`}
+                                    href={`${PUBLIC_URL_BACKEND}/api/download-all/${data.document.uuid}`}
                                     className="text-blue-500 hover:text-blue-600"
                                     target="_blank"
                                     rel="noopener noreferrer"
