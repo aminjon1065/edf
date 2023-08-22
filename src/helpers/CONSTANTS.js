@@ -1,6 +1,6 @@
-export const API_APP = "http://localhost/api/v1";
-export const PUBLIC_APP_URL_DOCUMENTS = "http://localhost/storage/documents/";
-export const PUBLIC_URL_BACKEND = "http://localhost";
+export const API_APP = "http://185.177.2.167/api/v1";
+export const PUBLIC_APP_URL_DOCUMENTS = "http://185.177.2.167/storage/documents/";
+export const PUBLIC_URL_BACKEND = "http://185.177.2.167";
 export const JWTToken = localStorage.getItem('token');
 export const VITE_PUSHER_APP_ID = "local";
 export const VITE_PUSHER_APP_SECRET = "local";
