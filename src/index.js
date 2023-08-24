@@ -18,10 +18,10 @@ window.Echo = new Echo({
     broadcaster: 'pusher',
     key: VITE_PUSHER_APP_KEY,
     cluster: VITE_PUSHER_APP_CLUSTER,
-    wsHost: VITE_PUSHER_HOST,
-    wsPort: 6001,
-    forceTLS: false,
-    disableStats: true
+    // wsHost: VITE_PUSHER_HOST,
+    // wsPort: 6001,
+    forceTLS: true,
+    // disableStats: true
 });
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
