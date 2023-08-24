@@ -1,3 +1,3 @@
-# EDSM
+# Getting Started with Create React App
 
-This project was frontend with [Create React App](hhttps://github.com/aminjon1065/edb).
+This project was frontend with [EDB](https://github.com/aminjon1065/edb).
