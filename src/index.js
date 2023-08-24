@@ -19,7 +19,7 @@ window.Echo = new Echo({
     broadcaster: 'pusher',
     key: VITE_PUSHER_APP_KEY,
     cluster: VITE_PUSHER_APP_CLUSTER,
-    wssHost: VITE_PUSHER_HOST,
+    wsHost: VITE_PUSHER_HOST,
     wsPort: 6001,
     forceTLS: false,
     disableStats: true,
