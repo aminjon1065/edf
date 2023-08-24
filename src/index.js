@@ -18,13 +18,15 @@ window.Pusher = require('pusher-js');
 window.Echo = new Echo({
     broadcaster: 'pusher',
     key: VITE_PUSHER_APP_KEY,
-    cluster: VITE_PUSHER_APP_CLUSTER,
     wsHost: VITE_PUSHER_HOST,
-    wsPort: 6001,
-    forceTLS: false,
     disableStats: true,
+    enabledTransports: ['ws', 'wss'],
+    wsPort: 80,
+    wssPort: 443,
+    forceTLS: false,
+    cluster: VITE_PUSHER_APP_CLUSTER,
 });
-
+console.log(window.location.host);
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <React.StrictMode>
