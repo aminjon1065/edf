@@ -15,6 +15,7 @@ import {
 import i18n from "./localization/i18n";
 
 window.Pusher = require('pusher-js');
+
 window.Echo = new Echo({
     broadcaster: 'pusher',
     secret: VITE_PUSHER_APP_SECRET,
