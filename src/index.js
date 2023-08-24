@@ -18,13 +18,7 @@ window.Echo = new Echo({
     wsPort: 6001,
     forceTLS: false,
     disableStats: true,
-    authEndpoint: 'http://only.tj/api/broadcasting/auth',
-    auth: {
-        headers: {
-            // Authorization: `Bearer ${token}`,
-            Accept: 'application/json',
-        },
-    }
+    enabledTransports: ['ws'],
 });
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
