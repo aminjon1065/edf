@@ -11,7 +11,6 @@
 // export const VITE_PUSHER_APP_CLUSTER = "ap1";
 //
 export const API_APP = "http://only.tj/api/api/v1";
-export const API_APP = "http://only.tj/api/api/v1";
 export const PUBLIC_APP_URL_DOCUMENTS = "http://only.tj/api/storage/documents/";
 export const PUBLIC_URL_BACKEND = "http://only.tj/api";
 export const JWTToken = localStorage.getItem('token');
