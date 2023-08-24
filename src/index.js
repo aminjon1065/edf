@@ -6,28 +6,19 @@ import reportWebVitals from './reportWebVitals';
 import {Provider} from "react-redux";
 import store from "./state/store";
 import Echo from "laravel-echo";
-import {
-    VITE_PUSHER_APP_CLUSTER,
-    VITE_PUSHER_APP_KEY,
-    VITE_PUSHER_HOST
-} from "./helpers/CONSTANTS";
+import {VITE_PUSHER_APP_CLUSTER, VITE_PUSHER_APP_KEY, VITE_PUSHER_HOST} from "./helpers/CONSTANTS";
 import i18n from "./localization/i18n";
 
 window.Pusher = require('pusher-js');
-
 window.Echo = new Echo({
     broadcaster: 'pusher',
     key: VITE_PUSHER_APP_KEY,
-    // wsHost: VITE_PUSHER_HOST,
-    wsHost: window.location.host,
-    disableStats: true,
-    enabledTransports: ['ws', 'wss'],
-    wsPort: 80,
-    wssPort: 443,
-    forceTLS: false,
     cluster: VITE_PUSHER_APP_CLUSTER,
+    wsHost: VITE_PUSHER_HOST,
+    wsPort: 6001,
+    forceTLS: false,
+    disableStats: true,
 });
-console.log(window.location.host);
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <React.StrictMode>

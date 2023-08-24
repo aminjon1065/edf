@@ -9,15 +9,15 @@
 // export const VITE_PUSHER_PORT = 6001;
 // export const VITE_PUSHER_SCHEME = "http";
 // export const VITE_PUSHER_APP_CLUSTER = "ap1";
-//
-export const API_APP = "https://only.tj/api/api/v1";
-export const PUBLIC_APP_URL_DOCUMENTS = "https://only.tj/api/storage/documents/";
-export const PUBLIC_URL_BACKEND = "https://only.tj/api";
+
+export const API_APP = "https://api.coes.site/api/v1";
+export const PUBLIC_APP_URL_DOCUMENTS = "https://api.coes.site/storage/documents/";
+export const PUBLIC_URL_BACKEND = "https://api.coes.site";
 export const JWTToken = localStorage.getItem('token');
 export const VITE_PUSHER_APP_ID = "local";
 export const VITE_PUSHER_APP_SECRET = "local";
 export const VITE_PUSHER_APP_KEY = "local";
-export const VITE_PUSHER_HOST = "https://only.tj";
+export const VITE_PUSHER_HOST = "api.coes.site";
 export const VITE_PUSHER_PORT = 6001;
 export const VITE_PUSHER_SCHEME = "http";
 export const VITE_PUSHER_APP_CLUSTER = "ap1";
