@@ -16,9 +16,8 @@ window.Echo = new Echo({
     cluster: VITE_PUSHER_APP_CLUSTER,
     wsHost: VITE_PUSHER_HOST,
     wsPort: 6001,
-    forceTLS: false,
+    // forceTLS: false,
     disableStats: true,
-    enabledTransports: ['ws'],
 });
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
