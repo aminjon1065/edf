@@ -17,7 +17,7 @@ window.Echo = new Echo({
     wsHost: VITE_PUSHER_HOST,
     wsPort: 6001,
     forceTLS: false,
-    disableStats: true
+    disableStats: true,
 });
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
