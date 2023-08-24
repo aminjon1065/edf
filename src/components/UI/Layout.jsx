@@ -11,12 +11,19 @@ const Index = () => {
     const meSelectorRole = useSelector(state => state.auth.user.role);
     const selectorNotification = useSelector(state => state.notificationModal);
     useEffect(() => {
-        window.Echo.channel(`notification.${meSelectorId}`)
-            .listen('NotificationSharedMail', (e) => {
-                dispatch(openNotification(e.message));
-                // setNotification(e.message)
-                // setIsOpen(true)
-            });
+        let pusher = new window.Pusher('7df99e1bf3471243c810', {
+            cluster: 'ap1'
+        });
+        let channel = pusher.subscribe(`notification.${meSelectorId}`);
+        channel.bind('my-event', (data) => {
+            dispatch(openNotification(data.message));
+        });
+        // window.Echo.channel(`notification.${meSelectorId}`)
+        //     .listen('NotificationSharedMail', (e) => {
+        //         dispatch(openNotification(e.message));
+        //         // setNotification(e.message)
+        //         // setIsOpen(true)
+        //     });
     }, [dispatch, meSelectorId]);
     return (
         <>
