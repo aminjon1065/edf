@@ -11,9 +11,13 @@ import i18n from "./localization/i18n";
 
 window.Pusher = require('pusher-js');
 window.Echo = new Echo({
-    key: '7df99e1bf3471243c810',
-    cluster: 'ap1',
-    forceTLS: true
+    broadcaster: 'pusher',
+    key: VITE_PUSHER_APP_KEY,
+    cluster: VITE_PUSHER_APP_CLUSTER,
+    wsHost: VITE_PUSHER_HOST,
+    wsPort: 6001,
+    // forceTLS: false,
+    disableStats: true,
 });
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

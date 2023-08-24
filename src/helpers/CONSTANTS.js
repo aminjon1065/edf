@@ -21,4 +21,4 @@ export const VITE_PUSHER_APP_KEY = "7df99e1bf3471243c810";
 export const VITE_PUSHER_HOST = "only.tj";
 export const VITE_PUSHER_PORT = 6001;
 export const VITE_PUSHER_SCHEME = "http";
-export const VITE_PUSHER_APP_CLUSTER = "mt1";
+export const VITE_PUSHER_APP_CLUSTER = "ap1";
