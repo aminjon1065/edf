@@ -18,7 +18,7 @@ window.Pusher = require('pusher-js');
 window.Echo = new Echo({
     broadcaster: 'pusher',
     key: VITE_PUSHER_APP_KEY,
-    wsHost: VITE_PUSHER_HOST,
+    // wsHost: VITE_PUSHER_HOST,
     disableStats: true,
     enabledTransports: ['ws', 'wss'],
     wsPort: 80,
