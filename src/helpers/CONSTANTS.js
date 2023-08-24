@@ -4,7 +4,7 @@
 // export const JWTToken = localStorage.getItem('token');
 // export const VITE_PUSHER_APP_ID = "local";
 // export const VITE_PUSHER_APP_SECRET = "local";
-// export const VITE_PUSHER_APP_KEY = "local";
+// export const VITE_PUSHER_APP_KEY = "7df99e1bf3471243c810";
 // export const VITE_PUSHER_HOST = "127.0.0.1";
 // export const VITE_PUSHER_PORT = 6001;
 // export const VITE_PUSHER_SCHEME = "http";

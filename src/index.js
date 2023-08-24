@@ -8,12 +8,12 @@ import store from "./state/store";
 import Echo from "laravel-echo";
 import {
     VITE_PUSHER_APP_CLUSTER,
-    VITE_PUSHER_APP_KEY,
-    VITE_PUSHER_HOST
+    VITE_PUSHER_APP_KEY
 } from "./helpers/CONSTANTS";
 import i18n from "./localization/i18n";
 
 window.Pusher = require('pusher-js');
+
 window.Echo = new Echo({
     broadcaster: 'pusher',
     key: VITE_PUSHER_APP_KEY,
@@ -21,7 +21,7 @@ window.Echo = new Echo({
     // wsHost: VITE_PUSHER_HOST,
     // wsPort: 6001,
     forceTLS: true,
-    // disableStats: true
+    // disableStats: true,
 });
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
