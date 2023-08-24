@@ -18,7 +18,7 @@ window.Echo = new Echo({
     wsPort: 6001,
     forceTLS: false,
     disableStats: true,
-    authEndpoint: 'http://api.coes.site/broadcasting/auth',
+    authEndpoint: 'http://only.tj/api/broadcasting/auth',
     auth: {
         headers: {
             // Authorization: `Bearer ${token}`,
