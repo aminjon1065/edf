@@ -5,19 +5,18 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {Provider} from "react-redux";
 import store from "./state/store";
-import Echo from "laravel-echo";
-import {VITE_PUSHER_APP_CLUSTER, VITE_PUSHER_APP_KEY, VITE_PUSHER_HOST} from "./helpers/CONSTANTS";
 import i18n from "./localization/i18n";
 
-window.Pusher = require('pusher-js');
+import Echo from 'laravel-echo';
+
+import Pusher from 'pusher-js';
+window.Pusher = Pusher;
+
 window.Echo = new Echo({
     broadcaster: 'pusher',
-    key: VITE_PUSHER_APP_KEY,
-    cluster: VITE_PUSHER_APP_CLUSTER,
-    wsHost: VITE_PUSHER_HOST,
-    wsPort: 6001,
-    // forceTLS: false,
-    disableStats: true,
+    key: '7df99e1bf3471243c810',
+    cluster: 'ap1',
+    forceTLS: true
 });
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
