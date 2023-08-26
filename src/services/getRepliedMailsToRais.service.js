@@ -13,18 +13,24 @@ export const getRepliedApi = createApi({
     }),
     endpoints: (builder) => ({
         getRepliedToRais: builder.query({
-            query: ({page, searchQuery, startDate, endDate, order, column}) => {
-                let queryString = `get-replied-to-rais?page=${page}&query=&startDate=&endDate=&order=${order}&column=${column}`;
+            query: ({page, searchQuery, startDate, endDate, order, column, isControl}) => {
+const params = {
+                    page,
+                    order,
+                    column,
+                    isControl
+                };
                 if (searchQuery) {
-                    queryString = `get-replied-to-rais?page&query=${searchQuery}&startDate=&endDate=&order=${order}&column=${column}`;
+                    params.query = searchQuery;
                 }
                 if (startDate && endDate) {
-                    queryString = `get-replied-to-rais?page=${page}&query=&startDate=${startDate}&endDate=${endDate}&order=${order}&column=${column}`;
+                    params.startDate = startDate;
+                    params.endDate = endDate;
                 }
-                if (searchQuery && startDate && endDate) {
-                    queryString = `get-replied-to-rais?page=${page}&query=${searchQuery}&startDate=${startDate}&endDate=${endDate}&order=${order}&column=${column}`;
-                }
-                return queryString;
+                const queryString = Object.keys(params)
+                    .map(key => `${key}=${params[key]}`)
+                    .join('&');
+                return `get-replied-to-rais?${queryString}`;
             },
             // query: () => 'get-replied-to-rais',
         }),

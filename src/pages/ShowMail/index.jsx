@@ -177,24 +177,26 @@ const Index = () => {
                         <CheckCircleIcon className={"h-6 w-auto text-green-400 ml-2"}/>}
             </span>
                 <div>
-                    <button
-                        className={"bg-red-700 px-4 py-2 hover:bg-red-500 rounded text-white flex flex-row items-center"}
-                        onClick={() => {
-                            const confirmation = window.confirm('Уверены что хотите удалить?');
-                            if (confirmation) {
-                                // Если пользователь подтвердил, вызываем функцию updateStatus
-                                api.delete(`/delete/${data.document.uuid}`).then((res) => {
-                                    console.log(res);
-                                    window.location.href = '/';
-                                }).catch((err) => {
-                                    console.log(err);
-                                });
-                            }
-                        }}
-                    >
-                        <TrashIcon className={"w-5 h-5 mr-2"} />
-                        Delete
-                    </button>
+                    {
+                        meSelector.user.role === 1 && <button
+                            className={"bg-red-700 px-4 py-2 hover:bg-red-500 rounded text-white flex flex-row items-center"}
+                            onClick={() => {
+                                const confirmation = window.confirm('Уверены что хотите удалить?');
+                                if (confirmation) {
+                                    // Если пользователь подтвердил, вызываем функцию updateStatus
+                                    api.delete(`/delete/${data.document.uuid}`).then((res) => {
+                                        console.log(res);
+                                        window.location.href = '/';
+                                    }).catch((err) => {
+                                        console.log(err);
+                                    });
+                                }
+                            }}
+                        >
+                            <TrashIcon className={"w-5 h-5 mr-2"} />
+                            Delete
+                        </button>
+                    }
                     <div className="items-end">{dateFormatter(data.created_at)}</div>
                     {
                         data.document.control

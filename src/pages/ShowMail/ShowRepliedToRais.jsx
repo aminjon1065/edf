@@ -180,7 +180,7 @@ const ShowRepliedToRais = ({id}) => {
                                                     <a
                                                         rel="noopener noreferrer"
                                                         target="_blank"
-                                                        href={`${PUBLIC_APP_URL_DOCUMENTS}${data.toRais.document.user.region}/${data.toRais.document.uuid}/${item.name}`}
+                                                        href={`${PUBLIC_APP_URL_DOCUMENTS}${data.toRais.document.user.region}/${item.folder}/${item.name}`}
                                                         download
                                                         className="font-medium text-indigo-600 hover:text-indigo-500"
                                                     >

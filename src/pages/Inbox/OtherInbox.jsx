@@ -20,6 +20,7 @@ const OtherInbox = () => {
     const [type, setType] = useState('')
     const [searchText, setSearchText] = useState('');
     const selectorNotification = useSelector(state => state.notificationModal);
+    const [isControl, setIsControl] = useState(false);
     const [dates, setDates] = useState({
         startDate: '',
         endDate: '',
@@ -31,6 +32,7 @@ const OtherInbox = () => {
         order: order,
         column: column,
         searchQuery: searchText,
+        isControl: isControl ? true : '',
         startDate: !dates.startDate ? '' : dates.startDate,
         endDate: !dates.endDate ? '' : dates.endDate,
         request: 'inbox'
@@ -77,6 +79,10 @@ const OtherInbox = () => {
     const handleChangeType = (event) => {
         setType(event.target.value);
     }
+    const toggleIsControl = () => {
+        // при нажатии переключается между true, false и null
+        setIsControl(prev => !prev);
+    };
     return (
         <>
             <div className="flex flex-col">
@@ -85,32 +91,32 @@ const OtherInbox = () => {
                         {data.to && <span>{data.to} {t("Interface.from")} {data.total}</span>}
                         <div className="flex flex-row items-center justify-between mb-3">
                             <div className="flex justify-start">
-                                <nav className="isolate inline-flex -space-x-px rounded-md shadow-sm bg-indigo-700"
+                                <nav className="isolate inline-flex -space-x-px rounded-md shadow-sm"
                                      aria-label="Pagination">
-                                    <button
-                                        disabled={!data.prev_page_url}
-                                        onClick={prevPage}
-                                        className={`relative bg-gray-100 inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0`}
-                                    >
-                                        <ChevronLeftIcon className="h-5 w-5" aria-hidden="true"/>
-                                    </button>
-                                    {data.next_page_url && (
+                                    <div className="flex-1 flex justify-between sm:justify-end">
+                                        <button
+                                            disabled={!data.prev_page_url}
+                                            onClick={prevPage}
+                                            className="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
+                                        >
+                                            {t("Interface.Prev")}
+                                        </button>
                                         <button
                                             onClick={nextPage}
-                                            className="relative bg-gray-100 inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
+                                            disabled={!data.next_page_url}
+                                            className="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
                                         >
-                                            <span className="sr-only">Next</span>
-                                            <ChevronRightIcon className="h-5 w-5" aria-hidden="true"/>
+                                            {t("Interface.Next")}
                                         </button>
-                                    )}
+                                    </div>
                                 </nav>
-                                <div className={"ml-5"}>
+                                <div className={"ml-5 flex flex-row space-x-4"}>
                                     <select
                                         value={type}
                                         name="filterType"
                                         onChange={handleChangeType}
                                         id="filterType"
-                                        className={"rounded w-1/3"}
+                                        className={"rounded w-1/3 border border-gray-300 px-4 py-2"}
                                     >
                                         <option
                                             value="">
@@ -127,14 +133,33 @@ const OtherInbox = () => {
                                             ))
                                         }
                                     </select>
+                                    <div
+                                        className="relative flex gap-x-3 items-center border border-gray-300 px-4 py-2 rounded">
+                                        <div className="flex h-6 items-center">
+                                            <input
+                                                onChange={toggleIsControl}
+                                                checked={isControl}
+                                                id="comments"
+                                                name="comments"
+                                                type="checkbox"
+                                                className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                                            />
+                                        </div>
+                                        <div className="text-sm leading-6">
+                                            <label htmlFor="comments" className="font-medium text-gray-900">
+                                                {t("Interface.Table.Control")}
+                                            </label>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div className="flex justify-end w-2/3">
+
                                 <div className="relative mr-1">
                                     <Datepicker
                                         separator="до"
                                         className="bg-red-700"
-                                        i18n="ru"
+                                        i18n={i18n.language}
                                         useRange
                                         showShortcuts={true}
                                         configs={{

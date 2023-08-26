@@ -14,23 +14,27 @@ export const messagesApi = createApi({
     }),
     endpoints: (build) => ({
         getMessages: build.query({
-            query: ({page, searchQuery, startDate, endDate, order, column, request,type}) => {
-                let queryString = `${request}?page=${page}&query=&startDate=&endDate=&order=${order}&column=${column}&type=${type}`;
+            query: ({page, searchQuery, startDate, endDate, order, column, request, type, isControl}) => {
+                const params = {
+                    page,
+                    order,
+                    column,
+                    type,
+                    isControl
+                };
                 if (searchQuery) {
-                    queryString = `${request}?page${page}&query=${searchQuery}&startDate=&endDate=&order=${order}&column=${column}&type=${type}`;
+                    params.query = searchQuery;
                 }
                 if (startDate && endDate) {
-                    queryString = `${request}?page=${page}&query=&startDate=${startDate}&endDate=${endDate}&order=${order}&column=${column}&type=${type}`;
+                    params.startDate = startDate;
+                    params.endDate = endDate;
                 }
-                if (type) {
-                    queryString = `${request}?page=${page}&query=&startDate=${startDate}&endDate=${endDate}&order=${order}&column=${column}&type=${type}`;
-                }
-                if (searchQuery && startDate && endDate && type) {
-                    queryString = `${request}?page=${page}&query=${searchQuery}&startDate=${startDate}&endDate=${endDate}&order=${order}&column=${column}&type=${type}`;
-                }
-                return queryString;
+                const queryString = Object.keys(params)
+                    .map(key => `${key}=${params[key]}`)
+                    .join('&');
+                return `${request}?${queryString}`;
             },
         })
     })
 });
-export const {useGetMessagesQuery} = messagesApi
+export const {useGetMessagesQuery} = messagesApi;
