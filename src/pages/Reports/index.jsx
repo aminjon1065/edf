@@ -19,6 +19,7 @@ const Index = () => {
         startDate: firstDayOfMonth.toISOString().split('T')[0],  // Convert date object to yyyy-mm-dd format
         endDate: currentDate.toISOString().split('T')[0],        // Convert date object to yyyy-mm-dd format
     });
+
     const handleValueChange = (newValue) => {
         setDates(newValue);
     };
@@ -41,7 +42,7 @@ const Index = () => {
         return <span>Error!</span>;
     }
     const downloadPdf = () => {
-        api.get(`/pdf-reports/${i18n.language}`, {responseType: 'blob'})
+        api.get(`/pdf-reports/${i18n.language}?filed=${field}&start=${dates.startDate}&end=${dates.endDate}`, {responseType: 'blob'})
             .then((response) => {
                 // Создаем URL-объект из blob ответа
                 const url = window.URL.createObjectURL(new Blob([response.data]));
