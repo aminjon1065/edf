@@ -247,8 +247,10 @@ const OtherInbox = () => {
                                             >
                                                 {t("Interface.Table.Control")}
                                             </th>
-                                            <th scope="col" className="relative px-6 py-3">
-                                                <span className="">Дата выполнения</span>
+                                            <th scope="col"
+                                                className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                            >
+                                                <span className="">{t("Interface.Table.DateDone")}</span>
                                             </th>
                                         </tr>
                                         </thead>
