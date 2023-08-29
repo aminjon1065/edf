@@ -6,6 +6,7 @@ import notificationSlice from './slices/notification';
 import {getRepliedApi} from "../services/getRepliedMailsToRais.service";
 import {repliedByIdApi} from "../services/show.replied.service";
 import {reportApi} from "../services/getReports.service";
+import countSlice from "./slices/countNewMail";
 
 const rootReducer = combineReducers({
     auth: authReducer,
@@ -15,13 +16,14 @@ const rootReducer = combineReducers({
     [inboxApiById.reducerPath]: inboxApiById.reducer,
     [getRepliedApi.reducerPath]: getRepliedApi.reducer,
     [repliedByIdApi.reducerPath]: repliedByIdApi.reducer,
+    countState: countSlice,
     notificationModal: notificationSlice,
 })
 
 const store = configureStore({
     reducer: rootReducer,
     middleware: (getDefaultMiddleware) =>
-        getDefaultMiddleware().concat([messagesApi.middleware, reportApi.middleware, inboxApiById.middleware, getRepliedApi.middleware, repliedByIdApi.middleware]),
+        getDefaultMiddleware().concat([messagesApi.middleware, reportApi.middleware, inboxApiById.middleware, getRepliedApi.middleware, repliedByIdApi.middleware])
 });
 
 export default store;

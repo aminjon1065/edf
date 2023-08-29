@@ -19,9 +19,12 @@ import {Dialog, Menu, Transition} from '@headlessui/react'
 import ApplicationLogo from "./ApplicationLogo";
 import {Link, useLocation} from "react-router-dom";
 import Modal from "../NewMailModal";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
 import i18n from "../../localization/i18n";
+import api from "../../services/api";
+import Loader from "./Loader";
+import {countNewMail} from "../../state/slices/countNewMail";
 
 
 function classNames(...classes) {
@@ -33,7 +36,9 @@ const SideBarWithHeader = () => {
     const [open, setOpen] = useState(false);
     const [currentRoute, setCurrentRoute] = useState("/");
     const [sidebarOpen, setSidebarOpen] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
     const meSelector = useSelector(state => state.auth);
+    const selectorNotification = useSelector(state => state.notificationModal);
     const {t} = useTranslation();
     const navigation = [
         {name: t("Interface.SideBar.Inbox"), href: '/', icon: InboxIcon, current: true},
@@ -48,10 +53,24 @@ const SideBarWithHeader = () => {
         {name: t("Interface.Header.Settings"), href: '/settings', icon: CogIcon},
         {name: t("Interface.Header.Logout"), href: '/log-out', icon: ArrowLeftOnRectangleIcon},
     ]
+
+    const dispatchCountMail = useDispatch();
+    const selectorCountMail = useSelector(state => state.countState.count);
+
     useEffect(() => {
         // Get the current path from the location object
         const currentPath = location.pathname;
-
+        const getUnreadMail = async () => {
+            try {
+                const response = await api.get('/unread-count');
+                dispatchCountMail(countNewMail(response.data.unreadCount));
+                setIsLoading(false);
+            } catch (e) {
+                console.log(e)
+                setIsLoading(false);
+            }
+        }
+        getUnreadMail();
         // Find the item in the navigation array that matches the current path
         const currentNavItem = navigation.find((item) => item.href === currentPath);
 
@@ -59,7 +78,7 @@ const SideBarWithHeader = () => {
         if (currentNavItem) {
             setCurrentRoute(currentNavItem.href);
         }
-    }, [location.pathname]);
+    }, [location.pathname, selectorNotification]);
     const showModal = () => {
         setOpen(true);
     };
@@ -257,14 +276,29 @@ const SideBarWithHeader = () => {
                                 <span className="sr-only">View notifications</span>
                                 <span
                                     className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium text-indigo-800">
-                                    <span>10</span>
-                                        <svg
-                                            className=" h-2 w-2 text-indigo-400"
-                                            fill="currentColor"
-                                            viewBox="0 0 8 8">
-                                          <circle cx={4} cy={4} r={3}/>
-                                        </svg>
-                                        <BellIcon className="h-6 w-6" aria-hidden="true"/>
+                                    <span className={"text-red-500"}>
+                                        {
+                                            isLoading
+                                                ?
+                                                <Loader className="h-6 w-6" aria-hidden="true"/>
+                                                :
+                                                selectorCountMail > 0 ? selectorCountMail : null
+                                        }
+                                    </span>
+                                    {
+                                        selectorCountMail > 0
+                                            ?
+                                            <svg
+                                                className={` h-2 w-2 text-indigo-400 ${selectorCountMail > 0 ? "text-red-500" : "text-indigo-400"}`}
+                                                fill="currentColor"
+                                                viewBox="0 0 8 8">
+                                                <circle cx={4} cy={4} r={3}/>
+                                            </svg>
+                                            :
+                                            null
+
+                                    }
+                                    <BellIcon className={`h-6 w-6 ${selectorCountMail > 0 ? "text-red-500" : "text-indigo-400"}`} aria-hidden="true"/>
                                         </span>
                             </Link>
                             {/* Profile dropdown */}

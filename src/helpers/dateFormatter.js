@@ -8,7 +8,6 @@ const formatDay = new Intl.DateTimeFormat("ru-RU", {
 
 const formatterDay = (date) => {
     const parsedDate = Date.parse(date);
-    console.log('Parsed date:', parsedDate);
 
     if (isNaN(parsedDate)) {
         console.warn('Invalid date:', date);
