@@ -1,10 +1,8 @@
 import React, {useState, Fragment, useEffect} from 'react';
 import {
-    CalendarIcon,
     ChartBarIcon,
     InboxIcon,
     XCircleIcon,
-    MagnifyingGlassIcon,
     BellIcon,
     Bars3Icon,
     DocumentIcon,
@@ -12,8 +10,7 @@ import {
     UsersIcon,
     CogIcon,
     ArrowLeftOnRectangleIcon,
-    EnvelopeIcon,
-    ClockIcon
+    EnvelopeIcon, UserPlusIcon,
 } from "@heroicons/react/24/outline";
 import {Dialog, Menu, Transition} from '@headlessui/react'
 import ApplicationLogo from "./ApplicationLogo";
@@ -47,6 +44,8 @@ const SideBarWithHeader = () => {
         // {name: 'Документы', href: '/documents', icon: DocumentIcon, current: false},
         // {name: t("Interface.SideBar.Calendar"), href: '/calendar', icon: CalendarIcon, current: false},
         {name: t("Interface.SideBar.Reports"), href: '/reports', icon: ChartBarIcon, current: false},
+        {name: t("Interface.SideBar.Users"), href: '/users-list', icon: UsersIcon, current: false, role: 1},
+        {name: t("Interface.SideBar.CreateUser"), href: '/create-user', icon: UserPlusIcon, current: false, role: 1},
     ]
     const userNavigation = [
         {name: t("Interface.Header.Profile"), href: '/profile', icon: UsersIcon},
@@ -56,6 +55,7 @@ const SideBarWithHeader = () => {
 
     const dispatchCountMail = useDispatch();
     const selectorCountMail = useSelector(state => state.countState.count);
+    const filteredNavigation = navigation.filter(item => item.role === undefined || item.role === meSelector.user.role);
 
     useEffect(() => {
         // Get the current path from the location object
@@ -199,19 +199,19 @@ const SideBarWithHeader = () => {
                                     <Modal open={open} setOpen={setOpen}/>
                                 </div>
                             </div>
-                            {navigation.map((item) => (
+                            {filteredNavigation.map((item) => (
                                 <Link
                                     key={item.name}
                                     to={item.href}
                                     className={classNames(
                                         item.href === currentRoute ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                                        'group flex items-center px-2 py-2 text-sm font-medium rounded-md'
+                                        'group flex items-center px-2 py-2 text-base font-medium rounded-md'
                                     )}
                                 >
                                     <item.icon
                                         className={classNames(
                                             item.href === currentRoute ? 'text-gray-300' : 'text-gray-400 group-hover:text-gray-300',
-                                            'mr-3 flex-shrink-0 h-6 w-6'
+                                            'mr-4 flex-shrink-0 h-6 w-6'
                                         )}
                                         aria-hidden="true"
                                     />
@@ -298,7 +298,9 @@ const SideBarWithHeader = () => {
                                             null
 
                                     }
-                                    <BellIcon className={`h-6 w-6 ${selectorCountMail > 0 ? "text-red-500" : "text-indigo-400"}`} aria-hidden="true"/>
+                                    <BellIcon
+                                        className={`h-6 w-6 ${selectorCountMail > 0 ? "text-red-500" : "text-indigo-400"}`}
+                                        aria-hidden="true"/>
                                         </span>
                             </Link>
                             {/* Profile dropdown */}

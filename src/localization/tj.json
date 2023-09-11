@@ -13,13 +13,30 @@
           "InvalidCredentials": "Почтаи электронӣ ё рамз хато!"
         }
       },
+      "RegisterUser": {
+        "FirstName": "Ном",
+        "LastName": "Насаб",
+        "Email": "Суроғаи электронӣ",
+        "Password": "Рамз",
+        "ConfirmPassword": "Тасдиқи рамз",
+        "Region": "Минтақа",
+        "Department": "Шуъба",
+        "Position": "Вазифа",
+        "Rank": "Рутба",
+        "Avatar": "Аватар",
+        "Role": "Ба ҳайси",
+        "ShowPassword": "Нишон додан",
+        "Submit": "Ба қайд гирифтан"
+      },
       "SideBar": {
         "NewMail": "Мактуби нав",
         "Inbox": "Воридотӣ",
         "Sent": "Содиротӣ",
         "Files": "Файлҳо",
         "Calendar": "Тақвим",
-        "Reports": "Ҳисоботҳо"
+        "Reports": "Ҳисоботҳо",
+        "CreateUser": "Ба қайдгирии истифодабаранда",
+        "Users": "Истифодабарандаҳо"
       },
       "Header": {
         "Search": "Кофтан",
