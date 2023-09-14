@@ -10,7 +10,13 @@
 // export const VITE_PUSHER_SCHEME = "http";
 // export const VITE_PUSHER_APP_CLUSTER = "ap1";
 
+//
+// export const API_APP = "https://only.tj/api/api/v1";
+// export const PUBLIC_APP_URL_DOCUMENTS = "https://only.tj/api/storage/documents/";
+// export const PUBLIC_URL_BACKEND = "https://only.tj/api";
 
-export const API_APP = "https://only.tj/api/api/v1";
-export const PUBLIC_APP_URL_DOCUMENTS = "https://only.tj/api/storage/documents/";
-export const PUBLIC_URL_BACKEND = "https://only.tj/api";
+
+
+export const API_APP = "http://185.177.2.167/api/api/v1";
+export const PUBLIC_APP_URL_DOCUMENTS = "http://185.177.2.167/api/storage/documents/";
+export const PUBLIC_URL_BACKEND = "http://185.177.2.167/api";
