@@ -293,7 +293,7 @@ export default function Index({open, setOpen}) {
                                                                                     </div>
                                                                                     <div
                                                                                         className={"w-1/4 flex flex-row justify-end"}>
-                                                                                        <div className={""}>
+                                                                                        <div className={"w-full"}>
                                                                                             <label htmlFor="type"
                                                                                                    className="block text-sm font-medium text-gray-700">
                                                                                                 {t("Interface.NewMailModal.TypeDocument")}
