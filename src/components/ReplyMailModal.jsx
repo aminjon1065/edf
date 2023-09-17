@@ -15,7 +15,6 @@ export default function ReplyMailModal({open, setOpen, uuid, reload, setReload})
     const [dateDone, setDateDone] = useState('');
     const [toRais, setToRais] = useState(false)
 
-
     // Получение контента редактора
     const getContent = (htmlContentProp) => {
         setHtmlContent(htmlContentProp);

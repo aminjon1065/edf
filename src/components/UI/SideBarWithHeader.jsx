@@ -13,7 +13,8 @@ import {
     CogIcon,
     ArrowLeftOnRectangleIcon,
     EnvelopeIcon,
-    ClockIcon
+    ClockIcon,
+    UserPlusIcon
 } from "@heroicons/react/24/outline";
 import {Dialog, Menu, Transition} from '@headlessui/react'
 import ApplicationLogo from "./ApplicationLogo";
@@ -47,6 +48,8 @@ const SideBarWithHeader = () => {
         // {name: 'Документы', href: '/documents', icon: DocumentIcon, current: false},
         // {name: t("Interface.SideBar.Calendar"), href: '/calendar', icon: CalendarIcon, current: false},
         {name: t("Interface.SideBar.Reports"), href: '/reports', icon: ChartBarIcon, current: false},
+        {name: t("Interface.SideBar.Users"), href: '/users-list', icon: UsersIcon, current: false, role: 1},
+        {name: t("Interface.SideBar.CreateUser"), href: '/create-user', icon: UserPlusIcon, current: false, role: 1},
     ]
     const userNavigation = [
         {name: t("Interface.Header.Profile"), href: '/profile', icon: UsersIcon},

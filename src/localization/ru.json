@@ -13,13 +13,33 @@
           "InvalidCredentials": "Неправильный логин или пароль!"
         }
       },
+      "RegisterUser": {
+        "FirstName": "Имя",
+        "LastName": "Фамилия",
+        "Email": "Электронная почта",
+        "Password": "Пароль",
+        "ConfirmPassword": "Подтвердите пароль",
+        "Region": "Регион",
+        "Department": "Отдел",
+        "Position": "Должность",
+        "Rank": "Звание",
+        "Avatar": "Аватар",
+        "Role": "Роль",
+        "ShowPassword": "Показать",
+        "Submit": "Зарегистрировать",
+        "Cancel": "Отмена",
+        "Admin": "Администратор",
+        "User": "Пользователь"
+      },
       "SideBar": {
         "NewMail": "Новое письмо",
         "Inbox": "Входящие",
         "Sent": "Исходящие",
         "Files": "Файлы",
         "Calendar": "Календарь",
-        "Reports": "Отчеты"
+        "Reports": "Отчеты",
+        "CreateUser": "Регистрация пользователя",
+        "Users": "Пользователи"
       },
       "Header": {
         "Search": "Поиск",
@@ -62,6 +82,12 @@
         "PastMonth": "Прошлый месяц",
         "NextMonth": "Следующий месяц"
       },
+      "Regions": {
+        "Dushanbe": "Душанбе",
+        "Sughd": "СОГД",
+        "Khatlon": "Хатлон",
+        "GBAO": "ГБАО"
+      },
       "All": "Все",
       "ShowMail": "Показать",
       "Next": "Следующий",
@@ -75,7 +101,8 @@
         "To": "Кому",
         "Type": "Тип",
         "Control": "Контрольный",
-        "Status": "Статус"
+        "Status": "Статус",
+        "isReply": "Ответ"
       }
     }
   }

@@ -14,13 +14,14 @@ export const messagesApi = createApi({
     }),
     endpoints: (build) => ({
         getMessages: build.query({
-            query: ({page, searchQuery, startDate, endDate, order, column, request, type, isControl}) => {
+            query: ({page, searchQuery, startDate, endDate, order, column, request, type, isControl, isReplied}) => {
                 const params = {
                     page,
                     order,
                     column,
                     type,
-                    isControl
+                    isControl,
+                    isReplied
                 };
                 if (searchQuery) {
                     params.query = searchQuery;

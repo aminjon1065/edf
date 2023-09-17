@@ -13,13 +13,33 @@
           "InvalidCredentials": "Почтаи электронӣ ё рамз хато!"
         }
       },
+      "RegisterUser": {
+        "FirstName": "Ном",
+        "LastName": "Насаб",
+        "Email": "Суроғаи электронӣ",
+        "Password": "Рамз",
+        "ConfirmPassword": "Тасдиқи рамз",
+        "Region": "Минтақа",
+        "Department": "Шуъба",
+        "Position": "Вазифа",
+        "Rank": "Рутба",
+        "Avatar": "Аватар",
+        "Role": "Ба ҳайси",
+        "ShowPassword": "Нишон додан",
+        "Submit": "Ба қайд гирифтан",
+        "Cancel": "Бекор кардан",
+        "Admin": "Админ",
+        "User": "Истифодабаранда"
+      },
       "SideBar": {
         "NewMail": "Мактуби нав",
         "Inbox": "Воридотӣ",
         "Sent": "Содиротӣ",
         "Files": "Файлҳо",
         "Calendar": "Тақвим",
-        "Reports": "Ҳисоботҳо"
+        "Reports": "Ҳисоботҳо",
+        "CreateUser": "Ба қайдгирии истифодабаранда",
+        "Users": "Истифодабарандаҳо"
       },
       "Header": {
         "Search": "Кофтан",
@@ -61,7 +81,12 @@
         "CurrentMonth": "Моҳи ҷорӣ",
         "PastMonth": "Моҳи гузашта",
         "NextMonth": "Моҳи оянда"
-
+      },
+      "Regions": {
+        "Dushanbe": "Душанбе",
+        "Sughd": "Суғд",
+        "Khatlon": "Хатлон",
+        "GBAO": "ВМКБ"
       },
       "All": "Ҳама",
       "ShowMail": "Нишон додан",
@@ -76,7 +101,8 @@
         "To": "Ба",
         "Type": "Намуд",
         "Control": "Назоратӣ",
-        "Status": "Ҳолат"
+        "Status": "Ҳолат",
+        "isReply": "Ҷавоб"
       }
     }
   }

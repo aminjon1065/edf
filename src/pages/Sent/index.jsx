@@ -23,6 +23,7 @@ const Index = () => {
     const [type, setType] = useState('')
     const [searchText, setSearchText] = useState('');
     const [isControl, setIsControl] = useState(false);
+    const [isReplied, setIsReplied] = useState(false);
     const [dates, setDates] = useState({
         startDate: '',
         endDate: '',
@@ -34,6 +35,7 @@ const Index = () => {
         type: type,
         searchQuery: searchText,
         isControl: isControl ? true : '',
+        isReplied: isReplied ? true : '',
         startDate: !dates.startDate ? '' : dates.startDate,
         endDate: !dates.endDate ? '' : dates.endDate,
         request: 'sent'
@@ -99,6 +101,10 @@ const Index = () => {
         // при нажатии переключается между true, false и null
         setIsControl(prev => !prev);
     };
+    const toggleIsReplied = () => {
+        // при нажатии переключается между true, false и null
+        setIsReplied(prev => !prev);
+    }
     return (
         <div className="flex flex-col">
             <div className="-my-2 scrollbar-none sm:-mx-6 lg:-mx-8 h-screen">
@@ -161,8 +167,26 @@ const Index = () => {
                                         />
                                     </div>
                                     <div className="text-sm leading-6">
-                                        <label htmlFor="comments" className="font-medium text-gray-900">
+                                        <label htmlFor="isReply" className="font-medium text-gray-900">
                                             {t("Interface.Table.Control")}
+                                        </label>
+                                    </div>
+                                </div>
+                                <div
+                                    className="relative flex gap-x-3 items-center border border-gray-300 px-4 py-2 rounded">
+                                    <div className="flex h-6 items-center">
+                                        <input
+                                            onChange={toggleIsReplied}
+                                            checked={isReplied}
+                                            id="isReply"
+                                            name="isReply"
+                                            type="checkbox"
+                                            className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                                        />
+                                    </div>
+                                    <div className="text-sm leading-6">
+                                        <label htmlFor="comments" className="font-medium text-gray-900">
+                                            {t("Interface.Table.isReply")}
                                         </label>
                                     </div>
                                 </div>
