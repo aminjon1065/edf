@@ -109,7 +109,7 @@ const Index = () => {
         <div className="flex flex-col">
             <div className="-my-2 scrollbar-none sm:-mx-6 lg:-mx-8 h-screen">
                 <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-                    {data.to && <span>{data.to} из {data.total}</span>}
+                    <span>{data.to ? data.to : 0} из {data.total}</span>
                     <div className="flex flex-row items-center justify-between mb-3">
                         <div className="flex justify-start">
                             <nav className="isolate inline-flex -space-x-px rounded-md shadow-sm"
@@ -167,7 +167,7 @@ const Index = () => {
                                         />
                                     </div>
                                     <div className="text-sm leading-6">
-                                        <label htmlFor="isReply" className="font-medium text-gray-900">
+                                        <label htmlFor="comments" className="font-medium text-gray-900">
                                             {t("Interface.Table.Control")}
                                         </label>
                                     </div>
@@ -185,7 +185,7 @@ const Index = () => {
                                         />
                                     </div>
                                     <div className="text-sm leading-6">
-                                        <label htmlFor="comments" className="font-medium text-gray-900">
+                                        <label htmlFor="isReply" className="font-medium text-gray-900">
                                             {t("Interface.Table.isReply")}
                                         </label>
                                     </div>
