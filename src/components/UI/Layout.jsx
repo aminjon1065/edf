@@ -4,6 +4,7 @@ import {openNotification} from "../../state/slices/notification";
 import {useDispatch, useSelector} from "react-redux";
 import NotificationNewMail from "./NotificationNewMail";
 import SideBarWithHeader from "./SideBarWithHeader";
+import {BsGithub} from "react-icons/bs";
 
 const Index = () => {
     const dispatch = useDispatch();
@@ -27,7 +28,7 @@ const Index = () => {
                         <div className="py-6">
                             <div className="max-w-full mx-auto px-4 sm:px-6 md:px-8">
                                 {/* Replace with your content */}
-                                <div className="">
+                                <div>
                                     {
                                         meSelectorRole === 99
                                             ?
@@ -38,10 +39,9 @@ const Index = () => {
                                                 Notification={selectorNotification.uuid}
                                             />
                                     }
-
                                     <Outlet/>
                                 </div>
-                                {/* /End replace */}
+                                <a href="https://github.com/aminjon1065" target={"_blank"} rel="noreferrer"><BsGithub className={"text-purple-700 w-3 h-3"} /></a>
                             </div>
                         </div>
                     </main>

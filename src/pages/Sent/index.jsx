@@ -112,7 +112,7 @@ const Index = () => {
                     <span>{data.to ? data.to : 0} из {data.total}</span>
                     <div className="flex flex-row items-center justify-between mb-3">
                         <div className="flex justify-start">
-                            <nav className="isolate inline-flex -space-x-px rounded-md shadow-sm"
+                            <nav className="isolate inline-flex -space-x-px rounded-md"
                                  aria-label="Pagination">
                                 <div className="flex-1 flex justify-between sm:justify-end">
                                     <button
@@ -186,7 +186,7 @@ const Index = () => {
                                     </div>
                                     <div className="text-sm leading-6">
                                         <label htmlFor="isReply" className="font-medium text-gray-900">
-                                            {t("Interface.Table.isReply")}
+                                            {t("Interface.Table.withNotificate")}
                                         </label>
                                     </div>
                                 </div>

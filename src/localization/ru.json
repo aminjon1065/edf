@@ -102,7 +102,8 @@
         "Type": "Тип",
         "Control": "Контрольный",
         "Status": "Статус",
-        "isReply": "Ответ"
+        "isReply": "Ответ",
+        "withNotificate": "По уведомлении"
       }
     }
   }

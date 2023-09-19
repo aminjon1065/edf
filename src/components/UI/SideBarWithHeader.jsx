@@ -1,10 +1,8 @@
 import React, {useState, Fragment, useEffect} from 'react';
 import {
-    CalendarIcon,
     ChartBarIcon,
     InboxIcon,
     XCircleIcon,
-    MagnifyingGlassIcon,
     BellIcon,
     Bars3Icon,
     DocumentIcon,
@@ -13,7 +11,6 @@ import {
     CogIcon,
     ArrowLeftOnRectangleIcon,
     EnvelopeIcon,
-    ClockIcon,
     UserPlusIcon
 } from "@heroicons/react/24/outline";
 import {Dialog, Menu, Transition} from '@headlessui/react'
@@ -24,7 +21,6 @@ import {useDispatch, useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
 import i18n from "../../localization/i18n";
 import api from "../../services/api";
-import Loader from "./Loader";
 import {countNewMail} from "../../state/slices/countNewMail";
 
 
@@ -271,6 +267,15 @@ const SideBarWithHeader = () => {
                             {/*</form>*/}
                         </div>
                         <div className="ml-4 flex items-center md:ml-6">
+                             <span className={"text-red-500 bg-red-500"}>
+                                        {
+                                            isLoading
+                                                ?
+                                                <span className={"animate-spin text-red-500 bg-red-500"}></span>
+                                                :
+                                                selectorCountMail > 0 ? selectorCountMail : null
+                                        }
+                             </span>
                             <Link
                                 to={"/"}
                                 type="button"
@@ -279,15 +284,7 @@ const SideBarWithHeader = () => {
                                 <span className="sr-only">View notifications</span>
                                 <span
                                     className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium text-indigo-800">
-                                    <span className={"text-red-500"}>
-                                        {
-                                            isLoading
-                                                ?
-                                                <Loader className="h-6 w-6" aria-hidden="true"/>
-                                                :
-                                                selectorCountMail > 0 ? selectorCountMail : null
-                                        }
-                                    </span>
+
                                     {
                                         selectorCountMail > 0
                                             ?
@@ -302,7 +299,7 @@ const SideBarWithHeader = () => {
 
                                     }
                                     <BellIcon className={`h-6 w-6 ${selectorCountMail > 0 ? "text-red-500" : "text-indigo-400"}`} aria-hidden="true"/>
-                                        </span>
+                                </span>
                             </Link>
                             {/* Profile dropdown */}
                             <Menu as="div" className="ml-3 relative">

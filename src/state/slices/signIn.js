@@ -59,7 +59,7 @@ export const login = (email, password) => async (dispatch) => {
             email: email,
             password: password,
         });
-        console.log('data :', response.data)
+        // console.log('data :', response.data)
         dispatch(loginSuccess(response.data));
     } catch (error) {
         dispatch(loginFailure(i18n.t("Interface.Auth.Login.InvalidCredentials")));

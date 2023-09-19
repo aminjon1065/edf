@@ -86,7 +86,7 @@ const RaisInbox = () => {
                         {/*{data.to && <span>{data.to} из {data.total}</span>}*/}
                         <div className="flex flex-row items-center justify-between mb-3">
                             <div className="flex justify-start space-x-4">
-                                <nav className="isolate inline-flex -space-x-px rounded-md shadow-sm"
+                                <nav className="isolate inline-flex -space-x-px rounded-md"
                                      aria-label="Pagination">
                                     <div className="flex-1 flex justify-between sm:justify-end">
                                         <button
@@ -118,7 +118,8 @@ const RaisInbox = () => {
                                     </div>
                                     <div className="text-sm leading-6">
                                         <label htmlFor="comments" className="font-medium text-gray-900">
-                                            IsControl
+                                            {t("Interface.Table.Control")}
+
                                         </label>
                                     </div>
                                 </div>
