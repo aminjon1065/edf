@@ -32,8 +32,7 @@ const Index = () => {
     return (
         <div className="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
             <div className="sm:mx-auto sm:w-full sm:max-w-md">
-
-                <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">{t("Interface.SideBar.CreateUser")}</h2>
+                <h2 className="mt-6 text-center text-2xl font-extrabold text-gray-900">{t("Interface.SideBar.CreateUser")}</h2>
                 {/*<p className="mt-2 text-center text-sm text-gray-600">*/}
                 {/*    Or{' '}*/}
                 {/*    <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">*/}
@@ -171,6 +170,40 @@ const Index = () => {
                                         <option value="admin">{t("Interface.Regions.Sughd")}</option>
                                         <option value="admin">{t("Interface.Regions.Khatlon")}</option>
                                         <option value="admin">{t("Interface.Regions.GBAO")}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div className="w-full">
+                                <label htmlFor="region" className="block text-sm font-medium text-gray-700">
+                                    {t("Interface.RegisterUser.Department")}
+                                </label>
+                                <div className="mt-1">
+                                    <select
+                                        id="region"
+                                        name="region"
+                                        autoComplete="region"
+                                        required
+                                        className="appearance-none block w-full py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                        {/*из базы при получении value добавить их в useTranslator в функцию t()*/}
+                                        <option value={"Interface.Departments.Apparat"}>{t("Interface.Departments.Apparat")}</option>
+                                        <option value={"Interface.Departments.CivilDefense"}>{t("Interface.Departments.CivilDefense")}</option>
+                                        <option value={"Interface.Departments.ProtectionPopulation"}>{t("Interface.Departments.ProtectionPopulation")}</option>
+                                        <option value={"Interface.Departments.TroopsDirectorate"}>{t("Interface.Departments.TroopsDirectorate")}</option>
+                                        <option value={"Interface.Departments.BuildingsStructures"}>{t("Interface.Departments.BuildingsStructures")}</option>
+                                        <option value={"Interface.Departments.HR"}>{t("Interface.Departments.HR")}</option>
+                                        <option value={"Interface.Departments.InternationalCooperation"}>{t("Interface.Departments.InternationalCooperation")}</option>
+                                        <option value={"Interface.Departments.Finance"}>{t("Interface.Departments.Finance")}</option>
+                                        <option value={"Interface.Departments.Medical"}>{t("Interface.Departments.Medical")}</option>
+                                        <option value={"Interface.Departments.CMC"}>{t("Interface.Departments.CMC")}</option>
+                                        <option value={"Interface.Departments.Legal"}>{t("Interface.Departments.Legal")}</option>
+                                        <option value={"Interface.Departments.Media"}>{t("Interface.Departments.Media")}</option>
+                                        <option value={"Interface.Departments.Rescue"}>{t("Interface.Departments.Rescue")}</option>
+                                        <option value={"Interface.Departments.Rear"}>{t("Interface.Departments.Rear")}</option>
+                                        <option value={"Interface.Departments.Sarez"}>{t("Interface.Departments.Sarez")}</option>
+                                        <option value={"Interface.Departments.Town"}>{t("Interface.Departments.Town")}</option>
+                                        <option value={"Interface.Departments.EducationCenter"}>{t("Interface.Departments.EducationCenter")}</option>
+                                        <option value={"Interface.Departments.Laboratory"}>{t("Interface.Departments.Laboratory")}</option>
+                                        <option value={"Interface.Departments.MilHospital"}>{t("Interface.Departments.MilHospital")}</option>
                                     </select>
                                 </div>
                             </div>
