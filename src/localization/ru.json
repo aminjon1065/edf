@@ -1,6 +1,9 @@
 {
   "translation": {
     "Interface": {
+      "Management": "Руководство",
+      "User": "Пользователь",
+      "Admin": "Администратор",
       "Auth": {
         "Login": {
           "Title": "Вход в ваш аккаунт",

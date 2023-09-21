@@ -1,6 +1,9 @@
 {
   "translation": {
     "Interface": {
+      "Management": "Роҳбарият",
+      "User": "Истифодабаранда",
+      "Admin": "Админ",
       "Auth": {
         "Login": {
           "Title": "Даромад ба система",
