@@ -1,9 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import {useGetRepliedToRaisQuery} from "../../services/getRepliedMailsToRais.service";
-import {CheckCircleIcon, ChevronLeftIcon, ClockIcon} from "@heroicons/react/24/outline";
+import {CheckCircleIcon, ClockIcon} from "@heroicons/react/24/outline";
 import formatterDay from "../../helpers/dateFormatter";
 import {useNavigate} from "react-router-dom";
-import {ChevronRightIcon} from "@heroicons/react/24/solid";
 import Datepicker from "react-tailwindcss-datepicker";
 import {useSelector} from "react-redux";
 import Loader from "../../components/UI/Loader";

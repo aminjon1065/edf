@@ -267,11 +267,11 @@ const SideBarWithHeader = () => {
                             {/*</form>*/}
                         </div>
                         <div className="ml-4 flex items-center md:ml-6">
-                             <span className={"text-red-500 bg-red-500"}>
+                             <span className={"text-red-500"}>
                                         {
                                             isLoading
                                                 ?
-                                                <span className={"animate-spin text-red-500 bg-red-500"}></span>
+                                                <span className={"animate-spin text-red-500"}></span>
                                                 :
                                                 selectorCountMail > 0 ? selectorCountMail : null
                                         }
