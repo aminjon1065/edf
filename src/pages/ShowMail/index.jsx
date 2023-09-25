@@ -193,8 +193,8 @@ const Index = () => {
                                 }
                             }}
                         >
-                            <TrashIcon className={"w-5 h-5 mr-2"} />
-                            Delete
+                            <TrashIcon className={"w-5 h-5 mr-2"}/>
+                            {t('Interface.Delete')}
                         </button>
                     }
                     <div className="items-end">{dateFormatter(data.created_at)}</div>
@@ -428,11 +428,11 @@ const Index = () => {
                                                     Выберите вариант
                                                 </option>
                                                 <option
-                                                    value="3">
+                                                    value="4">
                                                     Muovin Muovinov
                                                 </option>
                                                 <option
-                                                    value="4">Rais Raisov
+                                                    value="3">Rais Raisov
                                                 </option>
                                             </select>
                                         </div>

@@ -1,10 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import {useGetMessagesQuery} from "../../services/getMails.service";
 import {useNavigate} from "react-router-dom";
-import {CheckCircleIcon, ChevronLeftIcon, ClockIcon} from "@heroicons/react/24/outline";
+import {CheckCircleIcon, ClockIcon} from "@heroicons/react/24/outline";
 import formatterDay from "../../helpers/dateFormatter";
 import Loader from "../../components/UI/Loader";
-import {ChevronRightIcon} from "@heroicons/react/24/solid";
 import Datepicker from "react-tailwindcss-datepicker";
 import {useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
@@ -91,7 +90,7 @@ const OtherInbox = () => {
                         {data.to && <span>{data.to} {t("Interface.from")} {data.total}</span>}
                         <div className="flex flex-row items-center justify-between mb-3">
                             <div className="flex justify-start">
-                                <nav className="isolate inline-flex -space-x-px rounded-md shadow-sm"
+                                <nav className="isolate inline-flex -space-x-px rounded-md"
                                      aria-label="Pagination">
                                     <div className="flex-1 flex justify-between sm:justify-end">
                                         <button
