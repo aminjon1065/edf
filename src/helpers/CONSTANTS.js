@@ -11,6 +11,6 @@
 // export const VITE_PUSHER_APP_CLUSTER = "ap1";
 
 
-export const API_APP = "http://10.230.64.157/api/api/v1";
-export const PUBLIC_APP_URL_DOCUMENTS = "http://10.230.64.157/api/storage/documents/";
-export const PUBLIC_URL_BACKEND = "http://10.230.64.157/api";
+export const API_APP = "http://anmndoh.tj/api/api/v1";
+export const PUBLIC_APP_URL_DOCUMENTS = "http://anmndoh.tj/api/storage/documents/";
+export const PUBLIC_URL_BACKEND = "http://anmndoh.tj/api";
