@@ -3,9 +3,11 @@ import api from "../../services/api";
 import logo from './../../assets/images/logo.png'
 import {useTranslation} from "react-i18next";
 import Loader from "../../components/UI/Loader";
+import usePageTitle from "../../hooks/usePageTitle";
 
 const Index = () => {
     const {t} = useTranslation();
+    usePageTitle(t("Interface.SideBar.Users"));
     const [users, setUsers] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     useEffect(() => {
@@ -17,7 +19,6 @@ const Index = () => {
             setIsLoading(false);
         });
     }, []);
-    console.log(users)
     return (
         isLoading
             ?
