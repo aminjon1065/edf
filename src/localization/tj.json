@@ -129,6 +129,17 @@
         "Laboratory": "Озмоишгоҳи ҷумҳуриявии кимиёвӣ - радиометрӣ",
         "MilHospital": "Беморхонаи ҳарбӣ"
       },
+      "Ranks": {
+        "General": "Генерал",
+        "Polkovnik": "Полковник",
+        "PodPolkovnik": "Подполковник",
+        "Major": "Майор",
+        "Captain": "Капитан",
+        "Lieutenant": "Лейтенант",
+        "Mladshiy-Lieutenant": "Лейтенанти-хурд",
+        "Sergeant": "Сержант",
+        "Private": "Рядовой"
+      },
       "Delete": "Нест кардан",
       "Back": "Бозгашт"
     }
