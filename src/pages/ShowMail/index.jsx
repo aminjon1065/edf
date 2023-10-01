@@ -30,7 +30,7 @@ const Index = () => {
     const meSelector = useSelector(state => state.auth);
     const [userSelected, setUserSelected] = useState(null);
     const [usersList, setUsersList] = useState([]);
-    const [managementId, setManagementId] = useState('');
+    const [managementId, setManagementId] = useState(null);
     useEffect(() => {
         fetchUsers().then((res) => {
             setUsersList(res.data)
@@ -428,11 +428,11 @@ const Index = () => {
                                                     Выберите вариант
                                                 </option>
                                                 <option
-                                                    value="3">
+                                                    value="4">
                                                     Muovin Muovinov
                                                 </option>
                                                 <option
-                                                    value="4">Rais Raisov
+                                                    value="3">Rais Raisov
                                                 </option>
                                             </select>
                                         </div>

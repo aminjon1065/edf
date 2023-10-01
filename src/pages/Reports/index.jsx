@@ -131,7 +131,7 @@ const Index = () => {
                     disabled={data.length === 0}
                     className={"bg-slate-950 px-4 py-2 rounded text-white hover:bg-slate-800"}
                 >
-                    Download
+                    {t("Interface.Download")}
                 </button>
             </div>
         </div>

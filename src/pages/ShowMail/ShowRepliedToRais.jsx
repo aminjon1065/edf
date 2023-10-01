@@ -233,7 +233,7 @@ const ShowRepliedToRais = ({id}) => {
                                                 <span
                                                     className="flex-shrink-0 text-gray-400"
                                                 >
-                                                    {item.region}
+                                                    {t(item.region)}
                                                 </span>
                                             </div>
                                         </div>
