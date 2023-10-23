@@ -265,7 +265,7 @@ const OtherInbox = () => {
                                                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 ">
                                                         {mail.from_user.full_name}
                                                         <span
-                                                            className="text-indigo-500">({mail.from_user.region})</span>
+                                                            className="text-indigo-500">({t(mail.from_user.region)})</span>
                                                     </td>
                                                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                                     <span

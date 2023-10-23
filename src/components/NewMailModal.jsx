@@ -30,7 +30,19 @@ export default function Index({open, setOpen}) {
     // Запрос на получение пользователей при монтировании компонента
     useEffect(() => {
         fetchUsers().then((res) => {
-            setUsersList(res.data)
+            const transformedUsers = res.data.map(user => {
+                const match = user.label.match(/(.+) \((.+)\)/);
+
+                if (match && match.length > 2) {
+                    const name = match[1];
+                    const regionCode = match[2];
+
+                    user.label = `${name} ${(t(regionCode))}`;
+                }
+
+                return user;
+            });
+            setUsersList(transformedUsers);
         });
     }, []);
 
@@ -293,7 +305,7 @@ export default function Index({open, setOpen}) {
                                                                                     </div>
                                                                                     <div
                                                                                         className={"w-1/4 flex flex-row justify-end"}>
-                                                                                        <div className={"w-full"}>
+                                                                                        <div className={""}>
                                                                                             <label htmlFor="type"
                                                                                                    className="block text-sm font-medium text-gray-700">
                                                                                                 {t("Interface.NewMailModal.TypeDocument")}
