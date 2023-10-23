@@ -299,7 +299,7 @@ const Index = () => {
                                             <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{mail.document.id}</td>
                                             <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 ">
                                                 {mail.to_user.full_name}
-                                                <span className="text-indigo-500">({mail.to_user.region})</span>
+                                                <span className="text-indigo-500">({t(mail.to_user.region)})</span>
                                             </td>
                                             <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                                     <span
