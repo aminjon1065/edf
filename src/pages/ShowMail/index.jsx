@@ -429,10 +429,10 @@ const Index = () => {
                                                 </option>
                                                 <option
                                                     value="4">
-                                                    Muovin Muovinov
+                                                    Муовини Директор
                                                 </option>
                                                 <option
-                                                    value="3">Rais Raisov
+                                                    value="3">Директор
                                                 </option>
                                             </select>
                                         </div>
