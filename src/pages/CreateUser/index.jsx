@@ -305,44 +305,8 @@ const Index = () => {
                                                         className="appearance-none block w-full py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                                         {/*из базы при получении value добавить их в useTranslator в функцию t()*/}
                                                         <option
-                                                            value={"Interface.Departments.Apparat"}
-                                                            defaultValue={"Interface.Departments.Apparat"}>{t("Interface.Departments.Apparat")}</option>
-                                                        <option
-                                                            value={"Interface.Departments.CivilDefense"}>{t("Interface.Departments.CivilDefense")}</option>
-                                                        <option
-                                                            value={"Interface.Departments.ProtectionPopulation"}>{t("Interface.Departments.ProtectionPopulation")}</option>
-                                                        <option
-                                                            value={"Interface.Departments.TroopsDirectorate"}>{t("Interface.Departments.TroopsDirectorate")}</option>
-                                                        <option
-                                                            value={"Interface.Departments.BuildingsStructures"}>{t("Interface.Departments.BuildingsStructures")}</option>
-                                                        <option
-                                                            value={"Interface.Departments.HR"}>{t("Interface.Departments.HR")}</option>
-                                                        <option
-                                                            value={"Interface.Departments.InternationalCooperation"}>{t("Interface.Departments.InternationalCooperation")}</option>
-                                                        <option
-                                                            value={"Interface.Departments.Finance"}>{t("Interface.Departments.Finance")}</option>
-                                                        <option
-                                                            value={"Interface.Departments.Medical"}>{t("Interface.Departments.Medical")}</option>
-                                                        <option
-                                                            value={"Interface.Departments.CMC"}>{t("Interface.Departments.CMC")}</option>
-                                                        <option
-                                                            value={"Interface.Departments.Legal"}>{t("Interface.Departments.Legal")}</option>
-                                                        <option
-                                                            value={"Interface.Departments.Media"}>{t("Interface.Departments.Media")}</option>
-                                                        <option
-                                                            value={"Interface.Departments.Rescue"}>{t("Interface.Departments.Rescue")}</option>
-                                                        <option
-                                                            value={"Interface.Departments.Rear"}>{t("Interface.Departments.Rear")}</option>
-                                                        <option
-                                                            value={"Interface.Departments.Sarez"}>{t("Interface.Departments.Sarez")}</option>
-                                                        <option
-                                                            value={"Interface.Departments.Town"}>{t("Interface.Departments.Town")}</option>
-                                                        <option
-                                                            value={"Interface.Departments.EducationCenter"}>{t("Interface.Departments.EducationCenter")}</option>
-                                                        <option
-                                                            value={"Interface.Departments.Laboratory"}>{t("Interface.Departments.Laboratory")}</option>
-                                                        <option
-                                                            value={"Interface.Departments.MilHospital"}>{t("Interface.Departments.MilHospital")}</option>
+                                                            value="Test"
+                                                            defaultValue="Test">Test</option>
                                                     </select>
                                                 </div>
                                             </div>
